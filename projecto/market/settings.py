@@ -136,7 +136,7 @@ SESSION_SAVE_EVERY_REQUEST = True  # Actualiza la sesión en cada petición
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # La sesión no expira al cerrar el navegador
 
 # Configuración de API - Para integración con Spring Boot
-API_URL = 'http://127.0.0.1:3309/api/productos'  # Ajusta el puerto según tu API
+API_URL = 'http://127.0.0.1:8089/api/productos'  # Ajusta el puerto según tu API
 API_TIMEOUT = 10  # Tiempo de espera en segundos
 
 # Configuración específica para la ferretería

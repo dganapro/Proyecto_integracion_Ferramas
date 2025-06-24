@@ -1680,3 +1680,57 @@ django.template.exceptions.TemplateDoesNotExist: ferreteria/admin/inventario.htm
 "GET /static/js/global.js HTTP/1.1" 200 4085
 "GET /api/carrito/resumen/ HTTP/1.1" 200 52
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 24970
+"GET /static/css/baseStyle.css HTTP/1.1" 200 8009
+"GET /static/js/global.js HTTP/1.1" 200 4085
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 13645
+"GET /accounts/login/ HTTP/1.1" 200 10299
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /carrito/ HTTP/1.1" 200 12534
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /productos/ HTTP/1.1" 200 22452
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 24970
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /accounts/login/ HTTP/1.1" 200 10299
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /registro/ HTTP/1.1" 200 11758
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /carrito/ HTTP/1.1" 200 12534
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /productos/ HTTP/1.1" 200 22452
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 24970
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 24970
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+Not Found: /api/empleados
+"GET /api/empleados HTTP/1.1" 404 13651
+"GET / HTTP/1.1" 200 24970
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 24970
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\market\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /carrito/ HTTP/1.1" 200 12534
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /accounts/login/ HTTP/1.1" 200 10299
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /registro/ HTTP/1.1" 200 11758
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 24970
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /productos/ HTTP/1.1" 200 22452
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 24970
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52

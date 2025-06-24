@@ -95,7 +95,7 @@ def leer_uf_actual(request):
     return render(request,"ver_uf.html", contexto)
 
 def obtener_empleados():
-    url="http://127.0.0.1:3309/api/empleados"
+    url="http://127.0.0.1:8089/api/empleados"
     try:
         response = requests.get(url)
         data = response.json()
@@ -109,7 +109,7 @@ def ver_empleados(request):
     return render (request, "ver_empleados.html", contexto)
 
 def obtener_comunas():
-    url="http://127.0.0.1:3309/api/comunas"
+    url="http://127.0.0.1:8089/api/comunas"
     try:
         response = requests.get(url)
         data = response.json()
@@ -134,9 +134,9 @@ def crear_empleado(request):
             "telefono": request.POST['telefono'],
             "correo": request.POST['correo'],
             "comuna": comuna_data        }
-        requests.post("http://127.0.0.1:3309/api/empleados", json=data)
+        requests.post("http://127.0.0.1:8089/api/empleados", json=data)
         return redirect('empleado_exito')
-    comunas = requests.get("http://127.0.0.1:3309/api/comunas").json()
+    comunas = requests.get("http://127.0.0.1:8089/api/comunas").json()
     return render(request, 'crear_empleado.html', {"comunas": comunas})
 
 def empleado_exito(request):
@@ -147,7 +147,7 @@ def empleado_exito(request):
 
 def obtener_todos_productos():
     """Obtiene todos los productos desde la API externa"""
-    url = "http://127.0.0.1:3309/api/productos"
+    url = "http://127.0.0.1:8089/api/productos"
     try:
         response = requests.get(url)
         if response.status_code == 200:
@@ -162,7 +162,7 @@ def obtener_todos_productos():
 
 def obtener_producto_por_id(producto_id):
     """Obtiene un producto específico por ID desde la API externa"""
-    url = f"http://127.0.0.1:3309/api/productos/{producto_id}"
+    url = f"http://127.0.0.1:8089/api/productos/{producto_id}"
     try:
         response = requests.get(url)
         if response.status_code == 200:
@@ -177,7 +177,7 @@ def obtener_producto_por_id(producto_id):
 
 def crear_producto_api(producto_data):
     """Crea un producto en la API externa"""
-    url = "http://127.0.0.1:3309/api/productos"
+    url = "http://127.0.0.1:8089/api/productos"
     try:
         response = requests.post(url, json=producto_data)
         if response.status_code in [200, 201]:
@@ -190,7 +190,7 @@ def crear_producto_api(producto_data):
 
 def actualizar_producto_api(producto_id, producto_data):
     """Actualiza un producto en la API externa"""
-    url = f"http://127.0.0.1:3309/api/productos/{producto_id}"
+    url = f"http://127.0.0.1:8089/api/productos/{producto_id}"
     try:
         response = requests.put(url, json=producto_data)
         if response.status_code == 200:
@@ -203,7 +203,7 @@ def actualizar_producto_api(producto_id, producto_data):
 
 def eliminar_producto_api(producto_id):
     """Elimina un producto en la API externa"""
-    url = f"http://127.0.0.1:3309/api/productos/{producto_id}"
+    url = f"http://127.0.0.1:8089/api/productos/{producto_id}"
     try:
         response = requests.delete(url)
         return response.status_code == 200 or response.status_code == 204
