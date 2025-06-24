@@ -1,4 +1,4 @@
-:\Users\dgana\OneDrive\Desktop\ing\integracion eva2\projectoFerramasIntegracion\projecto\template\ferreteria\dashboard.html -->
+<!-- :\Users\dgana\OneDrive\Desktop\ing\integracion eva2\projectoFerramasIntegracion\projecto\template\ferreteria\dashboard.html -->
 {% extends 'ferreteria/base.html' %}
 
 {% block title %}Ferramas - Ferretería Industrial Profesional{% endblock %}
@@ -15,7 +15,7 @@
                             Bienvenido a <span class="text-warning">FERRAMAS</span>
                         </h1>
                         <p class="lead mb-4">
-                            Tu ferretería industrial de confianza. Ofrecemos herramientas profesionales, 
+                            Tu ferretería industrial de confianza. Ofrecemos herramientas profesionales,
                             materiales de construcción y suministros industriales de la más alta calidad.
                         </p>
                         <div class="d-flex gap-3 flex-wrap">
@@ -90,17 +90,17 @@
                     <div class="card product-card card-ferramas h-100">
                         <div class="product-image">
                             <i class="fas fa-tools fa-3x text-muted"></i>
-                            
+
                             <!-- Badge de stock -->
-                            {% if producto.stock_actual <= producto.stock_minimo %}
-                                <span class="badge-stock badge-agotado">Stock Bajo</span>
-                            {% elif producto.stock_actual > 50 %}
+                            {% if producto.stock_actual <= producto.stock_minimo %} <span
+                                class="badge-stock badge-agotado">Stock Bajo</span>
+                                {% elif producto.stock_actual > 50 %}
                                 <span class="badge-stock badge-disponible">Disponible</span>
-                            {% else %}
+                                {% else %}
                                 <span class="badge-stock badge-limitado">Stock Limitado</span>
-                            {% endif %}
+                                {% endif %}
                         </div>
-                        
+
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title fw-bold">{{ producto.nombre }}</h5>
                             <p class="text-muted small mb-1">
@@ -110,32 +110,31 @@
                                 <i class="fas fa-barcode me-1"></i>{{ producto.codigo }}
                             </p>
                             <p class="card-text text-muted flex-grow-1">{{ producto.descripcion|truncatewords:15 }}</p>
-                            
+
                             <div class="mt-auto">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <div>
                                         <span class="price">${{ producto.precio_venta|floatformat:0 }}</span>
                                         {% if producto.precio_oferta %}
-                                            <br><small class="price-old">${{ producto.precio_venta|floatformat:0 }}</small>
+                                        <br><small class="price-old">${{ producto.precio_venta|floatformat:0 }}</small>
                                         {% endif %}
                                     </div>
                                     <small class="text-muted">
                                         <i class="fas fa-boxes me-1"></i>Stock: {{ producto.stock_actual }}
                                     </small>
                                 </div>
-                                
+
                                 <div class="d-grid gap-2">
                                     <div class="btn-group" role="group">
-                                        <a href="{% url 'detalle_producto' producto.id %}" 
-                                           class="btn btn-outline-primary btn-sm">
+                                        <a href="{% url 'detalle_producto' producto.id %}"
+                                            class="btn btn-outline-primary btn-sm">
                                             <i class="fas fa-eye me-1"></i>Ver
                                         </a>
                                         {% if user.is_authenticated and producto.stock_actual > 0 %}
-                                            <button type="button" 
-                                                    class="btn btn-ferramas-primary btn-sm"
-                                                    onclick="addToCart({{ producto.id }})">
-                                                <i class="fas fa-cart-plus me-1"></i>Agregar
-                                            </button>
+                                        <button type="button" class="btn btn-ferramas-primary btn-sm"
+                                            onclick="addToCart({{ producto.id }})">
+                                            <i class="fas fa-cart-plus me-1"></i>Agregar
+                                        </button>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -173,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-4 col-md-6">
                     <div class="card product-card card-ferramas h-100">
                         <div class="product-image">
@@ -202,7 +201,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-4 col-md-6">
                     <div class="card product-card card-ferramas h-100">
                         <div class="product-image">
@@ -259,7 +258,7 @@
                             </div>
                             <h4 class="fw-bold">Despacho Industrial</h4>
                             <p class="text-muted">
-                                Entrega rápida y segura a obras y proyectos industriales 
+                                Entrega rápida y segura a obras y proyectos industriales
                                 en toda la región metropolitana.
                             </p>
                             <ul class="list-unstyled text-start">
@@ -279,7 +278,7 @@
                             </div>
                             <h4 class="fw-bold">Asesoría Técnica</h4>
                             <p class="text-muted">
-                                Nuestros expertos te ayudan a elegir las mejores herramientas 
+                                Nuestros expertos te ayudan a elegir las mejores herramientas
                                 y materiales para tu proyecto.
                             </p>
                             <ul class="list-unstyled text-start">
@@ -299,7 +298,7 @@
                             </div>
                             <h4 class="fw-bold">Instalación</h4>
                             <p class="text-muted">
-                                Servicio de instalación profesional para equipos 
+                                Servicio de instalación profesional para equipos
                                 y sistemas industriales complejos.
                             </p>
                             <ul class="list-unstyled text-start">
@@ -340,7 +339,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-12">
                             <div class="d-flex align-items-start">
                                 <div class="flex-shrink-0">
@@ -356,7 +355,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-12">
                             <div class="d-flex align-items-start">
                                 <div class="flex-shrink-0">
@@ -374,9 +373,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-6 text-center">
-                    <i class="fas fa-industry" style="font-size: 12rem; color: var(--ferramas-primary); opacity: 0.1;"></i>
+                    <i class="fas fa-industry"
+                        style="font-size: 12rem; color: var(--ferramas-primary); opacity: 0.1;"></i>
                 </div>
             </div>
         </div>
@@ -386,25 +386,25 @@
 
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Animación en scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    document.addEventListener('DOMContentLoaded', function () {
+        // Animación en scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-fade-in-up');
-            }
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas las tarjetas
+        document.querySelectorAll('.card, .stats-card').forEach(card => {
+            observer.observe(card);
         });
-    }, observerOptions);
-
-    // Observar todas las tarjetas
-    document.querySelectorAll('.card, .stats-card').forEach(card => {
-        observer.observe(card);
     });
-});
 </script>
 {% endblock %}
