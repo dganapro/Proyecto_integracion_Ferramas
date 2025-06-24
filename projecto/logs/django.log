@@ -1679,3 +1679,4 @@ django.template.exceptions.TemplateDoesNotExist: ferreteria/admin/inventario.htm
 "GET /static/css/baseStyle.css HTTP/1.1" 304 0
 "GET /static/js/global.js HTTP/1.1" 200 4085
 "GET /api/carrito/resumen/ HTTP/1.1" 200 52
+Watching for file changes with StatReloader
