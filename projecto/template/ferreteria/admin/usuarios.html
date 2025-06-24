@@ -1,0 +1,121 @@
+{% extends 'ferreteria/base.html' %}
+
+{% block title %}Gestión de Usuarios - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2><i class="fas fa-users me-2"></i>Gestión de Usuarios</h2>
+                    <p class="text-muted">Administra los usuarios del sistema</p>
+                </div>
+                <div>
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Volver
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="tipo" class="form-label">Tipo</label>
+                            <select name="tipo" id="tipo" class="form-select">
+                                <option value="">Todos</option>
+                                <option value="staff" {% if tipo_filtro == 'staff' %}selected{% endif %}>Staff</option>
+                                <option value="clientes" {% if tipo_filtro == 'clientes' %}selected{% endif %}>Clientes</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="buscar" class="form-label">Buscar</label>
+                            <input type="text" name="buscar" id="buscar" class="form-control" 
+                                   placeholder="Nombre o email..." value="{{ buscar }}">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Usuarios -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Usuarios <span class="badge bg-primary">{{ total_usuarios }}</span></h5>
+                </div>
+                <div class="card-body">
+                    {% if usuarios %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Información</th>
+                                        <th>Tipo</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for usuario in usuarios %}
+                                    <tr>
+                                        <td><strong>{{ usuario.username }}</strong></td>
+                                        <td>
+                                            {{ usuario.get_full_name|default:"Sin nombre" }}<br>
+                                            <small class="text-muted">{{ usuario.email }}</small>
+                                        </td>
+                                        <td>
+                                            {% if usuario.is_superuser %}
+                                                <span class="badge bg-warning">Super</span>
+                                            {% elif usuario.is_staff %}
+                                                <span class="badge bg-info">Staff</span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">Cliente</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if usuario.is_active %}
+                                                <span class="badge bg-success">Activo</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">Inactivo</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if not usuario.is_superuser or user.is_superuser %}
+                                                <a href="{% url 'admin_desactivar_usuario' usuario.id %}" 
+                                                   class="btn btn-sm {% if usuario.is_active %}btn-outline-danger{% else %}btn-outline-success{% endif %}"
+                                                   onclick="return confirm('¿Estás seguro?')">
+                                                    {% if usuario.is_active %}Desactivar{% else %}Activar{% endif %}
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                            <h5>No se encontraron usuarios</h5>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Ferretería</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 5px 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .sidebar .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            padding: 20px;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .stats-card.primary { border-left-color: #667eea; }
+        .stats-card.success { border-left-color: #28a745; }
+        .stats-card.warning { border-left-color: #ffc107; }
+        .stats-card.info { border-left-color: #17a2b8; }
+        
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .primary-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .success-bg { background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%); }
+        .warning-bg { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .info-bg { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .card-header {
+            background: white;
+            border-bottom: 2px solid #f8f9fa;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 20px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+        
+        .btn-outline-primary {
+            color: #667eea;
+            border-color: #667eea;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+        
+        .btn-outline-primary:hover {
+            background: #667eea;
+            border-color: #667eea;
+        }
+        
+        .header-profile {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .table th {
+            border: none;
+            font-weight: 600;
+            color: #495057;
+            background-color: #f8f9fa;
+        }
+        
+        .badge {
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            border: none;
+        }
+        
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            padding: 12px 15px;
+        }
+        
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .nav-pills .nav-link.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar">
+                <div class="d-flex flex-column p-3">
+                    <div class="text-center mb-4 mt-3">
+                        <i class="fas fa-tools text-white" style="font-size: 2.5rem;"></i>
+                        <h4 class="text-white mt-2">Admin Panel</h4>
+                    </div>
+                    
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-section="dashboard">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-section="usuarios">
+                                <i class="fas fa-users me-2"></i>Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-section="productos">
+                                <i class="fas fa-boxes me-2"></i>Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-section="ventas">
+                                <i class="fas fa-chart-line me-2"></i>Ventas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-section="reportes">
+                                <i class="fas fa-file-alt me-2"></i>Reportes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-section="configuracion">
+                                <i class="fas fa-cog me-2"></i>Configuración
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-auto">
+                        <hr class="text-white">
+                        <div class="dropdown">
+                            <a href="#" class="text-white text-decoration-none dropdown-toggle" 
+                               data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-2"></i>
+                                <span id="adminName">Administrador</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user-edit me-2"></i>Perfil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" onclick="logout()">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                <!-- Header -->
+                <div class="header-profile d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2 class="mb-0">Panel de Administración</h2>
+                        <small class="text-muted">Gestiona tu ferretería desde aquí</small>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-outline-primary me-2" onclick="refreshData()">
+                            <i class="fas fa-sync-alt me-1"></i>Actualizar
+                        </button>
+                        <span class="badge bg-success">
+                            <i class="fas fa-circle me-1"></i>En línea
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Dashboard Section -->
+                <div id="dashboard-section">
+                    <!-- Stats Cards -->
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stats-card primary">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon primary-bg me-3">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-muted mb-0">Total Usuarios</h5>
+                                        <h3 class="mb-0" id="totalUsuarios">-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stats-card success">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon success-bg me-3">
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-muted mb-0">Usuarios Activos</h5>
+                                        <h3 class="mb-0" id="usuariosActivos">-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stats-card warning">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon warning-bg me-3">
+                                        <i class="fas fa-user-shield"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-muted mb-0">Administradores</h5>
+                                        <h3 class="mb-0" id="administradores">-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stats-card info">
+                                <div class="d-flex align-items-center">
+                                    <div class="stats-icon info-bg me-3">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-muted mb-0">Últimas 24h</h5>
+                                        <h3 class="mb-0" id="nuevosUsuarios">-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activities -->
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-bar me-2"></i>Actividad Reciente
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="activityChart" style="height: 300px; display: flex; align-items: center; justify-content: center; color: #6c757d;">
+                                        <div class="text-center">
+                                            <i class="fas fa-chart-line fa-3x mb-3"></i>
+                                            <p>Gráfico de actividad en desarrollo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-bell me-2"></i>Notificaciones
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="notificationsList">
+                                        <div class="d-flex align-items-center mb-3 p-2 bg-light rounded">
+                                            <i class="fas fa-user-plus text-success me-3"></i>
+                                            <div class="flex-grow-1">
+                                                <small class="text-muted">Hace 5 min</small>
+                                                <p class="mb-0 small">Nuevo usuario registrado</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="d-flex align-items-center mb-3 p-2 bg-light rounded">
+                                            <i class="fas fa-cog text-info me-3"></i>
+                                            <div class="flex-grow-1">
+                                                <small class="text-muted">Hace 1 hora</small>
+                                                <p class="mb-0 small">Sistema actualizado</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="d-flex align-items-center p-2 bg-light rounded">
+                                            <i class="fas fa-backup text-warning me-3"></i>
+                                            <div class="flex-grow-1">
+                                                <small class="text-muted">Hace 2 horas</small>
+                                                <p class="mb-0 small">Backup completado</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Usuarios Section -->
+                <div id="usuarios-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-users me-2"></i>Gestión de Usuarios
+                            </h5>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoUsuarioModal">
+                                <i class="fas fa-plus me-1"></i>Nuevo Usuario
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="usuariosTable" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nombre</th>
+                                            <th>Email</th>
+                                            <th>Rol</th>
+                                            <th>Estado</th>
+                                            <th>Fecha Registro</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Los datos se cargarán dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Otras secciones (productos, ventas, etc.) -->
+                <div id="productos-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <i class="fas fa-boxes fa-4x text-muted mb-3"></i>
+                            <h4>Gestión de Productos</h4>
+                            <p class="text-muted">Esta sección estará disponible próximamente</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="ventas-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <i class="fas fa-chart-line fa-4x text-muted mb-3"></i>
+                            <h4>Análisis de Ventas</h4>
+                            <p class="text-muted">Esta sección estará disponible próximamente</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="reportes-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <i class="fas fa-file-alt fa-4x text-muted mb-3"></i>
+                            <h4>Reportes del Sistema</h4>
+                            <p class="text-muted">Esta sección estará disponible próximamente</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="configuracion-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <i class="fas fa-cog fa-4x text-muted mb-3"></i>
+                            <h4>Configuración del Sistema</h4>
+                            <p class="text-muted">Esta sección estará disponible próximamente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Nuevo Usuario -->
+    <div class="modal fade" id="nuevoUsuarioModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus me-2"></i>Crear Nuevo Usuario
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="nuevoUsuarioForm">
+                        <div class="mb-3">
+                            <label for="nombreUsuario" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombreUsuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellidoUsuario" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellidoUsuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailUsuario" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="emailUsuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefonoUsuario" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefonoUsuario">
+                        </div>
+                        <div class="mb-3">
+                            <label for="passwordUsuario" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="passwordUsuario" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rolUsuario" class="form-label">Rol</label>
+                            <select class="form-control" id="rolUsuario" required>
+                                <option value="USUARIO">Usuario</option>
+                                <option value="ADMINISTRADOR">Administrador</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="crearUsuario()">Crear Usuario</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    
+    <script>
+        let usuariosTable;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar autenticación
+            const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+            if (!usuario.id || usuario.rol !== 'ADMINISTRADOR') {
+                window.location.href = '/login';
+                return;
+            }
+            
+            // Mostrar nombre del administrador
+            document.getElementById('adminName').textContent = usuario.nombre || 'Administrador';
+            
+            // Configurar navegación
+            setupNavigation();
+            
+            // Cargar datos iniciales
+            loadDashboardData();
+            loadUsuarios();
+        });
+        
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remover clase active de todos los links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Agregar clase active al link clickeado
+                    this.classList.add('active');
+                    
+                    // Ocultar todas las secciones
+                    const sections = document.querySelectorAll('[id$="-section"]');
+                    sections.forEach(section => section.style.display = 'none');
+                    
+                    // Mostrar la sección correspondiente
+                    const sectionName = this.getAttribute('data-section');
+                    const section = document.getElementById(sectionName + '-section');
+                    if (section) {
+                        section.style.display = 'block';
+                    }
+                    
+                    // Cargar datos específicos de la sección
+                    if (sectionName === 'usuarios' && !usuariosTable) {
+                        setTimeout(initUsuariosTable, 100);
+                    }
+                });
+            });
+        }
+        
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('/api/admin/dashboard');
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    document.getElementById('totalUsuarios').textContent = data.totalUsuarios || 0;
+                    document.getElementById('usuariosActivos').textContent = data.usuariosActivos || 0;
+                    document.getElementById('administradores').textContent = data.administradores || 0;
+                    document.getElementById('nuevosUsuarios').textContent = data.nuevosUsuarios || 0;
+                }
+            } catch (error) {
+                console.error('Error cargando datos del dashboard:', error);
+            }
+        }
+        
+        async function loadUsuarios() {
+            try {
+                const response = await fetch('/api/admin/usuarios');
+                if (response.ok) {
+                    const usuarios = await response.json();
+                    updateUsuariosTable(usuarios);
+                }
+            } catch (error) {
+                console.error('Error cargando usuarios:', error);
+            }
+        }
+        
+        function updateUsuariosTable(usuarios) {
+            const tbody = document.querySelector('#usuariosTable tbody');
+            tbody.innerHTML = '';
+            
+            usuarios.forEach(usuario => {
+                const row = `
+                    <tr>
+                        <td>${usuario.id}</td>
+                        <td>${usuario.nombre} ${usuario.apellido}</td>
+                        <td>${usuario.email}</td>
+                        <td>
+                            <span class="badge ${usuario.rol === 'ADMINISTRADOR' ? 'bg-danger' : 'bg-primary'}">
+                                ${usuario.rol}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge ${usuario.activo ? 'bg-success' : 'bg-secondary'}">
+                                ${usuario.activo ? 'Activo' : 'Inactivo'}
+                            </span>
+                        </td>
+                        <td>${new Date(usuario.fechaRegistro).toLocaleDateString()}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary me-1" onclick="editarUsuario(${usuario.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="eliminarUsuario(${usuario.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+        
+        function initUsuariosTable() {
+            if (usuariosTable) {
+                usuariosTable.destroy();
+            }
+            
+            usuariosTable = $('#usuariosTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+                },
+                pageLength: 10,
+                responsive: true
+            });
+        }
+        
+        async function crearUsuario() {
+            const form = document.getElementById('nuevoUsuarioForm');
+            const formData = new FormData(form);
+            
+            const userData = {
+                nombre: document.getElementById('nombreUsuario').value,
+                apellido: document.getElementById('apellidoUsuario').value,
+                email: document.getElementById('emailUsuario').value,
+                telefono: document.getElementById('telefonoUsuario').value,
+                password: document.getElementById('passwordUsuario').value,
+                rol: document.getElementById('rolUsuario').value
+            };
+            
+            try {
+                const response = await fetch('/api/admin/usuarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                if (response.ok) {
+                    bootstrap.Modal.getInstance(document.getElementById('nuevoUsuarioModal')).hide();
+                    form.reset();
+                    loadUsuarios();
+                    loadDashboardData();
+                } else {
+                    const error = await response.json();
+                    alert('Error: ' + error.mensaje);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al crear usuario');
+            }
+        }
+        
+        function editarUsuario(id) {
+            alert('Función de edición en desarrollo para usuario ID: ' + id);
+        }
+        
+        async function eliminarUsuario(id) {
+            if (confirm('¿Está seguro de que desea eliminar este usuario?')) {
+                try {
+                    const response = await fetch(`/api/admin/usuarios/${id}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (response.ok) {
+                        loadUsuarios();
+                        loadDashboardData();
+                    } else {
+                        alert('Error al eliminar usuario');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error al eliminar usuario');
+                }
+            }
+        }
+        
+        function refreshData() {
+            loadDashboardData();
+            loadUsuarios();
+        }
+        
+        function logout() {
+            if (confirm('¿Está seguro de que desea cerrar sesión?')) {
+                localStorage.removeItem('usuario');
+                window.location.href = '/login';
+            }
+        }
+    </script>
+</body>
+</html>

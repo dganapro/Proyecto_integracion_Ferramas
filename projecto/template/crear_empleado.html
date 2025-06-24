@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Empleado</title>
+</head>
+<body>
+    <h2>Crear Empleado</h2>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        RUT: <input type="text" name="rut"><br>
+        Nombre: <input type="text" name="nombre"><br>
+        Teléfono: <input type="text" name="telefono"><br>
+        Correo: <input type="email" name="correo"><br>
+        Comuna:
+        <select name="comuna_id">
+          {% for comuna in comunas %}
+            <option value="{{ comuna.id }}">{{ comuna.nombre }}</option>
+          {% endfor %}
+        </select><br>
+        <input type="hidden" name="comuna_nombre" value="{{ comuna.nombre }}">
+        <button type="submit">Guardar</button>
+      </form>
+</body>
+</html>

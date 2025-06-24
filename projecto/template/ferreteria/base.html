@@ -1,0 +1,686 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ferramas - Ferretería Industrial{% endblock title %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Ferramas - Tu ferretería industrial de confianza. Herramientas profesionales, materiales de construcción y suministros industriales.">
+    <meta name="keywords" content="ferretería, herramientas, construcción, industrial, Ferramas">
+    <meta name="author" content="Ferramas S.A.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --ferramas-primary: #1e40af;
+            --ferramas-secondary: #dc2626;
+            --ferramas-accent: #f59e0b;
+            --ferramas-dark: #1f2937;
+            --ferramas-light: #f8fafc;
+            --ferramas-gray: #6b7280;
+            --ferramas-success: #059669;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Navbar Styling */
+        .navbar-ferramas {
+            background: linear-gradient(135deg, var(--ferramas-primary) 0%, var(--ferramas-dark) 100%);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--ferramas-secondary);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .navbar-brand .brand-icon {
+            background: var(--ferramas-secondary);
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--ferramas-accent) !important;
+            transform: translateY(-1px);
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--ferramas-accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::before {
+            width: 80%;
+        }
+        
+        /* Buttons */
+        .btn-ferramas-primary {
+            background: linear-gradient(135deg, var(--ferramas-primary), #3b82f6);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-ferramas-primary:hover {
+            background: linear-gradient(135deg, #1e3a8a, var(--ferramas-primary));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        .btn-ferramas-secondary {
+            background: linear-gradient(135deg, var(--ferramas-secondary), #ef4444);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-ferramas-accent {
+            background: linear-gradient(135deg, var(--ferramas-accent), #fbbf24);
+            border: none;
+            color: var(--ferramas-dark);
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Cards */
+        .card-ferramas {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card-ferramas:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header-ferramas {
+            background: linear-gradient(135deg, var(--ferramas-primary), var(--ferramas-dark));
+            color: white;
+            border: none;
+            padding: 1.25rem;
+            font-weight: 600;
+        }
+        
+        /* Product Cards */
+        .product-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .product-card:hover .product-image::before {
+            transform: translateX(100%);
+        }
+        
+        .price {
+            color: var(--ferramas-success);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .price-old {
+            color: var(--ferramas-gray);
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+        
+        /* Badge Styles */
+        .badge-stock {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+            padding: 0.25rem 0.75rem;
+        }
+        
+        .badge-disponible {
+            background: var(--ferramas-success);
+            color: white;
+        }
+        
+        .badge-limitado {
+            background: var(--ferramas-accent);
+            color: var(--ferramas-dark);
+        }
+        
+        .badge-agotado {
+            background: var(--ferramas-secondary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero-ferramas {
+            background: linear-gradient(135deg, var(--ferramas-primary) 0%, var(--ferramas-dark) 50%, var(--ferramas-secondary) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-ferramas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+        
+        /* Stats Cards */
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border-left: 4px solid var(--ferramas-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--ferramas-primary), var(--ferramas-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Footer */
+        .footer-ferramas {
+            background: linear-gradient(135deg, var(--ferramas-dark) 0%, #000000 100%);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        /* Cart Badge */
+        .cart-badge {
+            background: var(--ferramas-secondary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-ferramas {
+                padding: 2rem 0;
+            }
+            
+            .stats-card {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        /* Loading States */
+        .btn-loading {
+            position: relative;
+            color: transparent !important;
+        }
+        
+        .btn-loading::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            margin: -8px 0 0 -8px;
+            border: 2px solid;
+            border-color: transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Professional Table Styles */
+        .table-ferramas {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-ferramas thead {
+            background: var(--ferramas-primary);
+            color: white;
+        }
+        
+        .table-ferramas tbody tr:hover {
+            background-color: rgba(30, 64, 175, 0.05);
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock extra_css %}
+</head>
+<body class="bg-light">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-ferramas sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <span class="brand-icon">
+                    <i class="fas fa-tools"></i>
+                </span>
+                <span>FERRAMAS</span>
+                <small class="text-white-50 ms-2" style="font-size: 0.8rem;">Ferretería Industrial</small>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav me-auto">
+                    <a class="nav-link" href="{% url 'home' %}">
+                        <i class="fas fa-home me-1"></i>Inicio
+                    </a>
+                    <a class="nav-link" href="{% url 'catalogo_productos' %}">
+                        <i class="fas fa-tools me-1"></i>Catálogo
+                    </a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-industry me-1"></i>Servicios
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">
+                                <i class="fas fa-truck me-2"></i>Despacho Industrial
+                            </a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <i class="fas fa-users me-2"></i>Asesoría Técnica
+                            </a></li>
+                            <li><a class="dropdown-item" href="#">
+                                <i class="fas fa-wrench me-2"></i>Instalación
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="navbar-nav">
+                    <!-- Cart -->
+                    <a class="nav-link position-relative me-3" href="{% url 'ver_carrito' %}">
+                        <i class="fas fa-shopping-cart me-1"></i>Carrito
+                        <span class="position-absolute top-0 start-100 translate-middle cart-badge cart-count" style="display: none;">
+                            0
+                        </span>
+                    </a>
+                    
+                    {% if user.is_authenticated %}
+                        <!-- User Menu -->
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-1"></i>{{ user.get_full_name|default:user.username }}
+                                {% if user.is_staff %}
+                                    <i class="fas fa-crown text-warning ms-1" title="Administrador"></i>
+                                {% endif %}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{% url 'perfil_usuario' %}">
+                                    <i class="fas fa-user me-2"></i>Mi Perfil
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'mis_pedidos' %}">
+                                    <i class="fas fa-shopping-bag me-2"></i>Mis Pedidos
+                                </a></li>
+                                {% if user.is_staff %}
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{% url 'admin_dashboard' %}">
+                                        <i class="fas fa-tachometer-alt me-2"></i>Panel Admin
+                                    </a></li>
+                                {% endif %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="post" action="{% url 'logout' %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <a class="nav-link" href="{% url 'login' %}">
+                            <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                        </a>
+                        <a class="nav-link" href="{% url 'registro' %}">
+                            <i class="fas fa-user-plus me-1"></i>Registrarse
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Messages -->
+        {% if messages %}
+            <div class="container mt-3">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show animate-fade-in-up" role="alert">
+                        <i class="fas fa-info-circle me-2"></i>{{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% block content %}{% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-ferramas mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">
+                        <i class="fas fa-tools me-2"></i>FERRAMAS
+                    </h5>
+                    <p class="text-white-50">
+                        Tu socio confiable en soluciones industriales y de construcción. 
+                        Más de 35 años de experiencia en el mercado.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white-50 hover-text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white-50 hover-text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white-50 hover-text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-4">
+                    <h6 class="mb-3">Enlaces</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'catalogo_productos' %}" class="text-white-50 text-decoration-none">Catálogo</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Servicios</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Sobre Nosotros</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h6 class="mb-3">Contacto</h6>
+                    <p class="text-white-50 mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        Av. Industrial 1234, Santiago
+                    </p>
+                    <p class="text-white-50 mb-2">
+                        <i class="fas fa-phone me-2"></i>
+                        +56 2 2234 5678
+                    </p>
+                    <p class="text-white-50">
+                        <i class="fas fa-envelope me-2"></i>
+                        ventas@ferramas.cl
+                    </p>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h6 class="mb-3">Horarios</h6>
+                    <p class="text-white-50 mb-1">
+                        <strong>Lun - Vie:</strong> 8:00 - 18:00
+                    </p>
+                    <p class="text-white-50 mb-1">
+                        <strong>Sábados:</strong> 9:00 - 14:00
+                    </p>
+                    <p class="text-white-50">
+                        <strong>Domingos:</strong> Cerrado
+                    </p>
+                </div>
+            </div>
+            
+            <hr class="text-white-50">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-white-50 mb-0">
+                        &copy; 2024 Ferramas S.A. Todos los derechos reservados.
+                    </p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <small class="text-white-50">
+                        Desarrollado con tecnología Django
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Global JavaScript -->
+    <script>
+        // Función global para agregar al carrito
+        function addToCart(productoId, cantidad = 1) {
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            
+            // Loading state
+            btn.classList.add('btn-loading');
+            btn.disabled = true;
+            
+            fetch('/api/carrito/agregar/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    producto_id: productoId,
+                    cantidad: cantidad
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartCount();
+                    showNotification('Producto agregado al carrito', 'success');
+                } else {
+                    showNotification(data.error || 'Error al agregar producto', 'error');
+                }
+            })
+            .catch(error => {
+                showNotification('Error de conexión', 'error');
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Remove loading state
+                btn.classList.remove('btn-loading');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            });
+        }
+        
+        // Actualizar contador del carrito
+        function updateCartCount() {
+            fetch('/api/carrito/resumen/')
+            .then(response => response.json())
+            .then(data => {
+                const cartBadge = document.querySelector('.cart-count');
+                if (cartBadge) {
+                    cartBadge.textContent = data.total_items;
+                    cartBadge.style.display = data.total_items > 0 ? 'flex' : 'none';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        // Mostrar notificaciones
+        function showNotification(message, type) {
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed animate-fade-in-up`;
+            alertDiv.style.cssText = 'top: 90px; right: 20px; z-index: 1050; min-width: 300px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);';
+            alertDiv.innerHTML = `
+                <i class="fas ${iconClass} me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // Auto-dismiss después de 4 segundos
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.classList.remove('show');
+                    setTimeout(() => {
+                        if (alertDiv.parentNode) {
+                            alertDiv.parentNode.removeChild(alertDiv);
+                        }
+                    }, 150);
+                }
+            }, 4000);
+        }
+        
+        // Obtener token CSRF
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+        // Actualizar contador al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            
+            // Smooth scroll para enlaces internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock extra_js %}
+</body>
+</html>

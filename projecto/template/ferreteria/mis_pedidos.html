@@ -1,0 +1,339 @@
+{% extends 'ferreteria/base.html' %}
+{% load static %}
+
+{% block title %}Mis Pedidos - Ferretería{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1><i class="fas fa-shopping-bag me-2"></i>Mis Pedidos</h1>
+                <a href="{% url 'catalogo_productos' %}" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Hacer Nuevo Pedido
+                </a>
+            </div>
+
+            {% if pedidos %}
+                <!-- Filtros -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form method="get" class="row align-items-end">
+                            <div class="col-md-3">
+                                <label class="form-label">Estado del Pedido</label>
+                                <select name="estado" class="form-select">
+                                    <option value="">Todos los estados</option>
+                                    <option value="pendiente" {% if request.GET.estado == 'pendiente' %}selected{% endif %}>Pendiente</option>
+                                    <option value="confirmado" {% if request.GET.estado == 'confirmado' %}selected{% endif %}>Confirmado</option>
+                                    <option value="preparando" {% if request.GET.estado == 'preparando' %}selected{% endif %}>Preparando</option>
+                                    <option value="enviado" {% if request.GET.estado == 'enviado' %}selected{% endif %}>Enviado</option>
+                                    <option value="entregado" {% if request.GET.estado == 'entregado' %}selected{% endif %}>Entregado</option>
+                                    <option value="cancelado" {% if request.GET.estado == 'cancelado' %}selected{% endif %}>Cancelado</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Desde Fecha</label>
+                                <input type="date" name="fecha_desde" class="form-control" 
+                                       value="{{ request.GET.fecha_desde }}">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Hasta Fecha</label>
+                                <input type="date" name="fecha_hasta" class="form-control" 
+                                       value="{{ request.GET.fecha_hasta }}">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-search me-2"></i>Filtrar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Lista de Pedidos -->
+                {% for pedido in pedidos %}
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-3">
+                                <strong>Pedido #{{ pedido.numero_pedido }}</strong>
+                            </div>
+                            <div class="col-md-2">
+                                <small class="text-muted">{{ pedido.fecha_pedido|date:"d/m/Y" }}</small>
+                            </div>
+                            <div class="col-md-2">
+                                {% if pedido.estado == 'pendiente' %}
+                                    <span class="badge bg-warning">{{ pedido.get_estado_display }}</span>
+                                {% elif pedido.estado == 'confirmado' %}
+                                    <span class="badge bg-info">{{ pedido.get_estado_display }}</span>
+                                {% elif pedido.estado == 'preparando' %}
+                                    <span class="badge bg-primary">{{ pedido.get_estado_display }}</span>
+                                {% elif pedido.estado == 'enviado' %}
+                                    <span class="badge bg-secondary">{{ pedido.get_estado_display }}</span>
+                                {% elif pedido.estado == 'entregado' %}
+                                    <span class="badge bg-success">{{ pedido.get_estado_display }}</span>
+                                {% elif pedido.estado == 'cancelado' %}
+                                    <span class="badge bg-danger">{{ pedido.get_estado_display }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-2">
+                                <strong class="text-primary">${{ pedido.total|floatformat:0 }}</strong>
+                            </div>
+                            <div class="col-md-3 text-end">
+                                <button class="btn btn-sm btn-outline-primary" 
+                                        data-bs-toggle="collapse" 
+                                        data-bs-target="#pedido-{{ pedido.id }}">
+                                    <i class="fas fa-eye me-1"></i>Ver Detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="collapse" id="pedido-{{ pedido.id }}">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Productos -->
+                                <div class="col-md-8">
+                                    <h6>Productos:</h6>
+                                    {% for detalle in pedido.detalles.all %}
+                                    <div class="row align-items-center mb-2 pb-2 {% if not forloop.last %}border-bottom{% endif %}">
+                                        <div class="col-md-2">
+                                            {% if detalle.producto.imagen %}
+                                                <img src="{{ detalle.producto.imagen.url }}" 
+                                                     alt="{{ detalle.producto.nombre }}" 
+                                                     class="img-fluid rounded" style="max-height: 50px;">
+                                            {% else %}
+                                                <div class="bg-light d-flex align-items-center justify-content-center rounded" 
+                                                     style="height: 50px; width: 50px;">
+                                                    <i class="fas fa-image text-muted"></i>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong>{{ detalle.producto.nombre }}</strong>
+                                            <br><small class="text-muted">{{ detalle.producto.categoria.nombre }}</small>
+                                        </div>
+                                        <div class="col-md-2 text-center">
+                                            <span class="badge bg-secondary">{{ detalle.cantidad }}</span>
+                                        </div>
+                                        <div class="col-md-2 text-end">
+                                            <strong>${{ detalle.subtotal|floatformat:0 }}</strong>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                
+                                <!-- Información del Pedido -->
+                                <div class="col-md-4">
+                                    <h6>Información de Entrega:</h6>
+                                    <p class="mb-1"><strong>Método:</strong> 
+                                        {% if pedido.metodo_entrega == 'retiro' %}
+                                            <i class="fas fa-store me-1"></i>Retiro en Tienda
+                                        {% else %}
+                                            <i class="fas fa-truck me-1"></i>Despacho a Domicilio
+                                        {% endif %}
+                                    </p>
+                                    
+                                    {% if pedido.metodo_entrega == 'domicilio' %}
+                                        <p class="mb-1"><strong>Dirección:</strong> {{ pedido.direccion }}</p>
+                                        <p class="mb-1"><strong>Comuna:</strong> {{ pedido.comuna }}</p>
+                                    {% endif %}
+                                    
+                                    <p class="mb-1"><strong>Teléfono:</strong> {{ pedido.telefono }}</p>
+                                    
+                                    <hr>
+                                    
+                                    <h6>Pago:</h6>
+                                    <p class="mb-1"><strong>Método:</strong> 
+                                        {% if pedido.metodo_pago == 'tarjeta_credito' or pedido.metodo_pago == 'tarjeta_debito' %}
+                                        <i class="fas fa-credit-card me-1"></i>Tarjeta
+                                        {% else %}
+                                            {{ pedido.get_metodo_pago_display }}
+                                        {% endif %}
+                                    </p>
+                                    
+                                    {% if pedido.metodo_pago == 'tarjeta_credito' or pedido.metodo_pago == 'tarjeta_debito' %}
+                                        {% if pedido.pagotarjeta %}
+                                            <p class="mb-1"><strong>Tarjeta:</strong> 
+                                                {{ pedido.pagotarjeta.get_tipo_tarjeta_display|title }} 
+                                                **** {{ pedido.pagotarjeta.ultimos_digitos }}
+                                            </p>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Acciones -->
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="btn-group" role="group">
+                                        <a href="{% url 'confirmacion_pedido' pedido.numero_pedido %}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-receipt me-1"></i>Ver Comprobante
+                                        </a>
+                                        
+                                        {% if pedido.estado == 'pendiente' or pedido.estado == 'confirmado' %}
+                                            <button class="btn btn-sm btn-outline-danger" 
+                                                    onclick="cancelarPedido('{{ pedido.numero_pedido }}')">
+                                                <i class="fas fa-times me-1"></i>Cancelar
+                                            </button>
+                                        {% endif %}
+                                        
+                                        {% if pedido.estado == 'entregado' %}
+                                            <button class="btn btn-sm btn-outline-warning">
+                                                <i class="fas fa-star me-1"></i>Calificar
+                                            </button>
+                                        {% endif %}
+                                        
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-download me-1"></i>Descargar PDF
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- Paginación -->
+                {% if pedidos.has_other_pages %}
+                <nav aria-label="Paginación de pedidos">
+                    <ul class="pagination justify-content-center">
+                        {% if pedidos.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ pedidos.previous_page_number }}{% if request.GET.estado %}&estado={{ request.GET.estado }}{% endif %}{% if request.GET.fecha_desde %}&fecha_desde={{ request.GET.fecha_desde }}{% endif %}{% if request.GET.fecha_hasta %}&fecha_hasta={{ request.GET.fecha_hasta }}{% endif %}">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for num in pedidos.paginator.page_range %}
+                            {% if pedidos.number == num %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% elif num > pedidos.number|add:'-3' and num < pedidos.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}{% if request.GET.estado %}&estado={{ request.GET.estado }}{% endif %}{% if request.GET.fecha_desde %}&fecha_desde={{ request.GET.fecha_desde }}{% endif %}{% if request.GET.fecha_hasta %}&fecha_hasta={{ request.GET.fecha_hasta }}{% endif %}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if pedidos.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ pedidos.next_page_number }}{% if request.GET.estado %}&estado={{ request.GET.estado }}{% endif %}{% if request.GET.fecha_desde %}&fecha_desde={{ request.GET.fecha_desde }}{% endif %}{% if request.GET.fecha_hasta %}&fecha_hasta={{ request.GET.fecha_hasta }}{% endif %}">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+
+            {% else %}
+                <!-- Sin Pedidos -->
+                <div class="text-center py-5">
+                    <i class="fas fa-shopping-bag fa-5x text-muted mb-4"></i>
+                    <h3 class="text-muted mb-3">No tienes pedidos aún</h3>
+                    <p class="lead text-muted mb-4">¡Explora nuestro catálogo y realiza tu primera compra!</p>
+                    <a href="{% url 'catalogo_productos' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-shopping-cart me-2"></i>Ir al Catálogo
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación para Cancelar -->
+<div class="modal fade" id="cancelarModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cancelar Pedido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea cancelar este pedido?</p>
+                <p class="text-muted small">Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, mantener</button>
+                <button type="button" class="btn btn-danger" id="confirmarCancelacion">Sí, cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let pedidoACancelar = null;
+
+function cancelarPedido(numeroPedido) {
+    pedidoACancelar = numeroPedido;
+    const modal = new bootstrap.Modal(document.getElementById('cancelarModal'));
+    modal.show();
+}
+
+document.getElementById('confirmarCancelacion').addEventListener('click', function() {
+    if (pedidoACancelar) {
+        // Aquí iría la llamada AJAX para cancelar el pedido
+        fetch(`/api/pedidos/${pedidoACancelar}/cancelar/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                'numero_pedido': pedidoACancelar
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error al cancelar el pedido: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error de conexión');
+        });
+    }
+    bootstrap.Modal.getInstance(document.getElementById('cancelarModal')).hide();
+});
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Auto-colapsar otros pedidos cuando se abre uno
+document.addEventListener('DOMContentLoaded', function() {
+    const collapseElements = document.querySelectorAll('[data-bs-toggle="collapse"]');
+    collapseElements.forEach(function(element) {
+        element.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-bs-target');
+            const allCollapses = document.querySelectorAll('.collapse.show');
+            
+            allCollapses.forEach(function(collapse) {
+                if (collapse.id !== targetId.substring(1)) {
+                    bootstrap.Collapse.getInstance(collapse)?.hide();
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

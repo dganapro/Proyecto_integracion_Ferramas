@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunas</title>
+</head>
+<body>
+    <h2>Comunas</h2>
+    <hr>
+    {% for comuna in datos %}
+    <h3> {{comuna.id}} {{comuna.nombre}}</h3>
+    {% endfor %}
+    <hr>
+</body>
+</html>

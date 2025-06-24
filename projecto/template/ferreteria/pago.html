@@ -1,0 +1,263 @@
+{% extends 'ferreteria/base.html' %}
+{% load static %}
+
+{% block title %}Procesar Pago - Ferretería{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-credit-card me-2"></i>Procesar Pago</h4>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Resumen del Pedido -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Resumen del Pedido</h5>
+                            <div class="card">
+                                <div class="card-body">
+                                    {% for item in carrito_items %}
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div>
+                                            <strong>{{ item.producto_nombre|default:item.producto.nombre }}</strong>
+                                            <small class="text-muted d-block">Cantidad: {{ item.cantidad }}</small>
+                                        </div>
+                                        <span class="fw-bold">${{ item.subtotal|floatformat:0 }}</span>
+                                    </div>
+                                    {% endfor %}
+                                    <hr>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <strong>Total a Pagar:</strong>
+                                        <h4 class="text-primary mb-0">${{ total|floatformat:0 }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5>Información de Entrega</h5>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p><strong>Nombre:</strong> {{ request.session.info_entrega.nombre_completo|default:datos_pedido.nombre_cliente }}</p>
+                                    <p><strong>Teléfono:</strong> {{ request.session.info_entrega.telefono|default:datos_pedido.telefono_cliente }}</p>
+                                    <p><strong>Email:</strong> {{ request.session.info_entrega.email|default:datos_pedido.email_cliente }}</p>
+                                    <p><strong>Dirección:</strong> {{ request.session.info_entrega.direccion|default:datos_pedido.direccion_entrega }}</p>
+                                    <p><strong>Comuna:</strong> {{ request.session.info_entrega.comuna|default:datos_pedido.ciudad }}</p>
+                                    <p><strong>Método de Entrega:</strong> 
+                                        {% if request.session.info_entrega.metodo_entrega == 'retiro' or datos_pedido.metodo_entrega == 'retiro' %}
+                                            Retiro en Tienda
+                                        {% else %}
+                                            Despacho a Domicilio
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de Pago -->
+                    <form method="post" id="payment-form">
+                        {% csrf_token %}
+                        
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <h5>Método de Pago</h5>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Tipo de Tarjeta *</label>
+                                                <select class="form-select" name="tipo_tarjeta" required>
+                                                    <option value="">Seleccionar tipo</option>
+                                                    <option value="visa">Visa</option>
+                                                    <option value="mastercard">Mastercard</option>
+                                                    <option value="redcompra">Redcompra</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Número de Tarjeta *</label>
+                                                <input type="text" class="form-control" name="numero_tarjeta" 
+                                                       placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Nombre del Titular *</label>
+                                                <input type="text" class="form-control" name="nombre_titular" 
+                                                       placeholder="Nombre completo" required>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">Fecha Vencimiento *</label>
+                                                <input type="text" class="form-control" name="fecha_vencimiento" 
+                                                       placeholder="MM/AA" maxlength="5" required>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label">CVV *</label>
+                                                <input type="text" class="form-control" name="cvv" 
+                                                       placeholder="123" maxlength="4" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">RUT del Titular</label>
+                                                <input type="text" class="form-control" name="rut_titular" 
+                                                       placeholder="12.345.678-9">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Cuotas</label>
+                                                <select class="form-select" name="cuotas">
+                                                    <option value="1">1 cuota (sin interés)</option>
+                                                    <option value="3">3 cuotas</option>
+                                                    <option value="6">6 cuotas</option>
+                                                    <option value="12">12 cuotas</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Términos y Condiciones -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="terminos" required>
+                            <label class="form-check-label" for="terminos">
+                                Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#terminosModal">términos y condiciones</a> *
+                            </label>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="d-flex gap-3">
+                            <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Volver al Checkout
+                            </a>
+                            <button type="submit" class="btn btn-success btn-lg flex-fill" id="btn-procesar-pago">
+                                <i class="fas fa-lock me-2"></i>Procesar Pago - ${{ total|floatformat:0 }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Información de Seguridad -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <i class="fas fa-shield-alt fa-2x text-success mb-2"></i>
+                            <h6>Pago Seguro</h6>
+                            <small class="text-muted">Transacciones protegidas con SSL</small>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-lock fa-2x text-primary mb-2"></i>
+                            <h6>Datos Protegidos</h6>
+                            <small class="text-muted">Información encriptada</small>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-undo fa-2x text-info mb-2"></i>
+                            <h6>Garantía</h6>
+                            <small class="text-muted">Devolución garantizada</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Términos y Condiciones -->
+<div class="modal fade" id="terminosModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Términos y Condiciones</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Condiciones de Pago</h6>
+                <p>Al realizar el pago, usted acepta que:</p>
+                <ul>
+                    <li>La información proporcionada es verídica y exacta</li>
+                    <li>Autoriza el cargo a su tarjeta de crédito/débito</li>
+                    <li>El pago se procesará de forma segura</li>
+                </ul>
+                
+                <h6>2. Entrega de Productos</h6>
+                <p>Los productos serán entregados según el método seleccionado:</p>
+                <ul>
+                    <li>Retiro en tienda: Disponible dentro de 24 horas</li>
+                    <li>Despacho a domicilio: 2-5 días hábiles</li>
+                </ul>
+                
+                <h6>3. Política de Devoluciones</h6>
+                <p>Aceptamos devoluciones dentro de 30 días posteriores a la compra, con el producto en perfecto estado.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Formatear número de tarjeta
+    const numeroTarjeta = document.querySelector('input[name="numero_tarjeta"]');
+    numeroTarjeta.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+        e.target.value = formattedValue;
+    });
+
+    // Formatear fecha de vencimiento
+    const fechaVencimiento = document.querySelector('input[name="fecha_vencimiento"]');
+    fechaVencimiento.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        e.target.value = value;
+    });
+
+    // Solo números en CVV
+    const cvv = document.querySelector('input[name="cvv"]');
+    cvv.addEventListener('input', function(e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+
+    // Formatear RUT
+    const rutTitular = document.querySelector('input[name="rut_titular"]');
+    if (rutTitular) {
+        rutTitular.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^0-9kK]/g, '');
+            if (value.length > 1) {
+                value = value.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + value.slice(-1);
+            }
+            e.target.value = value;
+        });
+    }
+
+    // Procesar formulario de pago
+    const form = document.getElementById('payment-form');
+    const btnProcesar = document.getElementById('btn-procesar-pago');
+    
+    form.addEventListener('submit', function(e) {
+        btnProcesar.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Procesando...';
+        btnProcesar.disabled = true;
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,309 @@
+{% extends 'ferreteria/base.html' %}
+
+{% block title %}Carrito de Compras - Ferretería El Martillo{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-shopping-cart"></i> Carrito de Compras</h2>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Seguir Comprando
+            </a>
+        </div>
+    </div>
+
+    {% if items_carrito %}
+        <!-- Productos en el Carrito -->
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Productos ({{ cantidad_items }} items)</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        {% for item in items_carrito %}
+                        <div class="border-bottom p-3">
+                            <div class="row align-items-center">
+                                <!-- Imagen del producto -->
+                                <div class="col-md-2">
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-center" 
+                                         style="height: 80px;">
+                                        <i class="fas fa-tools fa-2x text-muted"></i>
+                                    </div>
+                                </div>
+                                
+                                <!-- Información del producto -->
+                                <div class="col-md-3">
+                                    <h6 class="mb-1">
+                                        <a href="{% url 'detalle_producto' item.producto.id %}" 
+                                           class="text-decoration-none">
+                                            {{ item.producto.nombre }}
+                                        </a>
+                                    </h6>
+                                    <small class="text-muted">
+                                        Código: {{ item.producto.codigo }}<br>
+                                    </small>
+                                </div>
+                                
+                                <!-- Precio unitario -->
+                                <div class="col-md-2 text-center">
+                                    <strong>${{ item.producto.precio_venta|floatformat:0 }}</strong>
+                                    <br><small class="text-muted">c/u</small>
+                                </div>
+                                
+                                <!-- Cantidad -->
+                                <div class="col-md-2 text-center">
+                                    <form method="POST" action="{% url 'actualizar_carrito' item.id %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <div class="input-group input-group-sm">
+                                            <input type="number" 
+                                                class="form-control text-center" 
+                                                name="cantidad" 
+                                                value="{{ item.cantidad }}" 
+                                                min="1" 
+                                                max="99"
+                                                onchange="this.form.submit()">
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <!-- Subtotal -->
+                                <div class="col-md-2 text-center">
+                                   <strong class="price">${{ item.subtotal|floatformat:0 }}</strong>
+                                </div>
+                                
+                                <!-- Eliminar -->
+                                <div class="col-md-1 text-center">
+                                    <form method="POST" action="{% url 'eliminar_del_carrito' item.id %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" 
+                                                onclick="return confirm('¿Eliminar este producto?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <form method="POST" action="{% url 'vaciar_carrito' %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger" 
+                                    onclick="return confirm('¿Vaciar todo el carrito?')">
+                                <i class="fas fa-trash"></i> Vaciar Carrito
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resumen del Pedido -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Resumen del Pedido</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal ({{ cantidad_items }} items):</span>
+                            <span>${{ total|floatformat:0 }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>IVA (19%):</span>
+                            <span>${{ iva|floatformat:0 }}</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Total:</strong>
+                            <strong class="price">${{ total_con_iva|floatformat:0 }}</strong>
+                        </div>
+                        
+                        <!-- Botón de Checkout -->
+                        <div class="d-grid">
+                            <a href="{% url 'checkout' %}" class="btn btn-primary btn-lg">
+                                <i class="fas fa-credit-card"></i> Proceder al Pago
+                            </a>
+                        </div>
+                        
+                        <!-- Información de Envío -->
+                        <div class="mt-3 p-2 bg-light rounded">
+                            <small class="text-muted">
+                                <i class="fas fa-truck"></i> 
+                                Envío gratis en compras sobre $50.000
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Código de Descuento -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h6 class="mb-0">Código de Descuento</h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="#" id="discount-form">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" name="codigo_descuento" class="form-control" 
+                                       placeholder="Ingresa tu código" maxlength="20">
+                                <button class="btn btn-outline-secondary" type="submit">
+                                    Aplicar
+                                </button>
+                            </div>
+                            <small class="text-muted mt-1 d-block">
+                                <i class="fas fa-info-circle"></i> 
+                                Descuentos especiales para compras sobre $100.000
+                            </small>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Productos Recomendados -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4>También te puede interesar</h4>
+                <p class="text-muted">Productos frecuentemente comprados juntos</p>
+                <!-- Aquí podrías mostrar productos relacionados -->
+                <div class="text-center py-4">
+                    <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-primary">
+                        Ver más productos
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    {% else %}
+        <!-- Carrito vacío -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="card">
+                    <div class="card-body py-5">
+                        <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                        <h5>Tu carrito está vacío</h5>
+                        <p class="text-muted">¡Comienza a agregar productos!</p>
+                        <a href="{% url 'catalogo_productos' %}" class="btn btn-primary">
+                            Ver Productos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Actualizar contador del carrito
+    document.addEventListener('DOMContentLoaded', function() {
+        // Escapar la variable para evitar inyección de código
+        const cantidadItems = parseInt('{{ cantidad_items|default:0|escapejs }}');
+        localStorage.setItem('cart_count', cantidadItems);
+        
+        // Verificar si updateCartCount existe antes de llamarla
+        if (typeof updateCartCount === 'function') {
+            updateCartCount();
+        } else {
+            // Implementar función básica para actualizar el contador
+            updateCartCountLocal();
+        }
+        
+        // Validación de cantidad en inputs
+        initializeQuantityValidation();
+        
+        // Mejorar UX en formularios
+        initializeFormEnhancements();
+    });
+    
+    // Función local para actualizar contador del carrito
+    function updateCartCountLocal() {
+        const cartCount = localStorage.getItem('cart_count') || 0;
+        const cartBadges = document.querySelectorAll('.cart-count, .badge, [data-cart-count]');
+        
+        cartBadges.forEach(badge => {
+            badge.textContent = cartCount;
+            badge.style.display = cartCount > 0 ? 'inline' : 'none';
+        });
+    }
+    
+    // Validación de cantidades
+    function initializeQuantityValidation() {
+        const quantityInputs = document.querySelectorAll('input[name="cantidad"]');
+        
+        quantityInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const max = parseInt(this.getAttribute('max'));
+                const min = parseInt(this.getAttribute('min')) || 1;
+                let value = parseInt(this.value);
+                
+                if (value > max) {
+                    alert(`Stock disponible: ${max} unidades`);
+                    this.value = max;
+                    return;
+                }
+                
+                if (value < min) {
+                    this.value = min;
+                    return;
+                }
+                
+                showLoadingOnInput(this);
+            });
+        });
+    }
+    
+    // Mejoras de UX en formularios
+    function initializeFormEnhancements() {
+        const deleteButtons = document.querySelectorAll('a[href*="eliminar_del_carrito"]');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (confirm('¿Eliminar este producto del carrito?')) {
+                    showLoadingOnButton(this);
+                } else {
+                    e.preventDefault();
+                }
+            });
+        });
+        
+        const emptyCartButton = document.querySelector('a[href*="vaciar_carrito"]');
+        if (emptyCartButton) {
+            emptyCartButton.addEventListener('click', function(e) {
+                if (confirm('¿Vaciar completamente el carrito?')) {
+                    showLoadingOnButton(this);
+                } else {
+                    e.preventDefault();
+                }
+            });
+        }
+    }
+    
+    function showLoadingOnInput(input) {
+        const originalBg = input.style.backgroundColor;
+        input.style.backgroundColor = '#f8f9fa';
+        input.disabled = true;
+        
+        setTimeout(() => {
+            input.style.backgroundColor = originalBg;
+            input.disabled = false;
+        }, 1000);
+    }
+    
+    function showLoadingOnButton(button) {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+        button.style.pointerEvents = 'none';
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.style.pointerEvents = 'auto';
+        }, 3000);
+    }
+</script>
+{% endblock %}

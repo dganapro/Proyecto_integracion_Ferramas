@@ -1,0 +1,260 @@
+{% extends 'ferreteria/base.html' %}
+
+{% block title %}{{ producto.nombre }} - Ferretería El Martillo{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'catalogo_productos' %}">Productos</a></li>
+            <li class="breadcrumb-item active">{{ producto.nombre }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Imagen del Producto -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body text-center" style="min-height: 400px;">
+                    <!-- Imagen placeholder -->
+                    <div class="d-flex align-items-center justify-content-center h-100">
+                        <i class="fas fa-tools fa-5x text-muted"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información del Producto -->
+        <div class="col-md-6">
+            <div class="mb-3">
+                <h1 class="h2">{{ producto.nombre }}</h1>
+                <p class="text-muted">Código: {{ producto.codigo }}</p>
+            </div>
+
+            <!-- Precio -->
+            <div class="mb-4">
+                <h3 class="price">${{ producto.precio_venta|floatformat:0 }}</h3>
+                <p class="text-muted">
+                    <small>Precio de compra: ${{ producto.precio_compra|floatformat:0 }}</small>
+                </p>
+            </div>
+
+            <!-- Información Básica -->
+            <div class="row mb-4">
+                <div class="col-6">
+                    <strong>Categoría:</strong><br>
+                    <span class="badge bg-secondary">{{ producto.categoria }}</span>
+                </div>
+                <div class="col-6">
+                    <strong>Marca:</strong><br>
+                    {{ producto.marca|default:"No especificada" }}
+                </div>
+            </div>
+
+            <!-- Stock -->
+            <div class="mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Stock Disponible:</strong><br>
+                        {% if producto.stock_actual <= producto.stock_minimo %}
+                            <span class="badge bg-danger fs-6">{{ producto.stock_actual }} {{ producto.unidad_medida }}</span>
+                            <small class="text-danger d-block">¡Bajo stock!</small>
+                        {% elif producto.stock_actual > 50 %}
+                            <span class="badge bg-success fs-6">{{ producto.stock_actual }} {{ producto.unidad_medida }}</span>
+                            <small class="text-success d-block">Disponible</small>
+                        {% else %}
+                            <span class="badge bg-warning fs-6">{{ producto.stock_actual }} {{ producto.unidad_medida }}</span>
+                            <small class="text-warning d-block">Stock limitado</small>
+                        {% endif %}
+                    </div>
+                    <div class="col-6">
+                        <strong>Proveedor:</strong><br>
+                        {{ producto.proveedor }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agregar al Carrito -->
+            {% if producto.stock_actual > 0 %}
+                <form method="POST" action="{% url 'agregar_al_carrito' producto.id %}" class="mb-4">
+                    {% csrf_token %}
+                    <div class="row align-items-end">
+                        <div class="col-4">
+                            <label for="cantidad" class="form-label">Cantidad:</label>
+                            <input type="number" 
+                                   class="form-control" 
+                                   name="cantidad" 
+                                   id="cantidad" 
+                                   value="1" 
+                                   min="1" 
+                                   max="{{ producto.stock_actual }}">
+                        </div>
+                        <div class="col-8">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            {% else %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Producto sin stock disponible
+                </div>
+            {% endif %}
+
+            <!-- Acciones de Administración -->
+            {% if user.is_staff %}
+            <div class="d-flex gap-2 mb-4">
+                <a href="{% url 'editar_producto' producto.id %}" class="btn btn-outline-warning">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Descripción y Detalles -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Descripción y Especificaciones</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>Descripción</h5>
+                            <p>{{ producto.descripcion|default:"Sin descripción disponible" }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Especificaciones</h5>
+                            <table class="table table-sm">
+                                <tr>
+                                    <td><strong>Código:</strong></td>
+                                    <td>{{ producto.codigo }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Marca:</strong></td>
+                                    <td>{{ producto.marca|default:"No especificada" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Modelo:</strong></td>
+                                    <td>{{ producto.modelo|default:"No especificado" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unidad:</strong></td>
+                                    <td>{{ producto.unidad_medida }}</td>
+                                </tr>
+                                {% if producto.peso %}
+                                <tr>
+                                    <td><strong>Peso:</strong></td>
+                                    <td>{{ producto.peso }} kg</td>
+                                </tr>
+                                {% endif %}
+                                <tr>
+                                    <td><strong>Estado:</strong></td>
+                                    <td>
+                                        <span class="badge bg-{% if producto.estado == 'activo' %}success{% else %}secondary{% endif %}">
+                                            {{ producto.estado|title }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información Adicional para Administradores -->
+    {% if user.is_staff %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Información Administrativa</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <strong>Margen de Ganancia:</strong><br>
+                            <span class="h5 text-success">{{ producto.margen_ganancia }}%</span>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Valor Inventario:</strong><br>
+                            <span class="h5">${{ producto.valor_inventario|floatformat:0 }}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Stock Mínimo:</strong><br>
+                            <span class="h5">{{ producto.stock_minimo }}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Necesita Restock:</strong><br>
+                            {% if producto.necesita_restock %}
+                                <span class="badge bg-danger fs-6">SÍ</span>
+                            {% else %}
+                                <span class="badge bg-success fs-6">NO</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Modal de Confirmación de Eliminación -->
+{% if user.is_staff %}
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar este producto?</p>
+                <p class="text-muted small">Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form method="POST" action="{% url 'eliminar_producto' producto.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Validar cantidad máxima
+document.getElementById('cantidad').addEventListener('input', function() {
+    const maxStock = {{ producto.stock_actual }};
+    if (parseInt(this.value) > maxStock) {
+        this.value = maxStock;
+    }
+    if (parseInt(this.value) < 1) {
+        this.value = 1;
+    }
+});
+</script>
+{% endblock %}
+    }
+    if (parseInt(this.value) < 1) {
+        this.value = 1;
+    }
+});
+</script> -->
+{% endblock %}

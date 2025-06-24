@@ -1,0 +1,270 @@
+{% extends 'ferreteria/base.html' %}
+
+{% block title %}Información de Entrega - Ferretería El Martillo{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ver_carrito' %}">Carrito</a></li>
+            <li class="breadcrumb-item active">Información de Entrega</li>
+        </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2><i class="fas fa-shipping-fast"></i> Información de Entrega</h2>
+            <p class="text-muted">Completa los datos para proceder con tu pedido</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Formulario de Entrega -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Datos de Entrega</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <!-- Información Personal -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nombre_completo" class="form-label">Nombre Completo *</label>
+                                <input type="text" class="form-control" name="nombre_completo" 
+                                       id="nombre_completo" 
+                                       value="{{ user.get_full_name|default:user.username }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email_cliente" class="form-label">Email de Contacto *</label>
+                                <input type="email" class="form-control" name="email_cliente" 
+                                       id="email_cliente" value="{{ user.email }}" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="telefono_cliente" class="form-label">Teléfono de Contacto *</label>
+                                <input type="tel" class="form-control" name="telefono_cliente" 
+                                       id="telefono_cliente" placeholder="+56 9 1234 5678" required>
+                            </div>
+                        </div>
+                        
+                        <!-- Método de Entrega -->
+                        <div class="mb-3">
+                            <label class="form-label">Método de Entrega *</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="metodo_entrega" 
+                                               id="domicilio" value="domicilio" checked>
+                                        <label class="form-check-label" for="domicilio">
+                                            <strong>Despacho a Domicilio</strong> - $3.000
+                                            <br><small class="text-muted">Entrega en 2-5 días hábiles</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="metodo_entrega" 
+                                               id="retiro" value="retiro">
+                                        <label class="form-check-label" for="retiro">
+                                            <strong>Retiro en Tienda</strong> - Gratis
+                                            <br><small class="text-muted">Disponible en 24 horas</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Dirección de Entrega -->
+                        <div class="mb-3" id="direccion-section">
+                            <label for="direccion_entrega" class="form-label">Dirección de Entrega *</label>
+                            <textarea class="form-control" name="direccion_entrega" 
+                                      id="direccion_entrega" rows="2" 
+                                      placeholder="Calle, número, depto/casa" required></textarea>
+                        </div>
+                        
+                        <div class="row mb-3" id="ubicacion-section">
+                            <div class="col-md-6">
+                                <label for="ciudad" class="form-label">Ciudad *</label>
+                                <input type="text" class="form-control" name="ciudad" id="ciudad" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="region" class="form-label">Región *</label>
+                                <select class="form-select" name="region" id="region" required>
+                                    <option value="">Seleccionar región</option>
+                                    <option value="RM">Región Metropolitana</option>
+                                    <option value="V">Valparaíso</option>
+                                    <option value="VIII">Biobío</option>
+                                    <option value="IX">La Araucanía</option>
+                                    <option value="X">Los Lagos</option>
+                                    <option value="XI">Aysén</option>
+                                    <option value="XII">Magallanes</option>
+                                    <option value="I">Tarapacá</option>
+                                    <option value="II">Antofagasta</option>
+                                    <option value="III">Atacama</option>
+                                    <option value="IV">Coquimbo</option>
+                                    <option value="VI">O'Higgins</option>
+                                    <option value="VII">Maule</option>
+                                    <option value="XIV">Los Ríos</option>
+                                    <option value="XV">Arica y Parinacota</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Método de Pago -->
+                        <div class="mb-3">
+                            <label class="form-label">Método de Pago *</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="metodo_pago" 
+                                               id="tarjeta_credito" value="tarjeta_credito" checked>
+                                        <label class="form-check-label" for="tarjeta_credito">
+                                            <i class="fas fa-credit-card me-2"></i>Tarjeta de Crédito
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="metodo_pago" 
+                                               id="tarjeta_debito" value="tarjeta_debito">
+                                        <label class="form-check-label" for="tarjeta_debito">
+                                            <i class="fas fa-credit-card me-2"></i>Tarjeta de Débito
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'ver_carrito' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left"></i> Volver al Carrito
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Continuar al Pago <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resumen del Pedido -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Resumen del Pedido</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Productos -->
+                    {% for item in items_carrito %}
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div>
+                            <small>{{ item.producto.nombre }}</small>
+                            <br><small class="text-muted">Cantidad: {{ item.cantidad }}</small>
+                        </div>
+                        <small>${{ item.subtotal|floatformat:0 }}</small>
+                    </div>
+                    {% endfor %}
+                    
+                    <hr>
+                    
+                    <!-- Totales -->
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Subtotal:</span>
+                        <span>${{ subtotal|floatformat:0 }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Envío:</span>
+                        <span id="costo-envio">$3.000</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>IVA (19%):</span>
+                        <span>${{ iva|floatformat:0 }}</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>Total:</strong>
+                        <strong class="price" id="total-final">${{ total|add:3000|floatformat:0 }}</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Información de Seguridad -->
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <i class="fas fa-shield-alt fa-2x text-success mb-2"></i>
+                    <h6>Compra Segura</h6>
+                    <small class="text-muted">
+                        Tus datos están protegidos con encriptación SSL
+                    </small>
+                </div>
+            </div>
+            
+            <!-- Métodos de Pago -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Métodos de Pago Aceptados</h6>
+                </div>
+                <div class="card-body text-center">
+                    <div class="row">
+                        <div class="col-3">
+                            <i class="fab fa-cc-visa fa-2x text-primary"></i>
+                        </div>
+                        <div class="col-3">
+                            <i class="fab fa-cc-mastercard fa-2x text-warning"></i>
+                        </div>
+                        <div class="col-3">
+                            <i class="fab fa-cc-amex fa-2x text-info"></i>
+                        </div>
+                        <div class="col-3">
+                            <i class="fas fa-credit-card fa-2x text-secondary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Actualizar costo de envío según el tipo seleccionado
+    document.addEventListener('DOMContentLoaded', function() {
+        const radioButtons = document.querySelectorAll('input[name="tipo_entrega"]');
+        const costoEnvio = document.getElementById('costo-envio');
+        const totalFinal = document.getElementById('total-final');
+        const subtotalBase = {{ total|floatformat:0 }};
+        
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'retiro') {
+                    costoEnvio.textContent = 'Gratis';
+                    totalFinal.textContent = '$' + new Intl.NumberFormat('es-CL').format(subtotalBase);
+                } else {
+                    costoEnvio.textContent = '$3.000';
+                    totalFinal.textContent = '$' + new Intl.NumberFormat('es-CL').format(subtotalBase + 3000);
+                }
+            });
+        });
+    });
+    
+    // Validación del teléfono
+    document.getElementById('telefono_contacto').addEventListener('input', function() {
+        let value = this.value.replace(/\D/g, ''); // Solo números
+        if (value.length > 8) {
+            value = value.slice(0, 8);
+        }
+        if (value.length > 0) {
+            this.value = '+56 9 ' + value.substring(0, 4) + ' ' + value.substring(4);
+        }
+    });
+</script>
+{% endblock %}

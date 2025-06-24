@@ -1,0 +1,345 @@
+{% extends 'ferreteria/base.html' %}
+{% load static %}
+
+{% block title %}Crear Producto - Ferretería{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-plus me-2"></i>Crear Nuevo Producto</h4>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data" id="producto-form">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <!-- Información Básica -->
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Información Básica</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre del Producto *</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="codigo" class="form-label">Código del Producto *</label>
+                                    <input type="text" class="form-control" name="codigo" id="codigo" 
+                                           placeholder="Ej: FER001" required>
+                                    <div class="form-text">Código único para identificar el producto</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="categoria" class="form-label">Categoría *</label>
+                                    <select class="form-select" name="categoria" id="categoria" required>
+                                        <option value="">Seleccionar categoría</option>
+                                        {% for categoria in categorias %}
+                                            <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="marca" class="form-label">Marca</label>
+                                    <input type="text" class="form-control" name="marca" id="marca" 
+                                           placeholder="Ej: Stanley, DeWalt, Truper">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="modelo" class="form-label">Modelo</label>
+                                    <input type="text" class="form-control" name="modelo" id="modelo">
+                                </div>
+                            </div>
+                            
+                            <!-- Imagen y Stock -->
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Imagen y Stock</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="imagen" class="form-label">Imagen del Producto</label>
+                                    <input type="file" class="form-control" name="imagen" id="imagen" 
+                                           accept="image/*" onchange="previewImage(event)">
+                                    <div class="form-text">Formatos permitidos: JPG, PNG, GIF. Máximo 5MB</div>
+                                </div>
+                                
+                                <div class="mb-3 text-center">
+                                    <div id="image-preview" class="border rounded p-3" style="min-height: 200px; background: #f8f9fa;">
+                                        <i class="fas fa-image fa-3x text-muted"></i>
+                                        <p class="text-muted mt-2">Vista previa de la imagen</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="stock" class="form-label">Stock Inicial *</label>
+                                        <input type="number" class="form-control" name="stock" id="stock" 
+                                               min="0" required value="0">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="stock_minimo" class="form-label">Stock Mínimo</label>
+                                        <input type="number" class="form-control" name="stock_minimo" 
+                                               id="stock_minimo" min="0" value="5">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <!-- Precios y Estado -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Precios</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="precio" class="form-label">Precio de Venta *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" name="precio" id="precio" 
+                                               min="0" step="0.01" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="precio_costo" class="form-label">Precio de Costo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" name="precio_costo" 
+                                               id="precio_costo" min="0" step="0.01">
+                                    </div>
+                                    <div class="form-text">Precio al que compra el producto</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="precio_oferta" class="form-label">Precio de Oferta</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" name="precio_oferta" 
+                                               id="precio_oferta" min="0" step="0.01">
+                                    </div>
+                                    <div class="form-text">Precio especial para ofertas</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Estado y Configuración</h5>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="activo" 
+                                               id="activo" checked>
+                                        <label class="form-check-label" for="activo">
+                                            Producto Activo
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Solo productos activos aparecen en el catálogo</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="destacado" id="destacado">
+                                        <label class="form-check-label" for="destacado">
+                                            Producto Destacado
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Aparecerá en la sección de productos destacados</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="en_oferta" id="en_oferta">
+                                        <label class="form-check-label" for="en_oferta">
+                                            En Oferta
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Activar cuando el producto esté en oferta</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="unidad_medida" class="form-label">Unidad de Medida</label>
+                                    <select class="form-select" name="unidad_medida" id="unidad_medida">
+                                        <option value="unidad">Unidad</option>
+                                        <option value="metro">Metro</option>
+                                        <option value="kilogramo">Kilogramo</option>
+                                        <option value="litro">Litro</option>
+                                        <option value="caja">Caja</option>
+                                        <option value="paquete">Paquete</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <!-- Descripción y Especificaciones -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="mb-3">Descripción y Especificaciones</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="descripcion_corta" class="form-label">Descripción Corta</label>
+                                    <textarea class="form-control" name="descripcion_corta" id="descripcion_corta" 
+                                              rows="2" maxlength="200" 
+                                              placeholder="Descripción breve del producto (máximo 200 caracteres)"></textarea>
+                                    <div class="form-text">Esta descripción aparece en las listas de productos</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label">Descripción Completa</label>
+                                    <textarea class="form-control" name="descripcion" id="descripcion" 
+                                              rows="5" placeholder="Descripción detallada del producto, características, usos, etc."></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="especificaciones" class="form-label">Especificaciones Técnicas</label>
+                                    <textarea class="form-control" name="especificaciones" id="especificaciones" 
+                                              rows="4" placeholder="Dimensiones, peso, material, potencia, etc."></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="tags" class="form-label">Etiquetas (Tags)</label>
+                                    <input type="text" class="form-control" name="tags" id="tags" 
+                                           placeholder="herramienta, eléctrica, construcción (separadas por comas)">
+                                    <div class="form-text">Ayudan a encontrar el producto en las búsquedas</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Botones de Acción -->
+                        <div class="d-flex gap-3 mt-4">
+                            <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Guardar Producto
+                            </button>
+                            <button type="submit" name="guardar_y_crear" value="1" class="btn btn-success">
+                                <i class="fas fa-plus me-2"></i>Guardar y Crear Otro
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Vista previa de imagen
+function previewImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('image-preview');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.innerHTML = `<img src="${e.target.result}" class="img-fluid rounded" style="max-height: 200px;">`;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.innerHTML = `
+            <i class="fas fa-image fa-3x text-muted"></i>
+            <p class="text-muted mt-2">Vista previa de la imagen</p>
+        `;
+    }
+}
+
+// Generar código automático basado en el nombre
+document.getElementById('nombre').addEventListener('input', function() {
+    const nombre = this.value;
+    const codigo = document.getElementById('codigo');
+    
+    if (nombre && !codigo.value) {
+        // Generar código automático
+        const palabras = nombre.split(' ');
+        let codigoGenerado = '';
+        
+        if (palabras.length >= 2) {
+            codigoGenerado = palabras[0].substring(0, 3).toUpperCase() + 
+                           palabras[1].substring(0, 3).toUpperCase();
+        } else {
+            codigoGenerado = nombre.substring(0, 6).toUpperCase();
+        }
+        
+        // Agregar números aleatorios
+        codigoGenerado += Math.floor(Math.random() * 100).toString().padStart(2, '0');
+        
+        codigo.value = codigoGenerado;
+    }
+});
+
+// Calcular margen de ganancia
+document.getElementById('precio_costo').addEventListener('input', calcularMargen);
+document.getElementById('precio').addEventListener('input', calcularMargen);
+
+function calcularMargen() {
+    const precioCosto = parseFloat(document.getElementById('precio_costo').value) || 0;
+    const precioVenta = parseFloat(document.getElementById('precio').value) || 0;
+    
+    if (precioCosto > 0 && precioVenta > 0) {
+        const margen = ((precioVenta - precioCosto) / precioCosto * 100).toFixed(1);
+        console.log(`Margen de ganancia: ${margen}%`);
+    }
+}
+
+// Habilitar/deshabilitar precio de oferta
+document.getElementById('en_oferta').addEventListener('change', function() {
+    const precioOferta = document.getElementById('precio_oferta');
+    if (this.checked) {
+        precioOferta.required = true;
+        precioOferta.focus();
+    } else {
+        precioOferta.required = false;
+        precioOferta.value = '';
+    }
+});
+
+// Validación del formulario
+document.getElementById('producto-form').addEventListener('submit', function(e) {
+    const enOferta = document.getElementById('en_oferta').checked;
+    const precioOferta = parseFloat(document.getElementById('precio_oferta').value) || 0;
+    const precio = parseFloat(document.getElementById('precio').value) || 0;
+    
+    if (enOferta && (precioOferta <= 0 || precioOferta >= precio)) {
+        e.preventDefault();
+        alert('El precio de oferta debe ser mayor a 0 y menor al precio regular.');
+        return false;
+    }
+    
+    // Mostrar indicador de carga
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Guardando...';
+    submitBtn.disabled = true;
+});
+
+// Contador de caracteres para descripción corta
+document.getElementById('descripcion_corta').addEventListener('input', function() {
+    const maxLength = 200;
+    const currentLength = this.value.length;
+    const remaining = maxLength - currentLength;
+    
+    // Buscar o crear contador
+    let counter = this.parentNode.querySelector('.char-counter');
+    if (!counter) {
+        counter = document.createElement('div');
+        counter.className = 'char-counter form-text text-end';
+        this.parentNode.appendChild(counter);
+    }
+    
+    counter.textContent = `${currentLength}/${maxLength} caracteres`;
+    counter.style.color = remaining < 20 ? '#dc3545' : '#6c757d';
+});
+</script>
+{% endblock %}

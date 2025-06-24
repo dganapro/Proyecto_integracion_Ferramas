@@ -1,0 +1,280 @@
+{% extends 'ferreteria/base.html' %}
+{% load static %}
+
+{% block title %}Confirmación de Pedido - Ferretería{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Mensaje de Confirmación -->
+            <div class="text-center mb-4">
+                <div class="mb-4">
+                    <i class="fas fa-check-circle fa-5x text-success"></i>
+                </div>
+                <h1 class="text-success mb-3">¡Pedido Confirmado!</h1>
+                <p class="lead">Su pedido ha sido procesado exitosamente</p>
+            </div>
+
+            <!-- Información del Pedido -->
+            <div class="card shadow mb-4">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="fas fa-receipt me-2"></i>Detalles del Pedido</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Número de Pedido:</strong>
+                            <span class="text-primary fs-5">#{{ pedido.numero_pedido }}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Fecha:</strong>
+                            {{ pedido.fecha_pedido|date:"d/m/Y H:i" }}
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Estado:</strong>
+                            <span class="badge bg-warning">{{ pedido.get_estado_display }}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Método de Pago:</strong>
+                            {% if pedido.metodo_pago == 'tarjeta' %}
+                                <i class="fas fa-credit-card me-1"></i>Tarjeta de Crédito/Débito
+                            {% else %}
+                                {{ pedido.get_metodo_pago_display }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Método de Entrega:</strong>
+                            {% if pedido.metodo_entrega == 'retiro' %}
+                                <i class="fas fa-store me-1"></i>Retiro en Tienda
+                            {% else %}
+                                <i class="fas fa-truck me-1"></i>Despacho a Domicilio
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Total Pagado:</strong>
+                            <span class="text-success fs-5 fw-bold">${{ pedido.total|floatformat:0 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Productos Comprados -->
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-box me-2"></i>Productos Comprados</h5>
+                </div>
+                <div class="card-body">
+                    {% for detalle in pedido.detalles.all %}
+                    <div class="row align-items-center py-3 {% if not forloop.last %}border-bottom{% endif %}">
+                        <div class="col-md-2">
+                            <div class="bg-light d-flex align-items-center justify-content-center rounded" 
+                                 style="height: 80px; width: 80px;">
+                                <i class="fas fa-tools text-muted"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="mb-1">{{ detalle.producto.nombre }}</h6>
+                            <small class="text-muted">
+                                Código: {{ detalle.producto.codigo|default:"N/A" }}
+                            </small>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <strong>Cantidad: {{ detalle.cantidad }}</strong>
+                        </div>
+                        <div class="col-md-2 text-end">
+                            <strong>${{ detalle.subtotal|floatformat:0 }}</strong>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Información de Entrega -->
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>Información de Entrega</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Nombre:</strong> {{ pedido.nombre_completo }}</p>
+                            <p><strong>Teléfono:</strong> {{ pedido.telefono }}</p>
+                            <p><strong>Email:</strong> {{ pedido.email }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            {% if pedido.metodo_entrega == 'domicilio' %}
+                                <p><strong>Dirección:</strong> {{ pedido.direccion }}</p>
+                                <p><strong>Comuna:</strong> {{ pedido.comuna }}</p>
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Su pedido será despachado en 2-5 días hábiles
+                                </div>
+                            {% else %}
+                                <div class="alert alert-success">
+                                    <i class="fas fa-store me-2"></i>
+                                    <strong>Retiro en Tienda</strong><br>
+                                    Av. Principal 1234, Santiago<br>
+                                    Horario: Lunes a Viernes 9:00 - 18:00<br>
+                                    Sábados 9:00 - 14:00
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de Pago -->
+            {% if pedido.metodo_pago == 'tarjeta' and pedido.pago_tarjeta %}
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>Información de Pago</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Tipo de Tarjeta:</strong> 
+                                {{ pedido.pago_tarjeta.get_tipo_tarjeta_display|title }}
+                            </p>
+                            <p><strong>Últimos 4 dígitos:</strong> 
+                                **** **** **** {{ pedido.pago_tarjeta.ultimos_digitos }}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Estado del Pago:</strong> 
+                                <span class="badge bg-success">{{ pedido.pago_tarjeta.get_estado_display }}</span>
+                            </p>
+                            <p><strong>Cuotas:</strong> {{ pedido.pago_tarjeta.cuotas }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Acciones -->
+            <div class="text-center mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-home me-2"></i>Volver al Inicio
+                        </a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'mis_pedidos' %}" class="btn btn-outline-primary btn-lg me-3">
+                            <i class="fas fa-list me-2"></i>Ver Mis Pedidos
+                        </a>
+                    </div>
+                    <div class="col-auto">
+                        <button onclick="window.print()" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-print me-2"></i>Imprimir
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información Adicional -->
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                            <h6>Confirmación por Email</h6>
+                            <p class="small text-muted">
+                                Recibirá un email de confirmación con todos los detalles
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-bell fa-2x text-success mb-3"></i>
+                            <h6>Seguimiento</h6>
+                            <p class="small text-muted">
+                                Le notificaremos sobre el estado de su pedido
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-headset fa-2x text-info mb-3"></i>
+                            <h6>Soporte</h6>
+                            <p class="small text-muted">
+                                ¿Preguntas? Contáctenos al +56 9 1234 5678
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estilos para impresión -->
+<style>
+@media print {
+    .btn, .navbar, .footer {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .card-header {
+        background-color: #f8f9fa !important;
+        color: #000 !important;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-scroll to top
+    window.scrollTo(0, 0);
+    
+    // Función para imprimir
+    window.imprimirPedido = function() {
+        window.print();
+    };
+    
+    // Animación de éxito
+    setTimeout(function() {
+        document.querySelector('.alert-success').classList.add('show');
+    }, 300);
+});
+</script>
+{% endblock %}
+{% endblock %}
+        0%, 20%, 53%, 80%, 100% {
+            transform: translate3d(0,0,0);
+        }
+        40%, 43% {
+            transform: translate3d(0, -30px, 0);
+        }
+        70% {
+            transform: translate3d(0, -15px, 0);
+        }
+        90% {
+            transform: translate3d(0, -4px, 0);
+        }
+    }
+`;
+document.head.appendChild(style);
+</script>
+{% endblock %}
+{% endblock %}
+    }
+`;
+document.head.appendChild(style);
+</script>
+{% endblock %}

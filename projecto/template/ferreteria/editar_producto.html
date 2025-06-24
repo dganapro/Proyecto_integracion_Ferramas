@@ -1,0 +1,494 @@
+{% extends 'ferreteria/base.html' %}
+{% load static %}
+
+{% block title %}Editar Producto - Ferretería{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0"><i class="fas fa-edit me-2"></i>Editar Producto: {{ producto.nombre }}</h4>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data" id="producto-form">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <!-- Información Básica -->
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Información Básica</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre del Producto *</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" 
+                                           value="{{ producto.nombre }}" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="codigo" class="form-label">Código del Producto *</label>
+                                    <input type="text" class="form-control" name="codigo" id="codigo" 
+                                           value="{{ producto.codigo }}" required>
+                                    <div class="form-text">Código único para identificar el producto</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="categoria" class="form-label">Categoría *</label>
+                                    <select class="form-select" name="categoria" id="categoria" required>
+                                        <option value="">Seleccionar categoría</option>
+                                        {% for categoria in categorias %}
+                                            <option value="{{ categoria.id }}" 
+                                                    {% if categoria.id == producto.categoria.id %}selected{% endif %}>
+                                                {{ categoria.nombre }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="marca" class="form-label">Marca</label>
+                                    <input type="text" class="form-control" name="marca" id="marca" 
+                                           value="{{ producto.marca|default:'' }}">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="modelo" class="form-label">Modelo</label>
+                                    <input type="text" class="form-control" name="modelo" id="modelo" 
+                                           value="{{ producto.modelo|default:'' }}">
+                                </div>
+                            </div>
+                            
+                            <!-- Imagen y Stock -->
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Imagen y Stock</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="imagen" class="form-label">Imagen del Producto</label>
+                                    <input type="file" class="form-control" name="imagen" id="imagen" 
+                                           accept="image/*" onchange="previewImage(event)">
+                                    <div class="form-text">Formatos permitidos: JPG, PNG, GIF. Máximo 5MB</div>
+                                </div>
+                                
+                                <div class="mb-3 text-center">
+                                    <div id="image-preview" class="border rounded p-3" style="min-height: 200px; background: #f8f9fa;">
+                                        {% if producto.imagen %}
+                                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" 
+                                                 class="img-fluid rounded" style="max-height: 200px;">
+                                        {% else %}
+                                            <i class="fas fa-image fa-3x text-muted"></i>
+                                            <p class="text-muted mt-2">Vista previa de la imagen</p>
+                                        {% endif %}
+                                    </div>
+                                    {% if producto.imagen %}
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input" type="checkbox" name="eliminar_imagen" id="eliminar_imagen">
+                                            <label class="form-check-label text-danger" for="eliminar_imagen">
+                                                Eliminar imagen actual
+                                            </label>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="stock" class="form-label">Stock Actual *</label>
+                                        <input type="number" class="form-control" name="stock" id="stock" 
+                                               min="0" required value="{{ producto.stock }}">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="stock_minimo" class="form-label">Stock Mínimo</label>
+                                        <input type="number" class="form-control" name="stock_minimo" 
+                                               id="stock_minimo" min="0" value="{{ producto.stock_minimo|default:5 }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <!-- Precios y Estado -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Precios</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="precio" class="form-label">Precio de Venta *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" name="precio" id="precio" 
+                                               min="0" step="0.01" required value="{{ producto.precio }}">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="precio_costo" class="form-label">Precio de Costo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" name="precio_costo" 
+                                               id="precio_costo" min="0" step="0.01" 
+                                               value="{{ producto.precio_costo|default:'' }}">
+                                    </div>
+                                    <div class="form-text">Precio al que compra el producto</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="precio_oferta" class="form-label">Precio de Oferta</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" name="precio_oferta" 
+                                               id="precio_oferta" min="0" step="0.01" 
+                                               value="{{ producto.precio_oferta|default:'' }}">
+                                    </div>
+                                    <div class="form-text">Precio especial para ofertas</div>
+                                </div>
+                                
+                                <!-- Información de margen si hay precio de costo -->
+                                {% if producto.precio_costo %}
+                                <div class="alert alert-info">
+                                    <small>
+                                        <strong>Margen actual:</strong>
+                                        {% widthratio producto.precio|sub:producto.precio_costo producto.precio_costo 100 %}%
+                                    </small>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Estado y Configuración</h5>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="activo" 
+                                               id="activo" {% if producto.activo %}checked{% endif %}>
+                                        <label class="form-check-label" for="activo">
+                                            Producto Activo
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Solo productos activos aparecen en el catálogo</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="destacado" 
+                                               id="destacado" {% if producto.destacado %}checked{% endif %}>
+                                        <label class="form-check-label" for="destacado">
+                                            Producto Destacado
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Aparecerá en la sección de productos destacados</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="en_oferta" 
+                                               id="en_oferta" {% if producto.en_oferta %}checked{% endif %}>
+                                        <label class="form-check-label" for="en_oferta">
+                                            En Oferta
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Activar cuando el producto esté en oferta</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="unidad_medida" class="form-label">Unidad de Medida</label>
+                                    <select class="form-select" name="unidad_medida" id="unidad_medida">
+                                        <option value="unidad" {% if producto.unidad_medida == 'unidad' %}selected{% endif %}>Unidad</option>
+                                        <option value="metro" {% if producto.unidad_medida == 'metro' %}selected{% endif %}>Metro</option>
+                                        <option value="kilogramo" {% if producto.unidad_medida == 'kilogramo' %}selected{% endif %}>Kilogramo</option>
+                                        <option value="litro" {% if producto.unidad_medida == 'litro' %}selected{% endif %}>Litro</option>
+                                        <option value="caja" {% if producto.unidad_medida == 'caja' %}selected{% endif %}>Caja</option>
+                                        <option value="paquete" {% if producto.unidad_medida == 'paquete' %}selected{% endif %}>Paquete</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <!-- Descripción y Especificaciones -->
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="mb-3">Descripción y Especificaciones</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="descripcion_corta" class="form-label">Descripción Corta</label>
+                                    <textarea class="form-control" name="descripcion_corta" id="descripcion_corta" 
+                                              rows="2" maxlength="200">{{ producto.descripcion_corta|default:'' }}</textarea>
+                                    <div class="form-text">Esta descripción aparece en las listas de productos</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label">Descripción Completa</label>
+                                    <textarea class="form-control" name="descripcion" id="descripcion" 
+                                              rows="5">{{ producto.descripcion|default:'' }}</textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="especificaciones" class="form-label">Especificaciones Técnicas</label>
+                                    <textarea class="form-control" name="especificaciones" id="especificaciones" 
+                                              rows="4">{{ producto.especificaciones|default:'' }}</textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="tags" class="form-label">Etiquetas (Tags)</label>
+                                    <input type="text" class="form-control" name="tags" id="tags" 
+                                           value="{{ producto.tags|default:'' }}">
+                                    <div class="form-text">Ayudan a encontrar el producto en las búsquedas</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <!-- Historial de Precios -->
+                        {% if historial_precios %}
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-history text-info me-2"></i>Historial de Precios
+                                </h5>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Fecha</th>
+                                                        <th>Precio Anterior</th>
+                                                        <th>Precio Nuevo</th>
+                                                        <th>Cambio</th>
+                                                        <th>Usuario</th>
+                                                        <th>Razón</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for historial in historial_precios %}
+                                                    <tr>
+                                                        <td>{{ historial.fecha_modificacion|date:"d/m/Y H:i" }}</td>
+                                                        <td>${{ historial.precio_anterior|floatformat:0 }}</td>
+                                                        <td>${{ historial.precio_nuevo|floatformat:0 }}</td>
+                                                        <td>
+                                                            <span class="badge {% if historial.diferencia_precio > 0 %}bg-success{% elif historial.diferencia_precio < 0 %}bg-danger{% else %}bg-secondary{% endif %}">
+                                                                {% if historial.diferencia_precio > 0 %}+{% endif %}{{ historial.porcentaje_cambio|floatformat:1 }}%
+                                                            </span>
+                                                        </td>
+                                                        <td>{{ historial.usuario_modificacion.get_full_name|default:historial.usuario_modificacion.username }}</td>
+                                                        <td>{{ historial.razon_cambio|default:"Sin especificar"|truncatewords:5 }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Razón del cambio de precio -->
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="razon_cambio_precio" class="form-label">Razón del cambio de precio (opcional)</label>
+                                    <textarea class="form-control" name="razon_cambio_precio" id="razon_cambio_precio" 
+                                              rows="2" placeholder="Ej: Actualización por inflación, Promoción especial, etc."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Botones de Acción -->
+                        <div class="d-flex gap-3 mt-4">
+                            <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-eye me-2"></i>Ver Producto
+                            </a>
+                            <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Volver al Catálogo
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save me-2"></i>Actualizar Producto
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="confirmarDeshabilitacion()">
+                                <i class="fas fa-ban me-2"></i>Deshabilitar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación para Eliminar -->
+<div class="modal fade" id="eliminarModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar el producto <strong>"{{ producto.nombre }}"</strong>?</p>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Esta acción no se puede deshacer. Se eliminarán todos los datos del producto.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form method="post" action="{% url 'eliminar_producto' producto.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Eliminar Definitivamente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación para Deshabilitar -->
+<div class="modal fade" id="deshabilitarModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar Deshabilitación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea deshabilitar el producto <strong>"{{ producto.nombre }}"</strong>?</p>
+                <div class="alert alert-warning">
+                    <i class="fas fa-info-circle me-2"></i>
+                    El producto se ocultará del catálogo pero mantendrá toda su información. Podrá habilitarlo nuevamente desde el panel de administración.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form method="post" action="{% url 'deshabilitar_producto' producto.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning">Deshabilitar Producto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Vista previa de imagen
+function previewImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('image-preview');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.innerHTML = `<img src="${e.target.result}" class="img-fluid rounded" style="max-height: 200px;">`;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// Función para confirmar eliminación
+function confirmarEliminacion() {
+    const modal = new bootstrap.Modal(document.getElementById('eliminarModal'));
+    modal.show();
+}
+
+// Función para confirmar deshabilitación
+function confirmarDeshabilitacion() {
+    const modal = new bootstrap.Modal(document.getElementById('deshabilitarModal'));
+    modal.show();
+}
+
+// Calcular margen de ganancia
+document.getElementById('precio_costo').addEventListener('input', calcularMargen);
+document.getElementById('precio').addEventListener('input', calcularMargen);
+
+function calcularMargen() {
+    const precioCosto = parseFloat(document.getElementById('precio_costo').value) || 0;
+    const precioVenta = parseFloat(document.getElementById('precio').value) || 0;
+    
+    if (precioCosto > 0 && precioVenta > 0) {
+        const margen = ((precioVenta - precioCosto) / precioCosto * 100).toFixed(1);
+        
+        // Buscar o crear elemento de margen
+        let margenDisplay = document.querySelector('.margen-display');
+        if (!margenDisplay) {
+            margenDisplay = document.createElement('div');
+            margenDisplay.className = 'alert alert-info margen-display mt-2';
+            document.getElementById('precio_oferta').parentNode.parentNode.appendChild(margenDisplay);
+        }
+        
+        margenDisplay.innerHTML = `<small><strong>Margen de ganancia:</strong> ${margen}%</small>`;
+    }
+}
+
+// Habilitar/deshabilitar precio de oferta
+document.getElementById('en_oferta').addEventListener('change', function() {
+    const precioOferta = document.getElementById('precio_oferta');
+    if (this.checked) {
+        precioOferta.required = true;
+        if (!precioOferta.value) {
+            precioOferta.focus();
+        }
+    } else {
+        precioOferta.required = false;
+    }
+});
+
+// Validación del formulario
+document.getElementById('producto-form').addEventListener('submit', function(e) {
+    const enOferta = document.getElementById('en_oferta').checked;
+    const precioOferta = parseFloat(document.getElementById('precio_oferta').value) || 0;
+    const precio = parseFloat(document.getElementById('precio').value) || 0;
+    
+    if (enOferta && (precioOferta <= 0 || precioOferta >= precio)) {
+        e.preventDefault();
+        alert('El precio de oferta debe ser mayor a 0 y menor al precio regular.');
+        return false;
+    }
+    
+    // Mostrar indicador de carga
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Actualizando...';
+    submitBtn.disabled = true;
+});
+
+// Contador de caracteres para descripción corta
+document.getElementById('descripcion_corta').addEventListener('input', function() {
+    const maxLength = 200;
+    const currentLength = this.value.length;
+    const remaining = maxLength - currentLength;
+    
+    // Buscar o crear contador
+    let counter = this.parentNode.querySelector('.char-counter');
+    if (!counter) {
+        counter = document.createElement('div');
+        counter.className = 'char-counter form-text text-end';
+        this.parentNode.appendChild(counter);
+    }
+    
+    counter.textContent = `${currentLength}/${maxLength} caracteres`;
+    counter.style.color = remaining < 20 ? '#dc3545' : '#6c757d';
+});
+
+// Calcular margen inicial si hay datos
+document.addEventListener('DOMContentLoaded', function() {
+    calcularMargen();
+    
+    // Actualizar contador de caracteres
+    const descripcionCorta = document.getElementById('descripcion_corta');
+    if (descripcionCorta.value) {
+        descripcionCorta.dispatchEvent(new Event('input'));
+    }
+});
+</script>
+{% endblock %}

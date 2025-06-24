@@ -1,0 +1,788 @@
+{% extends 'ferreteria/base.html' %}
+
+{% block title %}Catálogo de Productos - Ferramas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Header del Catálogo -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-tools me-2 text-primary"></i>Catálogo de Productos</h2>
+            <p class="text-muted">Descubre nuestra amplia gama de herramientas y materiales industriales profesionales</p>
+        </div>
+        <!-- Solo mostrar botón crear para administradores -->
+        {% if user.is_staff %}
+        <div class="col-md-4 text-end">
+            <a href="{% url 'crear_producto' %}" class="btn btn-ferramas-primary">
+                <i class="fas fa-plus me-2"></i>Agregar Producto
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Panel de Administración Rápido - Solo para staff -->
+    {% if user.is_staff %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-warning">
+                <div class="card-body bg-warning bg-opacity-10">
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="{% url 'admin_productos' %}" class="btn btn-outline-info btn-sm">
+                            <i class="fas fa-cogs me-1"></i>Gestión Avanzada
+                        </a>
+                        <a href="{% url 'admin_inventario' %}" class="btn btn-outline-warning btn-sm">
+                            <i class="fas fa-warehouse me-1"></i>Control de Inventario
+                        </a>
+                        <a href="{% url 'admin_reportes' %}" class="btn btn-outline-success btn-sm">
+                            <i class="fas fa-chart-bar me-1"></i>Reportes de Ventas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Filtros y Búsqueda Mejorados -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-filter me-2"></i>Filtros de Búsqueda
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="GET" action="{% url 'catalogo_productos' %}" id="filtros-form">
+                        <div class="row g-3">
+                            <!-- Búsqueda principal -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Buscar Productos</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary text-white">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           name="buscar" 
+                                           value="{{ query }}" 
+                                           placeholder="Nombre, código, marca o descripción...">
+                                </div>
+                            </div>
+                            
+                            <!-- Filtro por categoría -->
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Categoría</label>
+                                <select name="categoria" class="form-select">
+                                    <option value="">📦 Todas las categorías</option>
+                                    {% for categoria in categorias %}
+                                        <option value="{{ categoria }}" 
+                                                {% if categoria == categoria_filtro %}selected{% endif %}>
+                                            {{ categoria }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <!-- Botones de acción -->
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">&nbsp;</label>
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-ferramas-primary flex-fill">
+                                        <i class="fas fa-search me-1"></i>Buscar
+                                    </button>
+                                    <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-secondary">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Filtros adicionales -->
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Estado de Stock</label>
+                                <select name="stock" class="form-select">
+                                    <option value="">📊 Todos los estados</option>
+                                    <option value="disponible" {% if request.GET.stock == 'disponible' %}selected{% endif %}>
+                                        ✅ Disponible (Stock normal)
+                                    </option>
+                                    <option value="bajo" {% if request.GET.stock == 'bajo' %}selected{% endif %}>
+                                        ⚠️ Stock bajo
+                                    </option>
+                                    <option value="agotado" {% if request.GET.stock == 'agotado' %}selected{% endif %}>
+                                        ❌ Agotado
+                                    </option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Rango de Precio</label>
+                                <select name="precio" class="form-select">
+                                    <option value="">💰 Todos los precios</option>
+                                    <option value="0-10000" {% if request.GET.precio == '0-10000' %}selected{% endif %}>
+                                        Hasta $10.000
+                                    </option>
+                                    <option value="10000-50000" {% if request.GET.precio == '10000-50000' %}selected{% endif %}>
+                                        $10.000 - $50.000
+                                    </option>
+                                    <option value="50000-100000" {% if request.GET.precio == '50000-100000' %}selected{% endif %}>
+                                        $50.000 - $100.000
+                                    </option>
+                                    <option value="100000-" {% if request.GET.precio == '100000-' %}selected{% endif %}>
+                                        Más de $100.000
+                                    </option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Ordenar por</label>
+                                <select name="orden" class="form-select">
+                                    <option value="nombre" {% if request.GET.orden == 'nombre' %}selected{% endif %}>
+                                        📝 Nombre A-Z
+                                    </option>
+                                    <option value="precio_asc" {% if request.GET.orden == 'precio_asc' %}selected{% endif %}>
+                                        💲 Precio: Menor a Mayor
+                                    </option>
+                                    <option value="precio_desc" {% if request.GET.orden == 'precio_desc' %}selected{% endif %}>
+                                        💰 Precio: Mayor a Menor
+                                    </option>
+                                    <option value="stock" {% if request.GET.orden == 'stock' %}selected{% endif %}>
+                                        📦 Mayor Stock
+                                    </option>
+                                </select>
+                            </div>
+                            
+                            {% if user.is_staff %}
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Vista Admin</label>
+                                <div class="form-check form-switch mt-2">
+                                    <input class="form-check-input" type="checkbox" name="vista_admin" 
+                                           id="vista_admin" {% if request.GET.vista_admin %}checked{% endif %}>
+                                    <label class="form-check-label" for="vista_admin">
+                                        🔧 Información detallada
+                                    </label>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas de Resultados -->
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <div class="d-flex align-items-center gap-3">
+                <h6 class="mb-0 text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Mostrando <strong>{{ productos|length }}</strong> de <strong>{{ total_productos }}</strong> productos
+                    {% if query %}<span class="text-primary">para "<em>{{ query }}</em>"</span>{% endif %}
+                    {% if categoria_filtro %}<span class="text-secondary">en <em>{{ categoria_filtro }}</em></span>{% endif %}
+                </h6>
+                
+                {% if query or categoria_filtro %}
+                <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="fas fa-times me-1"></i>Limpiar filtros
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="col-md-4 text-end">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-secondary btn-sm active" id="vista-grid">
+                    <i class="fas fa-th"></i> Grid
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" id="vista-lista">
+                    <i class="fas fa-list"></i> Lista
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid de Productos -->
+    <div class="row" id="productos-container">
+        {% for producto in productos %}
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4 producto-item">
+            <div class="card h-100 product-card card-ferramas shadow-sm">
+                <div class="position-relative product-image-container">
+                    <!-- Imagen del producto -->
+                    <div class="product-image bg-light d-flex align-items-center justify-content-center rounded-top" 
+                         style="height: 220px; overflow: hidden;">
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" 
+                                 class="img-fluid" style="max-height: 200px; max-width: 100%; object-fit: cover;">
+                        {% else %}
+                            <i class="fas fa-tools fa-4x text-muted"></i>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Badges de estado -->
+                    <div class="position-absolute top-0 end-0 m-2">
+                        {% if producto.stock_actual <= 0 %}
+                            <span class="badge bg-danger">Sin Stock</span>
+                        {% elif producto.stock_actual <= producto.stock_minimo %}
+                            <span class="badge bg-warning text-dark">Stock Bajo</span>
+                        {% elif producto.stock_actual > 50 %}
+                            <span class="badge bg-success">Disponible</span>
+                        {% else %}
+                            <span class="badge bg-info">Stock Limitado</span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Badge de categoría -->
+                    <div class="position-absolute top-0 start-0 m-2">
+                        <span class="badge bg-secondary bg-opacity-75">{{ producto.categoria }}</span>
+                    </div>
+                    
+                    <!-- Overlay de acciones rápidas para admin -->
+                    {% if user.is_staff %}
+                    <div class="position-absolute bottom-0 start-0 end-0 p-2 bg-dark bg-opacity-75 admin-overlay" 
+                         style="opacity: 0; transition: opacity 0.3s;">
+                        <div class="d-flex gap-1 justify-content-center">
+                            <a href="{% url 'editar_producto' producto.id %}" 
+                               class="btn btn-warning btn-sm" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button type="button" class="btn btn-info btn-sm" 
+                                    title="Información" onclick="mostrarInfoAdmin({{ producto.id }})">
+                                <i class="fas fa-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="card-body d-flex flex-column">
+                    <!-- Información básica -->
+                    <div class="mb-2">
+                        <h6 class="card-title fw-bold mb-1 text-truncate" title="{{ producto.nombre }}">
+                            {{ producto.nombre }}
+                        </h6>
+                        <p class="text-muted small mb-1">
+                            <i class="fas fa-barcode me-1"></i>{{ producto.codigo }}
+                        </p>
+                        {% if producto.marca %}
+                        <p class="text-muted small mb-1">
+                            <i class="fas fa-industry me-1"></i>{{ producto.marca }}
+                        </p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Descripción -->
+                    <p class="card-text small text-muted flex-grow-1 mb-3" style="line-height: 1.4;">
+                        {{ producto.descripcion|truncatewords:12|default:"Sin descripción disponible" }}
+                    </p>
+                    
+                    <!-- Información de precios y stock -->
+                    <div class="mt-auto">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="price fw-bold text-success fs-5">
+                                    ${{ producto.precio_venta|floatformat:0 }}
+                                </span>
+                                {% if user.is_staff and producto.precio_compra %}
+                                <br><small class="text-muted">
+                                    Costo: ${{ producto.precio_compra|floatformat:0 }}
+                                </small>
+                                {% endif %}
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-boxes me-1"></i>Stock: {{ producto.stock_actual }}
+                                </small>
+                                {% if user.is_staff %}
+                                <small class="text-muted">
+                                    Min: {{ producto.stock_minimo|default:0 }}
+                                </small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Botones de acción condicionados por rol -->
+                        {% if user.is_staff %}
+                            <!-- Botones para administradores -->
+                            <div class="d-grid gap-1">
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'detalle_producto' producto.id %}" 
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye me-1"></i>Ver
+                                    </a>
+                                    <a href="{% url 'editar_producto' producto.id %}" 
+                                       class="btn btn-outline-warning btn-sm">
+                                        <i class="fas fa-edit me-1"></i>Editar
+                                    </a>
+                                    {% if producto.stock_actual > 0 %}
+                                        <button type="button" 
+                                                class="btn btn-ferramas-primary btn-sm"
+                                                onclick="addToCart({{ producto.id }})">
+                                            <i class="fas fa-cart-plus me-1"></i>+
+                                        </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <!-- Botones para usuarios normales -->
+                            <div class="d-grid gap-1">
+                                {% if producto.stock_actual > 0 %}
+                                    <div class="btn-group" role="group">
+                                        <a href="{% url 'detalle_producto' producto.id %}" 
+                                           class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-eye me-1"></i>Ver Detalles
+                                        </a>
+                                        {% if user.is_authenticated %}
+                                            <button type="button" 
+                                                    class="btn btn-ferramas-primary btn-sm"
+                                                    onclick="addToCart({{ producto.id }})">
+                                                <i class="fas fa-cart-plus me-1"></i>Agregar
+                                            </button>
+                                        {% else %}
+                                            <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-sm">
+                                                <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                {% else %}
+                                    <div class="btn-group" role="group">
+                                        <a href="{% url 'detalle_producto' producto.id %}" 
+                                           class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-eye me-1"></i>Ver Detalles
+                                        </a>
+                                        <button type="button" class="btn btn-secondary btn-sm" disabled>
+                                            <i class="fas fa-times me-1"></i>Sin Stock
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Información adicional para admin en vista extendida -->
+                {% if user.is_staff and request.GET.vista_admin %}
+                <div class="card-footer bg-light text-muted small">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <strong>Margen</strong><br>
+                            {% if producto.precio_compra %}
+                                {{ producto.margen_porcentaje|default:0 }}%
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </div>
+                        <div class="col-4">
+                            <strong>Valor Inv.</strong><br>
+                            ${{ producto.valor_inventario|floatformat:0|default:"0" }}
+                        </div>
+                        <div class="col-4">
+                            <strong>Estado</strong><br>
+                            {% if producto.stock_actual <= 0 %}
+                                <span class="text-danger">●</span> Agotado
+                            {% elif producto.stock_actual <= producto.stock_minimo %}
+                                <span class="text-warning">●</span> Crítico
+                            {% else %}
+                                <span class="text-success">●</span> Normal
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <!-- Estado vacío mejorado -->
+        <div class="col-12">
+            <div class="card text-center border-0 shadow-sm">
+                <div class="card-body py-5">
+                    <div class="mb-4">
+                        <i class="fas fa-search fa-4x text-muted mb-3"></i>
+                        <h4 class="text-muted">No se encontraron productos</h4>
+                        {% if query or categoria_filtro %}
+                            <p class="text-muted">
+                                No hay productos que coincidan con los filtros aplicados.
+                                <br>Intenta modificar tu búsqueda o filtros.
+                            </p>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="{% url 'catalogo_productos' %}" class="btn btn-ferramas-primary">
+                                    <i class="fas fa-refresh me-2"></i>Ver Todos los Productos
+                                </a>
+                                {% if user.is_staff %}
+                                    <a href="{% url 'crear_producto' %}" class="btn btn-outline-success">
+                                        <i class="fas fa-plus me-2"></i>Agregar Primer Producto
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">
+                                Aún no hay productos en el catálogo.
+                            </p>
+                            {% if user.is_staff %}
+                                <a href="{% url 'crear_producto' %}" class="btn btn-ferramas-primary btn-lg">
+                                    <i class="fas fa-plus me-2"></i>Agregar Primer Producto
+                                </a>
+                            {% else %}
+                                <p class="text-muted">Vuelve pronto para ver nuestros productos.</p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Paginación mejorada -->
+    {% if productos.has_other_pages %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <nav aria-label="Paginación de productos">
+                <ul class="pagination justify-content-center">
+                    {% if productos.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1{% if query %}&buscar={{ query }}{% endif %}{% if categoria_filtro %}&categoria={{ categoria_filtro }}{% endif %}{% for key, value in request.GET.items %}{% if key != 'page' and key != 'buscar' and key != 'categoria' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" 
+                               title="Primera página">
+                                <i class="fas fa-angle-double-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ productos.previous_page_number }}{% if query %}&buscar={{ query }}{% endif %}{% if categoria_filtro %}&categoria={{ categoria_filtro }}{% endif %}{% for key, value in request.GET.items %}{% if key != 'page' and key != 'buscar' and key != 'categoria' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
+                               title="Página anterior">
+                                <i class="fas fa-angle-left"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in productos.paginator.page_range %}
+                        {% if productos.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link fw-bold">{{ num }}</span>
+                            </li>
+                        {% elif num > productos.number|add:'-3' and num < productos.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}{% if query %}&buscar={{ query }}{% endif %}{% if categoria_filtro %}&categoria={{ categoria_filtro }}{% endif %}{% for key, value in request.GET.items %}{% if key != 'page' and key != 'buscar' and key != 'categoria' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                                    {{ num }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if productos.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ productos.next_page_number }}{% if query %}&buscar={{ query }}{% endif %}{% if categoria_filtro %}&categoria={{ categoria_filtro }}{% endif %}{% for key, value in request.GET.items %}{% if key != 'page' and key != 'buscar' and key != 'categoria' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
+                               title="Página siguiente">
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ productos.paginator.num_pages }}{% if query %}&buscar={{ query }}{% endif %}{% if categoria_filtro %}&categoria={{ categoria_filtro }}{% endif %}{% for key, value in request.GET.items %}{% if key != 'page' and key != 'buscar' and key != 'categoria' %}&{{ key }}={{ value }}{% endif %}{% endfor %}"
+                               title="Última página">
+                                <i class="fas fa-angle-double-right"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            
+            <!-- Información de paginación -->
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    Página {{ productos.number }} de {{ productos.paginator.num_pages }} 
+                    ({{ productos.paginator.count }} productos en total)
+                </small>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Información adicional y acciones rápidas -->
+    <div class="row mt-5">
+        <div class="col-md-8">
+            <div class="card bg-light border-0">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-info-circle text-primary me-2"></i>
+                        ¿No encuentras lo que buscas?
+                    </h5>
+                    <p class="card-text text-muted">
+                        Contáctanos y nuestros expertos te ayudarán a encontrar la herramienta o material perfecto para tu proyecto.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="#" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-phone me-1"></i>Llamar
+                        </a>
+                        <a href="#" class="btn btn-outline-info btn-sm">
+                            <i class="fas fa-envelope me-1"></i>Email
+                        </a>
+                        <a href="#" class="btn btn-outline-success btn-sm">
+                            <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if user.is_staff %}
+        <div class="col-md-4">
+            <div class="card border-warning">
+                <div class="card-body">
+                    <h6 class="card-title text-warning">
+                        <i class="fas fa-tools me-2"></i>Panel de Administración
+                    </h6>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'admin_dashboard' %}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                        <a href="{% url 'admin_inventario' %}" class="btn btn-outline-warning btn-sm">
+                            <i class="fas fa-warehouse me-1"></i>Inventario
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal de información para administradores -->
+{% if user.is_staff %}
+<div class="modal fade" id="infoAdminModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Información del Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="info-admin-content">
+                <!-- Contenido cargado dinámicamente -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Estilos adicionales para el catálogo */
+.product-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container:hover .admin-overlay {
+    opacity: 1 !important;
+}
+
+.badge-stock {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.75rem;
+    z-index: 10;
+}
+
+.price {
+    color: var(--ferramas-success);
+    font-weight: 700;
+}
+
+/* Animaciones para filtros */
+.filtros-form input:focus,
+.filtros-form select:focus {
+    border-color: var(--ferramas-primary);
+    box-shadow: 0 0 0 0.2rem rgba(30, 64, 175, 0.25);
+}
+
+/* Vista de lista (para implementación futura) */
+.vista-lista .producto-item {
+    width: 100%;
+}
+
+.vista-lista .product-card {
+    flex-direction: row;
+}
+
+.vista-lista .product-image {
+    width: 150px;
+    height: 120px;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .product-card {
+        margin-bottom: 1rem;
+    }
+    
+    .admin-overlay {
+        opacity: 1 !important;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Actualizar contador del carrito al cargar la página
+    updateCartCount();
+    
+    // Auto-submit de filtros cuando cambian
+    const filtrosSelects = document.querySelectorAll('#filtros-form select');
+    filtrosSelects.forEach(select => {
+        select.addEventListener('change', function() {
+            // Pequeño delay para mejor UX
+            setTimeout(() => {
+                document.getElementById('filtros-form').submit();
+            }, 300);
+        });
+    });
+    
+    // Búsqueda con Enter
+    const searchInput = document.querySelector('input[name="buscar"]');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('filtros-form').submit();
+            }
+        });
+    }
+    
+    // Vista grid/lista (para implementación futura)
+    const vistaGrid = document.getElementById('vista-grid');
+    const vistaLista = document.getElementById('vista-lista');
+    const productosContainer = document.getElementById('productos-container');
+    
+    if (vistaLista) {
+        vistaLista.addEventListener('click', function() {
+            vistaGrid.classList.remove('active');
+            vistaLista.classList.add('active');
+            productosContainer.classList.add('vista-lista');
+        });
+    }
+    
+    if (vistaGrid) {
+        vistaGrid.addEventListener('click', function() {
+            vistaLista.classList.remove('active');
+            vistaGrid.classList.add('active');
+            productosContainer.classList.remove('vista-lista');
+        });
+    }
+});
+
+// Función para mostrar información administrativa del producto
+{% if user.is_staff %}
+function mostrarInfoAdmin(productoId) {
+    // Aquí podrías hacer una llamada AJAX para obtener información detallada
+    const modal = new bootstrap.Modal(document.getElementById('infoAdminModal'));
+    const content = document.getElementById('info-admin-content');
+    
+    content.innerHTML = `
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-2">Cargando información del producto...</p>
+        </div>
+    `;
+    
+    modal.show();
+    
+    // Simular carga de datos (reemplazar con llamada AJAX real)
+    setTimeout(() => {
+        content.innerHTML = `
+            <div class="row">
+                <div class="col-6">
+                    <strong>ID del Producto:</strong><br>
+                    <span class="text-muted">${productoId}</span>
+                </div>
+                <div class="col-6">
+                    <strong>Última Actualización:</strong><br>
+                    <span class="text-muted">${new Date().toLocaleDateString()}</span>
+                </div>
+            </div>
+            <hr>
+            <p class="text-muted">
+                <i class="fas fa-info-circle me-1"></i>
+                Para ver información completa, haz clic en "Ver" o "Editar".
+            </p>
+        `;
+    }, 1000);
+}
+{% endif %}
+
+// Mejorar la función addToCart con feedback visual
+function addToCart(productoId, cantidad = 1) {
+    const btn = event.target.closest('button');
+    const originalText = btn.innerHTML;
+    
+    // Loading state
+    btn.classList.add('btn-loading');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Agregando...';
+    
+    fetch('/api/carrito/agregar/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            producto_id: productoId,
+            cantidad: cantidad
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            updateCartCount();
+            showNotification('¡Producto agregado al carrito!', 'success');
+            
+            // Efecto visual temporal
+            btn.innerHTML = '<i class="fas fa-check me-1"></i>¡Agregado!';
+            btn.classList.remove('btn-ferramas-primary');
+            btn.classList.add('btn-success');
+            
+            // Restaurar después de 2 segundos
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-ferramas-primary');
+            }, 2000);
+        } else {
+            showNotification(data.error || 'Error al agregar producto', 'error');
+        }
+    })
+    .catch(error => {
+        showNotification('Error de conexión', 'error');
+        console.error('Error:', error);
+    })
+    .finally(() => {
+        // Remove loading state
+        btn.classList.remove('btn-loading');
+        btn.disabled = false;
+        
+        // Si no hubo éxito, restaurar texto original
+        if (!btn.classList.contains('btn-success')) {
+            btn.innerHTML = originalText;
+        }
+    });
+}
+</script>
+{% endblock %}
