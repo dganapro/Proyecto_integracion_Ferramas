@@ -46,7 +46,7 @@
                                     <select class="form-select" name="categoria" id="categoria" required>
                                         <option value="">Seleccionar categoría</option>
                                         {% for categoria in categorias %}
-                                            <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                                            <option value="{{ categoria.id }}">{{ categoria.categoria }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>

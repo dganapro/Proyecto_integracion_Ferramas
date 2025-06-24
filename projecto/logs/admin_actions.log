@@ -6,3 +6,10 @@ INFO 2025-06-24 01:10:16,829 admin_actions Admin diego accedió a vista: admin_da
 INFO 2025-06-24 01:11:03,958 admin_actions Admin diego accedió a vista: admin_dashboard
 INFO 2025-06-24 01:11:25,545 admin_actions Admin diego accedió a vista: admin_inventario
 INFO 2025-06-24 01:12:08,955 admin_actions Admin diego accedió a vista: admin_dashboard
+INFO 2025-06-24 18:58:52,589 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-06-24 19:14:23,334 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-06-24 19:15:09,786 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-06-24 19:20:53,565 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-06-24 19:22:57,428 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-06-24 19:23:22,976 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-06-24 19:23:26,420 admin_actions Admin admin123 accedió a vista: admin_inventario

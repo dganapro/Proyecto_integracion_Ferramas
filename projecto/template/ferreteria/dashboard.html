@@ -130,9 +130,10 @@
                                             class="btn btn-outline-primary btn-sm">
                                             <i class="fas fa-eye me-1"></i>Ver
                                         </a>
-                                        {% if user.is_authenticated and producto.stock_actual > 0 %}
+                                        {% if user.is_authenticated %}
                                         <button type="button" class="btn btn-ferramas-primary btn-sm"
-                                            onclick="addToCart({{ producto.id }})">
+                                            onclick="addToCart({{ producto.id }})"
+                                            {% if producto.stock_actual <= 0 %}disabled{% endif %}>
                                             <i class="fas fa-cart-plus me-1"></i>Agregar
                                         </button>
                                         {% endif %}
@@ -164,9 +165,10 @@
                                     <small class="text-muted">Stock: 45</small>
                                 </div>
                                 <div class="d-grid">
-                                    <a href="#" class="btn btn-ferramas-primary btn-sm">
+                                    <button type="button" class="btn btn-ferramas-primary btn-sm"
+                                        onclick="addToCart(1)">
                                         <i class="fas fa-cart-plus me-1"></i>Agregar al Carrito
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -193,9 +195,10 @@
                                     <small class="text-muted">Stock: 12</small>
                                 </div>
                                 <div class="d-grid">
-                                    <a href="#" class="btn btn-ferramas-primary btn-sm">
+                                    <button type="button" class="btn btn-ferramas-primary btn-sm"
+                                        onclick="addToCart(2)">
                                         <i class="fas fa-cart-plus me-1"></i>Agregar al Carrito
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -222,9 +225,10 @@
                                     <small class="text-muted">Stock: 28</small>
                                 </div>
                                 <div class="d-grid">
-                                    <a href="#" class="btn btn-ferramas-primary btn-sm">
+                                    <button type="button" class="btn btn-ferramas-primary btn-sm"
+                                        onclick="addToCart(3)">
                                         <i class="fas fa-cart-plus me-1"></i>Agregar al Carrito
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
