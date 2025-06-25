@@ -2012,3 +2012,48 @@ Not Found: /.well-known/appspecific/com.chrome.devtools.json
 "GET /api/carrito/resumen/ HTTP/1.1" 200 52
 "GET / HTTP/1.1" 200 26937
 "GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /admin/ HTTP/1.1" 200 6181
+"GET /productos HTTP/1.1" 301 0
+"GET /productos/ HTTP/1.1" 200 49025
+"GET /static/css/baseStyle.css HTTP/1.1" 304 0
+"GET /static/js/global.js HTTP/1.1" 304 0
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+Not Found: /api/productos/
+"GET /api/productos/ HTTP/1.1" 404 13654
+"GET /productos/10 HTTP/1.1" 301 0
+"GET /productos/10/ HTTP/1.1" 302 0
+"GET /productos/ HTTP/1.1" 200 49404
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+Not Found: /api/productos/10
+"GET /api/productos/10 HTTP/1.1" 404 13660
+Not Found: /api/productos/
+"GET /api/productos/ HTTP/1.1" 404 13654
+"GET /productos/10/ HTTP/1.1" 302 0
+"GET /productos/ HTTP/1.1" 200 49404
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /productos/1 HTTP/1.1" 301 0
+Internal Server Error: /productos/1/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 291, in detalle_producto
+    margen = round(((producto['precio_venta'] - producto['precio_compra']) / producto['precio_compra']) * 100, 2)
+                     ~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'precio_venta'
+"GET /productos/1/ HTTP/1.1" 500 75305
+"GET /productos/ HTTP/1.1" 200 49025
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /productos/ HTTP/1.1" 200 38766
+"GET /productos/10/ HTTP/1.1" 302 0
+"GET /productos/ HTTP/1.1" 200 49404
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /productos/10 HTTP/1.1" 301 0
+"GET /productos/10/ HTTP/1.1" 302 0
+"GET /productos/ HTTP/1.1" 200 39145
