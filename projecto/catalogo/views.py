@@ -29,7 +29,7 @@ except ImportError:
 # Configurar loggers
 admin_logger = logging.getLogger('admin_actions')
 general_logger = logging.getLogger('catalogo')
-# Agregar la importación faltante para PagoTarjeta
+# Agregar tarjetaclase PagoTarjeta:
 class PagoTarjeta:
     """Modelo temporal para pagos con tarjeta"""
     def __init__(self, **kwargs):
@@ -1398,117 +1398,40 @@ def error_403(request, exception):
 # ==================== AUTENTICACIÓN DE USUARIOS ====================
 
 def registro_usuario(request):
-    """Registro de nuevos usuarios"""
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            
-            # Obtener datos adicionales del formulario
-            user.first_name = request.POST.get('first_name', '')
-            user.last_name = request.POST.get('last_name', '')
-            user.email = request.POST.get('email', '')
-            user.save()
-            
-            messages.success(request, f'¡Cuenta creada exitosamente para {user.username}!')
-            
-            # Login automático después del registro
-            from django.contrib.auth import login
-            login(request, user)
-            
-            return redirect('home')
-        else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f'{field}: {error}')
-    else:
-        form = UserCreationForm()
-    
-    contexto = {
-        'form': form
-    }
-    return render(request, 'registration/registro.html', contexto)
-
-def perfil_usuario(request):
-    """Perfil del usuario logueado"""
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
-    if request.method == 'POST':
-        # Actualizar datos del perfil
-        request.user.first_name = request.POST.get('first_name', '')
-        request.user.last_name = request.POST.get('last_name', '')
-        request.user.email = request.POST.get('email', '')
-        request.user.save()
-        
-        messages.success(request, 'Perfil actualizado exitosamente')
-        return redirect('perfil_usuario')
-    
-    # Obtener estadísticas del usuario
-    pedidos_usuario = Pedido.objects.filter(usuario=request.user)
-    total_pedidos = pedidos_usuario.count()
-    total_gastado = sum(p.total for p in pedidos_usuario)
-    
-    contexto = {
-        'total_pedidos': total_pedidos,
-        'total_gastado': total_gastado,
-        'ultimo_pedido': pedidos_usuario.first() if pedidos_usuario.exists() else None
-    }
-    
-    return render(request, 'registration/perfil.html', contexto)
-
-# Agregar estas rutas en la sección de autenticación:
-
-urlpatterns = [
-    # ... rutas existentes ...
-    
-    # ==================== AUTENTICACIÓN ====================
-   
-    # ... resto de rutas ...
-]
-
-# ==================== SISTEMA DE AUTENTICACIÓN MEJORADO ====================
-
-def registro_usuario(request):
     """Registro de nuevos usuarios con validaciones completas"""
     if request.method == 'POST':
-        from django.contrib.auth.forms import UserCreationForm
-        
-        # Obtener datos del formulario
         username = request.POST.get('username', '').strip()
         password1 = request.POST.get('password1', '')
         password2 = request.POST.get('password2', '')
         email = request.POST.get('email', '').strip()
         first_name = request.POST.get('first_name', '').strip()
         last_name = request.POST.get('last_name', '').strip()
-        
-        # Validaciones personalizadas
+
         errores = []
-        
+
         if not username or len(username) < 3:
             errores.append('El nombre de usuario debe tener al menos 3 caracteres')
         elif User.objects.filter(username=username).exists():
             errores.append('Este nombre de usuario ya está en uso')
-        
+
         if not email:
             errores.append('El email es obligatorio')
         elif User.objects.filter(email=email).exists():
             errores.append('Este email ya está registrado')
-        
+
         if not first_name or not last_name:
             errores.append('Nombre y apellido son obligatorios')
-        
+
         if not password1 or len(password1) < 6:
             errores.append('La contraseña debe tener al menos 6 caracteres')
         elif password1 != password2:
             errores.append('Las contraseñas no coinciden')
-        
+
         if errores:
             for error in errores:
                 messages.error(request, error)
         else:
             try:
-                # Crear usuario nuevo
                 user = User.objects.create_user(
                     username=username,
                     email=email,
@@ -1519,23 +1442,15 @@ def registro_usuario(request):
                     is_superuser=False,
                     is_active=True
                 )
-                
                 messages.success(request, f'¡Cuenta creada exitosamente para {user.get_full_name()}!')
-                
-                # Login automático
                 from django.contrib.auth import login
                 login(request, user)
-                
-                # Transferir carrito anónimo si existe
                 transferir_carrito_anonimo(request, user)
-                
                 return redirect('home')
-                
             except Exception as e:
                 messages.error(request, f'Error al crear la cuenta: {str(e)}')
-    
-    contexto = {'form': None}
-    return render(request, 'registration/registro.html', contexto)
+
+    return render(request, 'registration/registro.html')
 
 def transferir_carrito_anonimo(request, user):
     """Transfiere carrito anónimo al usuario registrado"""
@@ -1546,46 +1461,37 @@ def transferir_carrito_anonimo(request, user):
                 session_key=session_key,
                 usuario=None
             ).first()
-            
             if carrito_anonimo:
-                carrito_usuario, created = CarritoCompras.objects.get_or_create(
+                carrito_usuario, _ = CarritoCompras.objects.get_or_create(
                     usuario=user,
                     defaults={'activo': True}
                 )
-                
                 for item in carrito_anonimo.items.all():
                     item_existente = CarritoItem.objects.filter(
                         carrito=carrito_usuario,
                         producto_id=item.producto_id
                     ).first()
-                    
                     if item_existente:
                         item_existente.cantidad += item.cantidad
                         item_existente.save()
                     else:
                         item.carrito = carrito_usuario
                         item.save()
-                
                 carrito_anonimo.delete()
-                
     except Exception as e:
         print(f"Error transfiriendo carrito: {e}")
 
+@login_required
 def perfil_usuario(request):
     """Perfil del usuario logueado con estadísticas"""
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
     if request.method == 'POST':
-        # Actualizar datos del perfil
         request.user.first_name = request.POST.get('first_name', '')
         request.user.last_name = request.POST.get('last_name', '')
         request.user.email = request.POST.get('email', '')
         request.user.save()
-        
         messages.success(request, 'Perfil actualizado exitosamente')
         return redirect('perfil_usuario')
-    
+
     # Obtener estadísticas del usuario
     try:
         pedidos_usuario = Pedido.objects.filter(usuario=request.user)
@@ -1596,440 +1502,12 @@ def perfil_usuario(request):
         total_pedidos = 0
         total_gastado = 0
         ultimo_pedido = None
-    
+
     contexto = {
         'total_pedidos': total_pedidos,
         'total_gastado': total_gastado,
         'ultimo_pedido': ultimo_pedido
     }
-    
-    return render(request, 'registration/perfil.html', contexto)
-
-# ==================== PANEL DE ADMINISTRACIÓN ====================
-
-@login_required
-def admin_dashboard(request):
-    """Panel principal de administración"""
-    if not request.user.is_staff:
-        messages.error(request, 'No tienes permisos para acceder al panel de administración')
-        return redirect('home')
-    
-    # Obtener estadísticas del sistema
-    productos = obtener_todos_productos()
-    
-    # ✅ AGREGAR AQUÍ - Calcular margen para cada producto
-    for producto in productos:
-        if producto.get('precio_compra') and producto.get('precio_venta'):
-            precio_venta = float(producto['precio_venta'])
-            precio_compra = float(producto['precio_compra'])
-            producto['margen_porcentaje'] = round(((precio_venta - precio_compra) / precio_compra) * 100, 1)
-        else:
-            producto['margen_porcentaje'] = 0
-    
-    # Estadísticas de productos
-    stats = {
-        'total_productos': len(productos),
-        'productos_activos': len([p for p in productos if p.get('estado') == 'activo']),
-        'productos_inactivos': len([p for p in productos if p.get('estado') == 'inactivo']),
-        'productos_stock_bajo': len([p for p in productos if p.get('stock_actual', 0) <= p.get('stock_minimo', 0)]),
-        'valor_inventario': sum(p.get('precio_compra', 0) * p.get('stock_actual', 0) for p in productos),
-        'valor_venta_potencial': sum(p.get('precio_venta', 0) * p.get('stock_actual', 0) for p in productos)
-    }
-    
-    # Productos críticos (stock bajo)
-    productos_criticos = [p for p in productos if p.get('stock_actual', 0) <= p.get('stock_minimo', 0)][:5]
-    
-    # Estadísticas de usuarios
-    total_usuarios = User.objects.count()
-    usuarios_activos = User.objects.filter(is_active=True).count()
-    staff_usuarios = User.objects.filter(is_staff=True).count()
-    
-    # Estadísticas de pedidos
-    try:
-        pedidos_recientes = Pedido.objects.all().order_by('-fecha_pedido')[:5]
-        total_pedidos = Pedido.objects.count()
-        pedidos_pendientes = Pedido.objects.filter(estado='pendiente').count()
-    except:
-        pedidos_recientes = []
-        total_pedidos = 0
-        pedidos_pendientes = 0
-    
-    contexto = {
-        'stats': stats,
-        'productos_criticos': productos_criticos,
-        'ganancia_potencial': stats['valor_venta_potencial'] - stats['valor_inventario'],
-        'usuarios_stats': {
-            'total': total_usuarios,
-            'activos': usuarios_activos,
-            'staff': staff_usuarios,
-        },
-        'pedidos_stats': {
-            'total': total_pedidos,
-            'pendientes': pedidos_pendientes,
-            'recientes': pedidos_recientes
-        }
-    }
-    
-    return render(request, 'ferreteria/admin/dashboard.html', contexto)
-
-@login_required
-def admin_productos(request):
-    """Gestión avanzada de productos para administradores"""
-
-    if not request.user.is_staff:
-        messages.error(request, 'No tienes permisos para acceder a esta sección')
-        return redirect('home')
-    
-    productos = obtener_todos_productos()
-
-    return render(request, 'admin/productos.html', {'productos': productos})
-    # Filtros
-    categoria_filtro = request.GET.get('categoria', '')
-    estado_filtro = request.GET.get('estado', '')
-    stock_filtro = request.GET.get('stock', '')  # 'bajo', 'normal', 'alto'
-    
-    if categoria_filtro:
-        productos = [p for p in productos if p.get('categoria') == categoria_filtro]
-    
-    if estado_filtro:
-        productos = [p for p in productos if p.get('estado') == estado_filtro]
-    
-    if stock_filtro == 'bajo':
-        productos = [p for p in productos if p.get('stock_actual', 0) <= p.get('stock_minimo', 0)]
-    elif stock_filtro == 'normal':
-        productos = [p for p in productos if p.get('stock_minimo', 0) < p.get('stock_actual', 0) <= p.get('stock_minimo', 0) * 3]
-    elif stock_filtro == 'alto':
-        productos = [p for p in productos if p.get('stock_actual', 0) > p.get('stock_minimo', 0) * 3]
-    
-    # Paginación
-    from django.core.paginator import Paginator
-    paginator = Paginator(productos, 20)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    # Categorías para filtro
-    all_productos = obtener_todos_productos()
-    categorias = sorted(list(set(p.get('categoria', '') for p in all_productos if p.get('categoria'))))
-    
-    contexto = {
-        'productos': page_obj,
-        'categorias': categorias,
-        'categoria_filtro': categoria_filtro,
-        'estado_filtro': estado_filtro,
-        'stock_filtro': stock_filtro
-    }
-    
-    return render(request, 'ferreteria/admin/productos.html', contexto)
-
-@login_required
-def admin_pedidos(request):
-    """Gestión de pedidos para administradores"""
-    if not request.user.is_staff:
-        messages.error(request, 'No tienes permisos para acceder a esta sección')
-        return redirect('home')
-    
-    # Obtener todos los pedidos (necesitarías un modelo Pedido)
-    from .models import Pedido
-    pedidos = Pedido.objects.all().order_by('-fecha_pedido')
-    
-    # Filtros
-    estado_filtro = request.GET.get('estado', '')
-    if estado_filtro:
-        pedidos = pedidos.filter(estado=estado_filtro)
-    
-    # Paginación
-    from django.core.paginator import Paginator
-    paginator = Paginator(pedidos, 25)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    contexto = {
-        'pedidos': page_obj,
-        'estado_filtro': estado_filtro
-    }
-    
-    return render(request, 'ferreteria/admin/pedidos.html', contexto)
-
-@login_required
-def admin_inventario(request):
-    """Gestión de inventario para administradores"""
-    if not request.user.is_staff:
-        messages.error(request, 'No tienes permisos para acceder a esta sección')
-        return redirect('home')
-    
-    productos = obtener_todos_productos()
-    
-    # Análisis de inventario
-    productos_con_analisis = []
-    for producto in productos:
-        stock_actual = producto.get('stock_actual', 0)
-        stock_minimo = producto.get('stock_minimo', 0)
-        precio_compra = producto.get('precio_compra', 0)
-        precio_venta = producto.get('precio_venta', 0)
-        
-        analisis = {
-            **producto,
-            'valor_inventario': stock_actual * precio_compra,
-            'valor_venta_potencial': stock_actual * precio_venta,
-            'margen_ganancia': ((precio_venta - precio_compra) / precio_compra * 100) if precio_compra > 0 else 0,
-            'estado_stock': 'critico' if stock_actual <= stock_minimo else 'normal' if stock_actual <= stock_minimo * 2 else 'bueno',
-            'necesita_restock': stock_actual <= stock_minimo
-        }
-        productos_con_analisis.append(analisis)
-    
-    # Estadísticas
-    total_valor_inventario = sum(p['valor_inventario'] for p in productos_con_analisis)
-    total_valor_venta = sum(p['valor_venta_potencial'] for p in productos_con_analisis)
-    productos_criticos = len([p for p in productos_con_analisis if p['necesita_restock']])
-    
-    contexto = {
-        'productos': productos_con_analisis,
-        'total_valor_inventario': total_valor_inventario,
-        'total_valor_venta': total_valor_venta,
-        'ganancia_potencial': total_valor_venta - total_valor_inventario,
-        'productos_criticos': productos_criticos
-    }
-    
-    return render(request, 'ferreteria/admin/inventario.html', contexto)
-
-@login_required
-def admin_reportes(request):
-    """Reportes y estadísticas para administradores"""
-    if not request.user.is_staff:
-        messages.error(request, 'No tienes permisos para acceder a esta sección')
-        return redirect('home')
-    
-    productos = obtener_todos_productos()
-    
-    # Reporte por categorías
-    categorias_stats = {}
-    for producto in productos:
-        categoria = producto.get('categoria', 'Sin Categoría')
-        if categoria not in categorias_stats:
-            categorias_stats[categoria] = {
-                'cantidad': 0,
-                'valor_inventario': 0,
-                'valor_venta': 0,
-                'productos_activos': 0
-            }
-        
-        categorias_stats[categoria]['cantidad'] += 1
-        categorias_stats[categoria]['valor_inventario'] += producto.get('precio_compra', 0) * producto.get('stock_actual', 0)
-        categorias_stats[categoria]['valor_venta'] += producto.get('precio_venta', 0) * producto.get('stock_actual', 0)
-        
-        if producto.get('estado') == 'activo':
-            categorias_stats[categoria]['productos_activos'] += 1
-    
-    # Productos más valiosos
-    productos_ordenados = sorted(productos, key=lambda x: x.get('precio_venta', 0) * x.get('stock_actual', 0), reverse=True)
-    productos_mas_valiosos = productos_ordenados[:10]
-    
-    # Productos con mayor margen
-    productos_con_margen = []
-    for producto in productos:
-        precio_compra = producto.get('precio_compra', 0)
-        precio_venta = producto.get('precio_venta', 0)
-        if precio_compra > 0:
-            margen = ((precio_venta - precio_compra) / precio_compra) * 100
-            productos_con_margen.append({**producto, 'margen': margen})
-    
-    productos_mayor_margen = sorted(productos_con_margen, key=lambda x: x['margen'], reverse=True)[:10]
-    
-    contexto = {
-        'categorias_stats': categorias_stats,
-        'productos_mas_valiosos': productos_mas_valiosos,
-        'productos_mayor_margen': productos_mayor_margen,
-        'total_productos': len(productos),
-        'total_categorias': len(categorias_stats)
-    }
-    
-@login_required
-def admin_reportes(request):
-    """Reportes y estadísticas para administradores"""
-    if not request.user.is_staff:
-        messages.error(request, 'No tienes permisos para acceder a esta sección')
-        return redirect('home')
-    
-    productos = obtener_todos_productos()
-    
-    # Reporte por categorías
-    categorias_stats = {}
-    for producto in productos:
-        categoria = producto.get('categoria', 'Sin Categoría')
-        if categoria not in categorias_stats:
-            categorias_stats[categoria] = {
-                'cantidad': 0,
-                'valor_inventario': 0,
-                'valor_venta': 0,
-                'productos_activos': 0
-            }
-        
-        categorias_stats[categoria]['cantidad'] += 1
-        categorias_stats[categoria]['valor_inventario'] += producto.get('precio_compra', 0) * producto.get('stock_actual', 0)
-        categorias_stats[categoria]['valor_venta'] += producto.get('precio_venta', 0) * producto.get('stock_actual', 0)
-        
-        if producto.get('estado') == 'activo':
-            categorias_stats[categoria]['productos_activos'] += 1
-    
-    # Productos más valiosos
-    productos_ordenados = sorted(productos, key=lambda x: x.get('precio_venta', 0) * x.get('stock_actual', 0), reverse=True)
-    productos_mas_valiosos = productos_ordenados[:10]
-    
-    # Productos con mayor margen
-    productos_con_margen = []
-    for producto in productos:
-        precio_compra = producto.get('precio_compra', 0)
-        precio_venta = producto.get('precio_venta', 0)
-        if precio_compra > 0:
-            margen = ((precio_venta - precio_compra) / precio_compra) * 100
-            productos_con_margen.append({**producto, 'margen': margen})
-    
-    productos_mayor_margen = sorted(productos_con_margen, key=lambda x: x['margen'], reverse=True)[:10]
-    
-    contexto = {
-        'categorias_stats': categorias_stats,
-        'productos_mas_valiosos': productos_mas_valiosos,
-        'productos_mayor_margen': productos_mayor_margen,
-        'total_productos': len(productos),
-        'total_categorias': len(categorias_stats)
-    }
-    
-    return render(request, 'ferreteria/admin/reportes.html', contexto)
-
-@login_required
-@user_passes_test(lambda u: u.is_staff, login_url='/')
-def admin_cambiar_estado_usuario(request, user_id):
-    """Cambiar estado activo/inactivo de un usuario"""
-    if request.method == 'POST':
-        try:
-            usuario = User.objects.get(id=user_id)
-            
-            # Protección: no desactivar superusuarios
-            if usuario.is_superuser:
-                admin_logger.warning(f"Admin {request.user.username} intentó desactivar superusuario: {usuario.username}")
-                messages.error(request, 'No puedes desactivar un superusuario')
-                return redirect('admin_usuarios')
-            
-            # Protección: no desactivarse a sí mismo
-            if usuario == request.user:
-                admin_logger.warning(f"Admin {request.user.username} intentó desactivarse a sí mismo")
-                messages.error(request, 'No puedes desactivar tu propia cuenta')
-                return redirect('admin_usuarios')
-            
-            # Cambiar estado
-            estado_anterior = usuario.is_active
-            usuario.is_active = not usuario.is_active
-            usuario.save()
-            
-            estado = "activado" if usuario.is_active else "desactivado"
-            admin_logger.info(f"Admin {request.user.username} {estado} usuario: {usuario.username} (ID: {user_id})")
-            messages.success(request, f'Usuario {usuario.username} {estado} exitosamente')
-            
-        except User.DoesNotExist:
-            admin_logger.error(f"Admin {request.user.username} intentó modificar usuario inexistente: {user_id}")
-            messages.error(request, 'Usuario no encontrado')
-        except Exception as e:
-            admin_logger.error(f"Admin {request.user.username} - Error al cambiar estado del usuario {user_id}: {str(e)}")
-            messages.error(request, f'Error al cambiar estado del usuario: {str(e)}')
-    
-    return redirect('admin_usuarios')
-
-@login_required
-def admin_usuarios(request):
-    """Gestión de usuarios para administradores"""
-    if not request.user.is_staff:
-        messages.error(request, 'No tienes permisos para acceder a esta sección')
-        return redirect('home')
-    
-    usuarios = User.objects.all().order_by('-date_joined')
-    
-    # Filtros
-    estado_filtro = request.GET.get('estado', '')
-    if estado_filtro == 'activos':
-        usuarios = usuarios.filter(is_active=True)
-    elif estado_filtro == 'inactivos':
-        usuarios = usuarios.filter(is_active=False)
-    elif estado_filtro == 'staff':
-        usuarios = usuarios.filter(is_staff=True)
-    
-    # Paginación
-    from django.core.paginator import Paginator
-    paginator = Paginator(usuarios, 20)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    contexto = {
-        'usuarios': page_obj,
-        'estado_filtro': estado_filtro
-    }
-    
-    return render(request, 'ferreteria/admin/usuarios.html', contexto)
-def transferir_carrito_anonimo(request, user):
-    """Transfiere carrito anónimo al usuario registrado"""
-    try:
-        session_key = request.session.session_key
-        if session_key:
-            carrito_anonimo = CarritoCompras.objects.filter(
-                session_key=session_key,
-                usuario=None
-            ).first()
-            
-            if carrito_anonimo:
-                carrito_usuario, created = CarritoCompras.objects.get_or_create(
-                    usuario=user,
-                    defaults={'activo': True}
-                )
-                
-                for item in carrito_anonimo.items.all():
-                    item_existente = CarritoItem.objects.filter(
-                        carrito=carrito_usuario,
-                        producto_id=item.producto_id
-                    ).first()
-                    
-                    if item_existente:
-                        item_existente.cantidad += item.cantidad
-                        item_existente.save()
-                    else:
-                        item.carrito = carrito_usuario
-                        item.save()
-                
-                carrito_anonimo.delete()
-                
-    except Exception as e:
-        print(f"Error transfiriendo carrito: {e}")
-
-def perfil_usuario(request):
-    """Perfil del usuario logueado con estadísticas"""
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
-    if request.method == 'POST':
-        # Actualizar datos del perfil
-        request.user.first_name = request.POST.get('first_name', '')
-        request.user.last_name = request.POST.get('last_name', '')
-        request.user.email = request.POST.get('email', '')
-        request.user.save()
-        
-        messages.success(request, 'Perfil actualizado exitosamente')
-        return redirect('perfil_usuario')
-    
-    # Obtener estadísticas del usuario
-    try:
-        pedidos_usuario = Pedido.objects.filter(usuario=request.user)
-        total_pedidos = pedidos_usuario.count()
-        total_gastado = sum(p.total for p in pedidos_usuario)
-        ultimo_pedido = pedidos_usuario.first() if pedidos_usuario.exists() else None
-    except:
-        total_pedidos = 0
-        total_gastado = 0
-        ultimo_pedido = None
-    
-    contexto = {
-        'total_pedidos': total_pedidos,
-        'total_gastado': total_gastado,
-        'ultimo_pedido': ultimo_pedido
-    }
-    
     return render(request, 'registration/perfil.html', contexto)
 
 # ==================== PANEL DE ADMINISTRACIÓN ====================
@@ -2271,100 +1749,162 @@ def admin_reportes(request):
     
     return render(request, 'ferreteria/admin/reportes.html', contexto)
 
-# ==================== API ENDPOINTS PARA CARRITO ====================
-
-def api_carrito_resumen(request):
-    """API endpoint para obtener resumen del carrito"""
-    carrito = obtener_o_crear_carrito(request)
-    items = carrito.items.all()
-    
-    total = sum(item.cantidad * item.precio_unitario for item in items)
-    cantidad_items = sum(item.cantidad for item in items)
-    
-    return JsonResponse({
-        'cantidad_items': cantidad_items,
-        'total': float(total),
-        'success': True
-    })
-
-def api_carrito_items(request):
-    """API endpoint para obtener items del carrito"""
-    carrito = obtener_o_crear_carrito(request)
-    items = []
-    
-    for item in carrito.items.all():
-        items.append({
-            'id': item.id,
-            'producto_id': item.producto_id,
-            'producto_nombre': item.producto_nombre,
-            'cantidad': item.cantidad,
-            'precio_unitario': float(item.precio_unitario),
-            'subtotal': float(item.cantidad * item.precio_unitario)
-        })
-    
-    return JsonResponse({'items': items, 'success': True})
-
-def api_carrito_total(request):
-    """API endpoint para obtener total del carrito"""
-    carrito = obtener_o_crear_carrito(request)
-    total = sum(item.cantidad * item.precio_unitario for item in carrito.items.all())
-    
-    return JsonResponse({'total': float(total), 'success': True})
-
-def api_agregar_carrito(request):
-    """API endpoint para agregar productos al carrito vía AJAX"""
+@login_required
+@user_passes_test(lambda u: u.is_staff, login_url='/')
+def admin_cambiar_estado_usuario(request, user_id):
+    """Cambiar estado activo/inactivo de un usuario"""
     if request.method == 'POST':
         try:
-            data = json.loads(request.body)
-            producto_id = data.get('producto_id')
-            cantidad = int(data.get('cantidad', 1))
+            usuario = User.objects.get(id=user_id)
             
-            producto = obtener_producto_por_id(producto_id)
-            if not producto:
-                return JsonResponse({'success': False, 'error': 'Producto no encontrado'})
+            # Protección: no desactivar superusuarios
+            if usuario.is_superuser:
+                admin_logger.warning(f"Admin {request.user.username} intentó desactivar superusuario: {usuario.username}")
+                messages.error(request, 'No puedes desactivar un superusuario')
+                return redirect('admin_usuarios')
             
-            if cantidad > producto.get('stock_actual', 0):
-                return JsonResponse({
-                    'success': False, 
-                    'error': f'Solo hay {producto.get("stock_actual", 0)} unidades disponibles'
-                })
+            # Protección: no desactivarse a sí mismo
+            if usuario == request.user:
+                admin_logger.warning(f"Admin {request.user.username} intentó desactivarse a sí mismo")
+                messages.error(request, 'No puedes desactivar tu propia cuenta')
+                return redirect('admin_usuarios')
             
-            carrito = obtener_o_crear_carrito(request)
+            # Cambiar estado
+            estado_anterior = usuario.is_active
+            usuario.is_active = not usuario.is_active
+            usuario.save()
             
-            # Verificar si el producto ya está en el carrito
-            item_existente = CarritoItem.objects.filter(carrito=carrito, producto_id=producto_id).first()
+            estado = "activado" if usuario.is_active else "desactivado"
+            admin_logger.info(f"Admin {request.user.username} {estado} usuario: {usuario.username} (ID: {user_id})")
+            messages.success(request, f'Usuario {usuario.username} {estado} exitosamente')
             
-            if item_existente:
-                nueva_cantidad = item_existente.cantidad + cantidad
-                if nueva_cantidad > producto.get('stock_actual', 0):
-                    return JsonResponse({
-                        'success': False,
-                        'error': f'Máximo disponible: {producto.get("stock_actual", 0)}'
-                    })
-                item_existente.cantidad = nueva_cantidad
-                item_existente.save()
-            else:
-                CarritoItem.objects.create(
-                    carrito=carrito,
-                    producto_id=producto_id,
-                    producto_codigo=producto.get('codigo', ''),
-                    producto_nombre=producto.get('nombre', ''),
-                    precio_unitario=Decimal(str(producto.get('precio_venta', 0))),
-                    cantidad=cantidad
-                )
-            
-            # Obtener nuevo total del carrito
-            total_items = sum(item.cantidad for item in carrito.items.all())
-            
-            return JsonResponse({
-                'success': True,
-                'mensaje': f'{producto.get("nombre")} agregado al carrito',
-                'total_items': total_items
-            })
-            
+        except User.DoesNotExist:
+            admin_logger.error(f"Admin {request.user.username} intentó modificar usuario inexistente: {user_id}")
+            messages.error(request, 'Usuario no encontrado')
         except Exception as e:
-            return JsonResponse({'success': False, 'error': str(e)})
+            admin_logger.error(f"Admin {request.user.username} - Error al cambiar estado del usuario {user_id}: {str(e)}")
+            messages.error(request, f'Error al cambiar estado del usuario: {str(e)}')
     
-    return JsonResponse({'success': False, 'error': 'Método no permitido'})
+    return redirect('admin_usuarios')
+
+@login_required
+def admin_usuarios(request):
+    """Gestión de usuarios para administradores"""
+    if not request.user.is_staff:
+        messages.error(request, 'No tienes permisos para acceder a esta sección')
+        return redirect('home')
+    
+    usuarios = User.objects.all().order_by('-date_joined')
+    
+    # Filtros
+    estado_filtro = request.GET.get('estado', '')
+    if estado_filtro == 'activos':
+        usuarios = usuarios.filter(is_active=True)
+    elif estado_filtro == 'inactivos':
+        usuarios = usuarios.filter(is_active=False)
+    elif estado_filtro == 'staff':
+        usuarios = usuarios.filter(is_staff=True)
+    
+    # Paginación
+    from django.core.paginator import Paginator
+    paginator = Paginator(usuarios, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    contexto = {
+        'usuarios': page_obj,
+        'estado_filtro': estado_filtro
+    }
+    
+    return render(request, 'ferreteria/admin/usuarios.html', contexto)
+
+def transferir_carrito_anonimo(request, user):
+    """Transfiere carrito anónimo al usuario registrado"""
+    try:
+        session_key = request.session.session_key
+        if session_key:
+            carrito_anonimo = CarritoCompras.objects.filter(
+                session_key=session_key,
+                usuario=None
+            ).first()
+            if carrito_anonimo:
+                carrito_usuario, _ = CarritoCompras.objects.get_or_create(
+                    usuario=user,
+                    defaults={'activo': True}
+                )
+                for item in carrito_anonimo.items.all():
+        'usuarios': page_obj,
+        'estado_filtro': estado_filtro
+    }
+    
+    return render(request, 'ferreteria/admin/usuarios.html', contexto)
+
+def transferir_carrito_anonimo(request, user):
+    """Transfiere carrito anónimo al usuario registrado"""
+    try:
+        session_key = request.session.session_key
+        if session_key:
+            carrito_anonimo = CarritoCompras.objects.filter(
+                               session_key=session_key,
+                usuario=None
+            ).first()
+
+            if carrito_anonimo:
+                carrito_usuario, created = CarritoCompras.objects.get_or_create(
+                    usuario=user,
+                    defaults={'activo': True}
+                )
+
+                for item in carrito_anonimo.items.all():
+                    item_existente = CarritoItem.objects.filter(
+                        carrito=carrito_usuario,
+                        producto_id=item.producto_id
+                    ).first()
+
+                    if item_existente:
+                        item_existente.cantidad += item.cantidad
+                        item_existente.save()
+                    else:
+                        item.carrito = carrito_usuario
+                        item.save()
+
+                carrito_anonimo.delete()
+
+    except Exception as e:
+        print(f"Error transfiriendo carrito: {e}")
+
+def perfil_usuario(request):
+    """Perfil del usuario logueado con estadísticas"""
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    if request.method == 'POST':
+        # Actualizar datos del perfil
+        request.user.first_name = request.POST.get('first_name', '')
+        request.user.last_name = request.POST.get('last_name', '')
+        request.user.email = request.POST.get('email', '')
+        request.user.save()
+
+        messages.success(request, 'Perfil actualizado exitosamente')
+        return redirect('perfil_usuario')
+
+    # Obtener estadísticas del usuario
+    try:
+        pedidos_usuario = Pedido.objects.filter(usuario=request.user)
+        total_pedidos = pedidos_usuario.count()
+        total_gastado = sum(p.total for p in pedidos_usuario)
+        ultimo_pedido = pedidos_usuario.first() if pedidos_usuario.exists() else None
+    except:
+        total_pedidos = 0
+        total_gastado = 0
+        ultimo_pedido = None
+
+    contexto = {
+        'total_pedidos': total_pedidos,
+        'total_gastado': total_gastado,
+        'ultimo_pedido': ultimo_pedido
+    }
+
+    return render(request, 'registration/perfil.html', contexto)
 
 

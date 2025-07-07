@@ -1,0 +1,9 @@
+Java Abrir vs code 
+Iniciar
+Gestion-target- iniciar consola y comando: java -jar .\gestion-0.0.1-SNAPSHOT.jar
+Cd project
+.\env\Scripts\Activate.ps1
+-.\env\Scripts\activate
+-proyecto py manage.py runserver 
+-py manage.py runserver 
+-python manage.py migrate   
