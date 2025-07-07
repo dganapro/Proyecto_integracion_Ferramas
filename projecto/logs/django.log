@@ -2074,3 +2074,28 @@ Not Found: /favicon.ico
 "GET /api/carrito/resumen/ HTTP/1.1" 200 52
 "GET / HTTP/1.1" 200 26937
 "GET /api/carrito/resumen/ HTTP/1.1" 200 52
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 26937
+"GET /static/css/baseStyle.css HTTP/1.1" 304 0
+"GET /static/js/global.js HTTP/1.1" 304 0
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 13645
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+"GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 13756
+"GET /productos/ HTTP/1.1" 200 49025
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /carrito/ HTTP/1.1" 200 14267
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET /perfil/ HTTP/1.1" 200 13661
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 26937
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 26937
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 26937
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
+"GET / HTTP/1.1" 200 26937
+"GET /api/carrito/resumen/ HTTP/1.1" 200 52
