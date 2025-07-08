@@ -318,7 +318,7 @@
                                     {% if producto.stock_actual > 0 %}
                                         <button type="button" 
                                                 class="btn btn-ferramas-primary btn-sm"
-                                                onclick="addToCart({{ producto.id }}, this)">
+                                                onclick="addToCart({{ producto.id }})">
                                             <i class="fas fa-cart-plus me-1"></i>+
                                         </button>
                                     {% endif %}
@@ -336,7 +336,7 @@
                                         {% if user.is_authenticated %}
                                             <button type="button" 
                                                     class="btn btn-ferramas-primary btn-sm"
-                                                    onclick="addToCart({{ producto.id }}, this)">
+                                                    onclick="addToCart({{ producto.id }})">
                                                 <i class="fas fa-cart-plus me-1"></i>Agregar
                                             </button>
                                         {% else %}
@@ -727,108 +727,62 @@ function mostrarInfoAdmin(productoId) {
 }
 {% endif %}
 
-// Función mejorada para agregar al carrito
-function addToCart(productoId, buttonElement) {
-    const originalText = buttonElement.innerHTML;
+// Mejorar la función addToCart con feedback visual
+function addToCart(productoId, cantidad = 1) {
+    const btn = event.target.closest('button');
+    const originalText = btn.innerHTML;
     
     // Loading state
-    buttonElement.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>...';
-    buttonElement.disabled = true;
+    btn.classList.add('btn-loading');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Agregando...';
     
-    fetch(`/agregar-al-carrito/${productoId}/`, {
+    fetch('/api/carrito/agregar/', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
             'X-CSRFToken': getCookie('csrftoken')
         },
-        body: 'cantidad=1'
+        body: JSON.stringify({
+            producto_id: productoId,
+            cantidad: cantidad
+        })
     })
-    .then(response => {
-        if (response.ok) {
-            return response.text();
-        }
-        throw new Error('Error en la respuesta');
-    })
+    .then(response => response.json())
     .then(data => {
-        // Actualizar contador del carrito
-        updateCartCount();
-        
-        // Mostrar notificación
-        showNotification('¡Producto agregado al carrito!', 'success');
-        
-        // Cambiar botón temporalmente
-        buttonElement.innerHTML = '<i class="fas fa-check me-1"></i>¡Agregado!';
-        buttonElement.classList.remove('btn-ferramas-primary');
-        buttonElement.classList.add('btn-success');
-        
-        // Restaurar después de 2 segundos
-        setTimeout(() => {
-            buttonElement.innerHTML = originalText;
-            buttonElement.classList.remove('btn-success');
-            buttonElement.classList.add('btn-ferramas-primary');
-            buttonElement.disabled = false;
-        }, 2000);
+        if (data.success) {
+            updateCartCount();
+            showNotification('¡Producto agregado al carrito!', 'success');
+            
+            // Efecto visual temporal
+            btn.innerHTML = '<i class="fas fa-check me-1"></i>¡Agregado!';
+            btn.classList.remove('btn-ferramas-primary');
+            btn.classList.add('btn-success');
+            
+            // Restaurar después de 2 segundos
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-ferramas-primary');
+            }, 2000);
+        } else {
+            showNotification(data.error || 'Error al agregar producto', 'error');
+        }
     })
     .catch(error => {
+        showNotification('Error de conexión', 'error');
         console.error('Error:', error);
-        showNotification('Error al agregar producto', 'error');
-        buttonElement.innerHTML = originalText;
-        buttonElement.disabled = false;
+    })
+    .finally(() => {
+        // Remove loading state
+        btn.classList.remove('btn-loading');
+        btn.disabled = false;
+        
+        // Si no hubo éxito, restaurar texto original
+        if (!btn.classList.contains('btn-success')) {
+            btn.innerHTML = originalText;
+        }
     });
 }
-
-// Funciones auxiliares para el catálogo
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-function showNotification(message, type) {
-    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
-    const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
-    alertDiv.style.cssText = 'top: 90px; right: 20px; z-index: 1050; min-width: 300px;';
-    alertDiv.innerHTML = `
-        <i class="fas ${iconClass} me-2"></i>${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    `;
-
-    document.body.appendChild(alertDiv);
-    setTimeout(() => {
-        if (alertDiv.parentNode) {
-            alertDiv.remove();
-        }
-    }, 4000);
-}
-
-function updateCartCount() {
-    fetch('/api/carrito/resumen/')
-        .then(response => response.json())
-        .then(data => {
-            const cartBadge = document.querySelector('.cart-count');
-            if (cartBadge) {
-                cartBadge.textContent = data.total_items;
-                cartBadge.style.display = data.total_items > 0 ? 'flex' : 'none';
-            }
-        })
-        .catch(error => console.error('Error:', error));
-}
-
-// Inicializar contador al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-    updateCartCount();
-});
 </script>
 {% endblock %}

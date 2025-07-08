@@ -277,32 +277,33 @@ function cancelarPedido(numeroPedido) {
 
 document.getElementById('confirmarCancelacion').addEventListener('click', function() {
     if (pedidoACancelar) {
-        // Llamada AJAX para cancelar el pedido
+        // Aquí iría la llamada AJAX para cancelar el pedido
         fetch(`/api/pedidos/${pedidoACancelar}/cancelar/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCookie('csrftoken')
-            }
+            },
+            body: JSON.stringify({
+                'numero_pedido': pedidoACancelar
+            })
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                showNotification('Pedido cancelado exitosamente', 'success');
                 location.reload();
             } else {
-                showNotification(data.error || 'Error al cancelar pedido', 'error');
+                alert('Error al cancelar el pedido: ' + data.error);
             }
         })
         .catch(error => {
-            showNotification('Error de conexión', 'error');
             console.error('Error:', error);
+            alert('Error de conexión');
         });
     }
     bootstrap.Modal.getInstance(document.getElementById('cancelarModal')).hide();
 });
 
-// Función para obtener CSRF token
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -316,33 +317,6 @@ function getCookie(name) {
         }
     }
     return cookieValue;
-}
-
-// Función para mostrar notificaciones
-function showNotification(message, type) {
-    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
-    const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
-    alertDiv.style.cssText = 'top: 90px; right: 20px; z-index: 1050; min-width: 300px;';
-    alertDiv.innerHTML = `
-        <i class="fas ${iconClass} me-2"></i>${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    `;
-
-    document.body.appendChild(alertDiv);
-
-    setTimeout(() => {
-        if (alertDiv.parentNode) {
-            alertDiv.classList.remove('show');
-            setTimeout(() => {
-                if (alertDiv.parentNode) {
-                    alertDiv.parentNode.removeChild(alertDiv);
-                }
-            }, 150);
-        }
-    }, 4000);
 }
 
 // Auto-colapsar otros pedidos cuando se abre uno
