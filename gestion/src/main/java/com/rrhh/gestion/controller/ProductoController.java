@@ -34,12 +34,27 @@ public class ProductoController {
     @PostMapping
     public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) {
         try {
+            System.out.println("📥 Datos recibidos: " + producto);
+            
             // Validar datos obligatorios
             if (producto.getCodigo() == null || producto.getNombre() == null) {
+                System.err.println("❌ Error: Código o nombre faltantes");
                 return ResponseEntity.badRequest().build();
             }
             
-            // Establecer valores por defecto si no están presentes
+            // ✅ AGREGAR: Manejar categoria null
+            if (producto.getCategoria() == null) {
+                System.out.println("⚠️ Advertencia: Producto sin categoría");
+                // Crear una categoría por defecto o permitir null
+            }
+            
+            // ✅ AGREGAR: Manejar proveedor null
+            if (producto.getProveedor() == null) {
+                System.out.println("⚠️ Advertencia: Producto sin proveedor");
+                // Permitir null o crear uno por defecto
+            }
+            
+            // Establecer valores por defecto
             if (producto.getEstado() == null) {
                 producto.setEstado(Producto.EstadoProducto.ACTIVO);
             }
@@ -54,8 +69,11 @@ public class ProductoController {
             }
             
             Producto nuevoProducto = productoRepository.save(producto);
+            System.out.println("✅ Producto creado: " + nuevoProducto.getId());
             return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
+            
         } catch (Exception e) {
+            System.err.println("💥 Error al crear producto: " + e.getMessage());
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
