@@ -23,6 +23,12 @@ public class AuthController {
     @PostMapping("/registro")
     public ResponseEntity<?> registrarUsuario(@RequestBody UsuarioRegistroDTO registroDTO) {
         try {
+            // Validar el rol recibido o asignar USUARIO por defecto
+            if (registroDTO.getRol() == null) {
+                registroDTO.setRol(Rol.USUARIO);
+            } else if (!(registroDTO.getRol() == Rol.USUARIO || registroDTO.getRol() == Rol.ADMINISTRADOR)) {
+                return ResponseEntity.badRequest().body(Map.of("error", "Rol inválido"));
+            }
             UsuarioResponseDTO usuarioCreado = usuarioService.registrarUsuario(registroDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCreado);
         } catch (RuntimeException e) {

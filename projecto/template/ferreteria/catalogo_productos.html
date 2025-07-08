@@ -213,7 +213,7 @@
                     <div class="product-image bg-light d-flex align-items-center justify-content-center rounded-top" 
                          style="height: 220px; overflow: hidden;">
                         {% if producto.imagen %}
-                            <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" 
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" 
                                  class="img-fluid" style="max-height: 200px; max-width: 100%; object-fit: cover;">
                         {% else %}
                             <i class="fas fa-tools fa-4x text-muted"></i>

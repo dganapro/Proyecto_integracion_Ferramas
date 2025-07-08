@@ -666,6 +666,9 @@ def api_crear_producto(request):
 
 def dashboard_ferreteria(request):
     """Dashboard principal con estadísticas de la ferretería"""
+    if request.user.is_authenticated and request.user.is_staff:
+        # Si es admin, redirigir al dashboard de admin
+        return redirect('admin_dashboard')
     productos = obtener_todos_productos()
     
     # Si no hay productos de la API, crear datos de muestra

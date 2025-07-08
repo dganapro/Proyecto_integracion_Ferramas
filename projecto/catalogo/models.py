@@ -366,3 +366,13 @@ class PagoTransbank(models.Model):
     def __str__(self):
         return f"Pago {self.buy_order} - {self.estado}"
 
+# Modelo para almacenar imágenes de productos subidas por los usuarios
+class ProductoImagen(models.Model):
+    nombre = models.CharField(max_length=255)
+    codigo = models.CharField(max_length=50, unique=True)
+    imagen = models.ImageField(upload_to='productos/')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nombre
+
