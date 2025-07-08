@@ -4459,3 +4459,89 @@ django.db.utils.OperationalError: no such table: catalogo_historialprecio
 "POST /productos/editar/1/ HTTP/1.1" 500 245127
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 26949
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /admin-ferreteria/ HTTP/1.1" 200 28563
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/crear/ HTTP/1.1" 200 23099
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /api/validar-codigo/
+"GET /api/validar-codigo/?codigo=MARTIL32 HTTP/1.1" 404 14818
+"POST /productos/crear/ HTTP/1.1" 200 23875
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /api/validar-codigo/
+"GET /api/validar-codigo/?codigo=MARTIL32 HTTP/1.1" 404 14818
+Not Found: /api/validar-codigo/
+"GET /api/validar-codigo/?codigo=MARTIL32 HTTP/1.1" 404 14818
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 26949
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /admin-ferreteria/ HTTP/1.1" 200 28563
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/crear/ HTTP/1.1" 200 23099
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/validar-codigo/?codigo=MARTIL32 HTTP/1.1" 200 53
+"GET /api/validar-codigo/?codigo=MARTIL32 HTTP/1.1" 200 53
+"GET / HTTP/1.1" 200 26949
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /admin-ferreteria/ HTTP/1.1" 200 28563
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /admin-ferreteria/productos/ HTTP/1.1" 200 0
+"GET /admin-ferreteria/productos/ HTTP/1.1" 200 0
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /admin-ferreteria/productos/ HTTP/1.1" 200 0
+"GET /admin-ferreteria/productos/ HTTP/1.1" 200 0
+"GET / HTTP/1.1" 200 26949
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /admin-ferreteria/ HTTP/1.1" 200 28563
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /admin-ferreteria/productos/ HTTP/1.1" 200 0
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+"GET /carrito/ HTTP/1.1" 200 18341
+"GET /productos/ HTTP/1.1" 200 35142
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 35142
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET / HTTP/1.1" 200 26949
+"GET /productos/ HTTP/1.1" 200 35142
+"GET /carrito/ HTTP/1.1" 200 18341
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 35142
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET / HTTP/1.1" 200 26949
+Not Found: /favicon.ico
+"GET /carrito/ HTTP/1.1" 200 18341
+"GET /productos/ HTTP/1.1" 200 35142
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /favicon.ico
+"GET /productos/ HTTP/1.1" 200 35142
+Not Found: /favicon.ico
+"GET / HTTP/1.1" 200 26949
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /favicon.ico
+"GET /carrito/ HTTP/1.1" 200 18341
+"POST /accounts/logout/ HTTP/1.1" 302 0
+"GET /productos/ HTTP/1.1" 200 27792
+"GET /carrito/ HTTP/1.1" 200 16598
+Not Found: /favicon.ico
+"GET / HTTP/1.1" 200 25206
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57

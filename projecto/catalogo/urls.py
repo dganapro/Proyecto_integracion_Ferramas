@@ -34,6 +34,7 @@ urlpatterns = [
     path('api/carrito/items/', views.api_carrito_items, name='api_carrito_items'),
     path('api/carrito/total/', views.api_carrito_total, name='api_carrito_total'),
     path('api/carrito/agregar/', views.api_agregar_carrito, name='api_agregar_carrito'),
+    path('api/validar-codigo/', views.ajax_validar_codigo, name='ajax_validar_codigo'),
     
     
     # ==================== PANEL ADMIN ====================

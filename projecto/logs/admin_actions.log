@@ -95,3 +95,20 @@ ERROR 2025-07-08 01:35:12,179 admin_actions Admin admin123 - Error al actualizar
 INFO 2025-07-08 01:42:21,246 admin_actions Admin admin123 accedió a vista: editar_producto
 INFO 2025-07-08 01:42:21,271 admin_actions Admin admin123 editando producto: 1 - martillo
 ERROR 2025-07-08 01:42:21,294 admin_actions Admin admin123 - Error al actualizar producto: 1
+INFO 2025-07-08 01:45:51,702 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 01:45:53,741 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:46:05,557 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:46:05,557 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-08 01:46:06,198 admin_actions Admin admin123 - Error al crear producto en API: MARTIL32
+INFO 2025-07-08 01:49:49,362 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 01:49:51,606 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:50:02,695 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 01:50:04,196 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:50:12,710 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:51:17,546 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:51:18,544 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:51:26,232 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 01:51:27,790 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:52:04,508 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:52:18,225 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:52:24,559 admin_actions Admin admin123 accedió a vista: crear_producto

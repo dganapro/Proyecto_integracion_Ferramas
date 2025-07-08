@@ -49,15 +49,10 @@
                             <i class="fas fa-industry me-1"></i>Servicios
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">
-                                    <i class="fas fa-truck me-2"></i>Despacho Industrial
-                                </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                    <i class="fas fa-users me-2"></i>Asesoría Técnica
-                                </a></li>
-                            <li><a class="dropdown-item" href="#">
-                                    <i class="fas fa-wrench me-2"></i>Instalación
-                                </a></li>
+                            <!-- Puedes agregar URLs reales si tienes vistas para estos servicios -->
+                            <li><span class="dropdown-item disabled"><i class="fas fa-truck me-2"></i>Despacho Industrial</span></li>
+                            <li><span class="dropdown-item disabled"><i class="fas fa-users me-2"></i>Asesoría Técnica</span></li>
+                            <li><span class="dropdown-item disabled"><i class="fas fa-wrench me-2"></i>Instalación</span></li>
                         </ul>
                     </div>
                 </div>
@@ -148,15 +143,7 @@
                         Más de 35 años de experiencia en el mercado.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="#" class="text-white-50 hover-text-white">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-white-50 hover-text-white">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-white-50 hover-text-white">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+                        <!-- Agrega aquí los enlaces reales de tus redes sociales si los tienes -->
                     </div>
                 </div>
 
@@ -165,9 +152,9 @@
                     <ul class="list-unstyled">
                         <li><a href="{% url 'catalogo_productos' %}"
                                 class="text-white-50 text-decoration-none">Catálogo</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Servicios</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Sobre Nosotros</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Contacto</a></li>
+                        <li><span class="text-white-50 text-decoration-none">Servicios</span></li>
+                        <li><a href="{% url 'sobre_nosotros' %}" class="text-white-50 text-decoration-none">Sobre Nosotros</a></li>
+                        <li><a href="{% url 'contacto' %}" class="text-white-50 text-decoration-none">Contacto</a></li>
                     </ul>
                 </div>
 

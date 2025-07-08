@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de Productos</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Gestión de Productos</h1>
+    <a href="/productos/crear/">Agregar Producto</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio Compra</th>
+                <th>Precio Venta</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ producto.precio_compra }}</td>
+                <td>{{ producto.precio_venta }}</td>
+                <td>{{ producto.stock_actual }}</td>
+                <td>
+                    <a href="/productos/editar/{{ producto.id }}/">Editar</a> |
+                    <a href="/productos/eliminar/{{ producto.id }}/" onclick="return confirm('¿Seguro que deseas eliminar este producto?');">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7">No hay productos registrados.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    {% if productos.has_other_pages %}
+    <div>
+        {% if productos.has_previous %}
+            <a href="?page={{ productos.previous_page_number }}">Anterior</a>
+        {% endif %}
+        Página {{ productos.number }} de {{ productos.paginator.num_pages }}
+        {% if productos.has_next %}
+            <a href="?page={{ productos.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</body>
+</html>

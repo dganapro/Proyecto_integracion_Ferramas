@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de Inventario</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Gestión de Inventario</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Stock Actual</th>
+                <th>Stock Mínimo</th>
+                <th>Valor Inventario</th>
+                <th>¿Restock?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ producto.stock_actual }}</td>
+                <td>{{ producto.stock_minimo }}</td>
+                <td>{{ producto.valor_inventario }}</td>
+                <td>{% if producto.necesita_restock %}Sí{% else %}No{% endif %}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7">No hay productos en inventario.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html> 

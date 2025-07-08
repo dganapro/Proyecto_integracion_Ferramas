@@ -131,8 +131,8 @@ def crear_empleado(request):
         data = {
             "rut": request.POST['rut'],
             "nombre": request.POST['nombre'],
-            "telefono": request.POST['telefono'],
-            "correo": request.POST['correo'],
+            "telefono": request.POST.get('telefono', ''),
+            "correo": request.POST.get('correo', ''),
             "comuna": comuna_data        }
         requests.post("http://127.0.0.1:8089/api/empleados", json=data)
         return redirect('empleado_exito')
