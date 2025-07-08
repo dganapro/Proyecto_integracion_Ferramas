@@ -213,17 +213,17 @@ class DetallePedido(models.Model):
 class PagoTarjeta(models.Model):
     """Modelo para pagos con tarjeta de crédito/débito"""
     pedido = models.ForeignKey('Pedido', on_delete=models.CASCADE)
-    numero_tarjeta_enmascarado = models.CharField(max_length=19)  # **** **** **** 1234
-    tipo_tarjeta = models.CharField(max_length=20)  # visa, mastercard, etc.
+    numero_tarjeta_enmascarado = models.CharField(max_length=19, default='**** **** **** 0000')  # ✅ AGREGAR DEFAULT
+    tipo_tarjeta = models.CharField(max_length=20, default='visa')  # ✅ AGREGAR DEFAULT
     banco_emisor = models.CharField(max_length=100, blank=True, null=True)
-    codigo_autorizacion = models.CharField(max_length=10)
-    numero_transaccion = models.CharField(max_length=20, unique=True)
-    monto = models.DecimalField(max_digits=10, decimal_places=2)
+    codigo_autorizacion = models.CharField(max_length=10, default='000000')  # ✅ AGREGAR DEFAULT
+    numero_transaccion = models.CharField(max_length=20, unique=True, default='TXN000000')  # ✅ AGREGAR DEFAULT
+    monto = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # ✅ AGREGAR DEFAULT
     estado = models.CharField(max_length=20, default='pendiente')
     
-    # Metadatos
-    ip_cliente = models.GenericIPAddressField(default='127.0.0.1')  # ✅ CON DEFAULT
-    user_agent = models.TextField(default='Unknown')  # ✅ CON DEFAULT
+    # Metadatos (ya tienen default)
+    ip_cliente = models.GenericIPAddressField(default='127.0.0.1')
+    user_agent = models.TextField(default='Unknown')
     fecha_transaccion = models.DateTimeField(auto_now_add=True)
     fecha_procesamiento = models.DateTimeField(null=True, blank=True)
     

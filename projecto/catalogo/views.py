@@ -194,20 +194,25 @@ def crear_producto_api(producto_data):
     }
     
     try:
-        print(f"Enviando datos a Spring Boot: {spring_data}")
+        print(f"🔗 Conectando con Spring Boot en: {url}")
+        print(f"📤 Enviando datos: {spring_data}")
+        
         response = requests.post(url, json=spring_data, timeout=30)
-        print(f"Respuesta de Spring Boot: {response.status_code} - {response.text}")
+        print(f"📥 Respuesta de Spring Boot: {response.status_code}")
         
         if response.status_code in [200, 201]:
+            print("✅ Producto creado exitosamente en Spring Boot")
             return response.json()
         else:
-            print(f"Error en Spring Boot: {response.status_code} - {response.text}")
+            print(f"❌ Error en Spring Boot: {response.status_code} - {response.text}")
             return None
+            
     except requests.exceptions.ConnectionError:
-        print("Error: No se puede conectar con Spring Boot en el puerto 8089")
+        print("🔌 Error: No se puede conectar con Spring Boot en puerto 8089")
+        print("💡 Asegúrate de que Spring Boot esté corriendo con: java -jar gestion-0.0.1-SNAPSHOT.jar")
         return None
     except Exception as e:
-        print(f"Error al crear producto: {e}")
+        print(f"💥 Error inesperado al crear producto: {e}")
         return None
 
 def actualizar_producto_api(producto_id, producto_data):
@@ -335,7 +340,6 @@ def detalle_producto(request, producto_id):
 def crear_producto(request):
     """Vista para crear un nuevo producto - POST /productos - SOLO ADMINISTRADORES"""
     if request.method == 'POST':
-        # Log del intento de creación
         admin_logger.info(f"Admin {request.user.username} intenta crear producto")
         
         # Obtener datos del formulario
@@ -344,15 +348,21 @@ def crear_producto(request):
             'nombre': request.POST.get('nombre'),
             'descripcion': request.POST.get('descripcion', ''),
             'categoria': request.POST.get('categoria'),
-            'precio_compra': float(request.POST.get('precio_compra', 0)),
+            'precio_compra': float(request.POST.get('precio_compra', 0)) if request.POST.get('precio_compra') else 0,
             'precio_venta': float(request.POST.get('precio_venta', 0)),
             'stock_actual': int(request.POST.get('stock_actual', 0)),
-            'stock_minimo': int(request.POST.get('stock_minimo', 0)),
-            'unidad_medida': request.POST.get('unidad_medida', 'unidad'),
+            'stock_minimo': int(request.POST.get('stock_minimo', 5)),
+            'unidad_medida': request.POST.get('unidad_medida', 'UNIDAD'),
             'marca': request.POST.get('marca', ''),
-            'proveedor': request.POST.get('proveedor'),
-            'estado': request.POST.get('estado', 'activo')
+            'proveedor': request.POST.get('proveedor', ''),
+            'estado': 'ACTIVO'
         }
+        
+        # Manejar imagen si se proporciona
+        if request.FILES.get('imagen'):
+            # Aquí podrías guardar la imagen y obtener la URL
+            # Por ahora, solo registramos que se subió una imagen
+            admin_logger.info(f"Imagen subida para producto: {nuevo_producto['codigo']}")
         
         # Validaciones básicas
         if not nuevo_producto['codigo'] or not nuevo_producto['nombre']:
@@ -361,21 +371,32 @@ def crear_producto(request):
             return render(request, 'ferreteria/crear_producto.html')
         
         # Intentar crear el producto en la API
-        resultado = crear_producto_api(nuevo_producto)
-        if resultado:
-            admin_logger.info(f"Admin {request.user.username} creó producto exitosamente: {nuevo_producto['codigo']} - {nuevo_producto['nombre']}")
-            messages.success(request, f'Producto {nuevo_producto["nombre"]} creado exitosamente')
-            return redirect('catalogo_productos')
-        else:
-            admin_logger.error(f"Admin {request.user.username} - Error al crear producto en API: {nuevo_producto['codigo']}")
-            messages.error(request, 'Error al crear el producto en la API')
-            return render(request, 'ferreteria/crear_producto.html')
+        try:
+            resultado = crear_producto_api(nuevo_producto)
+            if resultado:
+                admin_logger.info(f"Admin {request.user.username} creó producto exitosamente: {nuevo_producto['codigo']} - {nuevo_producto['nombre']}")
+                messages.success(request, f'Producto {nuevo_producto["nombre"]} creado exitosamente')
+                return redirect('catalogo_productos')
+            else:
+                admin_logger.error(f"Admin {request.user.username} - Error al crear producto en API: {nuevo_producto['codigo']}")
+                messages.error(request, 'Error al crear el producto. Verifica que Spring Boot esté funcionando.')
+        except Exception as e:
+            admin_logger.error(f"Admin {request.user.username} - Excepción al crear producto: {str(e)}")
+            messages.error(request, f'Error inesperado: {str(e)}')
     
-    # Obtener listas para los selectores
-    productos = obtener_todos_productos()
-    categorias = list(set(p['categoria'] for p in productos))
-    proveedores = list(set(p.get('proveedor', '') for p in productos))
-    marcas = list(set(p.get('marca', '') for p in productos))
+    # Obtener listas para los selectores (GET request)
+    try:
+        productos = obtener_todos_productos()
+        categorias = list(set(p.get('categoria', '') for p in productos if p.get('categoria')))
+        proveedores = list(set(p.get('proveedor', '') for p in productos if p.get('proveedor')))
+        marcas = list(set(p.get('marca', '') for p in productos if p.get('marca')))
+    except Exception as e:
+        # Si la API no funciona, usar listas vacías
+        categorias = []
+        proveedores = []
+        marcas = []
+        if request.method != 'POST':  # Solo mostrar mensaje en GET
+            messages.warning(request, 'API no disponible. Algunas funciones pueden estar limitadas.')
     
     contexto = {
         'categorias': sorted([c for c in categorias if c]),
@@ -1404,39 +1425,34 @@ Sitemap: {}/sitemap.xml'''.format(request.build_absolute_uri('/')[:-1])
     return HttpResponse(robots_content, content_type='text/plain')
 
 # ==================== PÁGINAS INFORMATIVAS ====================
-
 def sobre_nosotros(request):
     """Página sobre nosotros"""
     return render(request, 'ferreteria/paginas/sobre_nosotros.html')
 
 def contacto(request):
     """Página de contacto"""
-    return render(request, 'ferreteria/paginas/contacto.html')
+    return render(request, 'contacto.html')  # Ya existe en template/
 
 def politicas_privacidad(request):
     """Página de políticas de privacidad"""
-    return render(request, 'ferreteria/paginas/politicas.html')
+    return render(request, 'politicas_privacidad.html')
 
 def terminos_condiciones(request):
     """Página de términos y condiciones"""
-    return render(request, 'ferreteria/paginas/terminos.html')
+    return render(request, 'terminos_condiciones.html')
 
 def informacion_envios(request):
     """Página de información de envíos"""
-    return render(request, 'ferreteria/paginas/envios.html')
+    return render(request, 'inforacion_envios.html')  # Corregir nombre del archivo
 
 # ==================== HANDLERS DE ERRORES ====================
-
-def error_404(request, exception):
-    """Handler personalizado para error 404"""
+def error_404_view(request, exception):
     return render(request, 'ferreteria/errores/404.html', status=404)
 
-def error_500(request):
-    """Handler personalizado para error 500"""
+def error_500_view(request):
     return render(request, 'ferreteria/errores/500.html', status=500)
 
-def error_403(request, exception):
-    """Handler personalizado para error 403"""
+def error_403_view(request, exception):
     return render(request, 'ferreteria/errores/403.html', status=403)
 
 # ==================== AUTENTICACIÓN DE USUARIOS ====================
@@ -1821,11 +1837,6 @@ def admin_inventario(request):
     # Estadísticas
     total_valor_inventario = sum(p['valor_inventario'] for p in productos_con_analisis)
     total_valor_venta = sum(p['valor_venta_potencial'] for p in productos_con_analisis)
-    return render(request, 'ferreteria/admin/inventario.html', contexto)
-
-@login_required
-def admin_reportes(request):
-    """Reportes y estadísticas para administradores"""
     if not request.user.is_staff:
         messages.error(request, 'No tienes permisos para acceder a esta sección')
         return redirect('home')
@@ -1843,9 +1854,6 @@ def admin_reportes(request):
                 'valor_venta': 0,
                 'activos': 0
 
-
-
-           
 
 
             }

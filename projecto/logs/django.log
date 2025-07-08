@@ -4545,3 +4545,242 @@ Not Found: /favicon.ico
 Not Found: /favicon.ico
 Not Found: /favicon.ico
 "GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Watching for file changes with StatReloader
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 753, in dashboard_ferreteria
+    return render(request, 'ferreteria/dashboard.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'sobre_nosotros' not found. 'sobre_nosotros' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 169369
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 15058
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 753, in dashboard_ferreteria
+    return render(request, 'ferreteria/dashboard.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'sobre_nosotros' not found. 'sobre_nosotros' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 169506
+Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 753, in dashboard_ferreteria
+    return render(request, 'ferreteria/dashboard.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'sobre_nosotros' not found. 'sobre_nosotros' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 169506
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\urls.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 16129
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 27352
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/?buscar=&categoria=&stock=&precio=&orden=nombre HTTP/1.1" 200 27360
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 16129
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 27352
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /registro/ HTTP/1.1" 200 11289
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 26480
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 34702
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/crear/ HTTP/1.1" 200 22630
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /api/validar-codigo/
+"GET /api/validar-codigo/?codigo=MARTIL32 HTTP/1.1" 404 16734
+"POST /productos/crear/ HTTP/1.1" 200 23406
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /sobre-nosotros/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 1410, in sobre_nosotros
+    return render(request, 'ferreteria/paginas/sobre_nosotros.html')
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: ferreteria/paginas/sobre_nosotros.html
+"GET /sobre-nosotros/ HTTP/1.1" 500 90499
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 26480
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 17872
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 34702
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/crear/ HTTP/1.1" 200 22630
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /api/validar-codigo/
+"GET /api/validar-codigo/?codigo=MARTIL32 HTTP/1.1" 404 16734
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\models.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 26480
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 17872
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 34702
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/crear/ HTTP/1.1" 200 22630
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /api/validar-codigo/
+"GET /api/validar-codigo/?codigo=MARTIL32 HTTP/1.1" 404 16734
+"POST /productos/crear/ HTTP/1.1" 200 23476
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
