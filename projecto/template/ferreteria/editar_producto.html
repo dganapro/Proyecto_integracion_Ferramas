@@ -153,11 +153,11 @@
                                 </div>
                                 
                                 <!-- Información de margen si hay precio de costo -->
-                                {% if producto.precio_costo %}
+                                {% if producto.precio_compra %}
                                 <div class="alert alert-info">
                                     <small>
                                         <strong>Margen actual:</strong>
-                                        {% widthratio producto.precio|sub:producto.precio_costo producto.precio_costo 100 %}%
+                                        {{ producto.margen_porcentaje|default:0 }}%
                                     </small>
                                 </div>
                                 {% endif %}

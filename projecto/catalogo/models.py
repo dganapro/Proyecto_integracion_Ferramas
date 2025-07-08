@@ -211,40 +211,30 @@ class DetallePedido(models.Model):
         return self.cantidad * self.precio_unitario
 
 class PagoTarjeta(models.Model):
-    """Modelo para registrar pagos con tarjeta"""
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='pagos_tarjeta')
-    tipo_tarjeta = models.CharField(max_length=20, choices=[
-        ('visa', 'Visa'),
-        ('mastercard', 'Mastercard'),
-        ('american_express', 'American Express')
-    ])
-    ultimos_digitos = models.CharField(max_length=4)
-    nombre_titular = models.CharField(max_length=100)
-    email_titular = models.EmailField()
+    """Modelo para pagos con tarjeta de crédito/débito"""
+    pedido = models.ForeignKey('Pedido', on_delete=models.CASCADE)
+    numero_tarjeta_enmascarado = models.CharField(max_length=19)  # **** **** **** 1234
+    tipo_tarjeta = models.CharField(max_length=20)  # visa, mastercard, etc.
+    banco_emisor = models.CharField(max_length=100, blank=True, null=True)
+    codigo_autorizacion = models.CharField(max_length=10)
+    numero_transaccion = models.CharField(max_length=20, unique=True)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
-    estado = models.CharField(max_length=20, choices=[
-        ('pendiente', 'Pendiente'),
-        ('aprobado', 'Aprobado'),
-        ('rechazado', 'Rechazado')
-    ], default='pendiente')
-    codigo_autorizacion = models.CharField(max_length=20, blank=True)
-    codigo_transaccion = models.CharField(max_length=50, unique=True)
-    ip_cliente = models.GenericIPAddressField()
-    fecha_procesamiento = models.DateTimeField(auto_now_add=True)
+    estado = models.CharField(max_length=20, default='pendiente')
+    
+    # Metadatos
+    ip_cliente = models.GenericIPAddressField(default='127.0.0.1')  # ✅ CON DEFAULT
+    user_agent = models.TextField(default='Unknown')  # ✅ CON DEFAULT
+    fecha_transaccion = models.DateTimeField(auto_now_add=True)
+    fecha_procesamiento = models.DateTimeField(null=True, blank=True)
     
     class Meta:
-        db_table = 'pagos_tarjeta'
-        verbose_name = 'Pago con Tarjeta'
-        verbose_name_plural = 'Pagos con Tarjeta'
+        db_table = 'catalogo_pagotarjeta'
+        verbose_name = 'Pago Tarjeta'
+        verbose_name_plural = 'Pagos Tarjeta'
+        ordering = ['-fecha_transaccion']
     
     def __str__(self):
-        return f"Pago {self.codigo_transaccion} - {self.tipo_tarjeta} ****{self.ultimos_digitos}"
-        db_table = 'catalogo_pago_tarjeta'
-        verbose_name = 'Pago con Tarjeta'
-        verbose_name_plural = 'Pagos con Tarjeta'
-    
-    def __str__(self):
-        return f"Pago {self.codigo_transaccion} - {self.pedido.numero_pedido}"
+        return f"Pago {self.numero_transaccion} - {self.estado}"
 
 class HistorialPrecio(models.Model):
     """Modelo para trackear cambios de precios en productos"""
@@ -343,37 +333,36 @@ class Local(models.Model):
         return self.estado == 'activo'
 
 class PagoTransbank(models.Model):
-    """Modelo para registrar pagos procesados por Transbank"""
-    ESTADOS_PAGO = [
-        ('pendiente', 'Pendiente'),
-        ('autorizado', 'Autorizado'),
-        ('rechazado', 'Rechazado'),
-        ('anulado', 'Anulado'),
-        ('reembolsado', 'Reembolsado'),
-    ]
+    """Modelo para registrar pagos con Transbank WebPay Plus"""
+    pedido = models.ForeignKey('Pedido', on_delete=models.CASCADE, null=True, blank=True)
+    buy_order = models.CharField(max_length=26, unique=True)
+    session_id = models.CharField(max_length=61)
+    token_ws = models.CharField(max_length=64)
+    monto = models.DecimalField(max_digits=10, decimal_places=0)
     
-    pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE, related_name='pago_transbank')
-    buy_order = models.CharField(max_length=100, unique=True)
-    session_id = models.CharField(max_length=100)
-    token_ws = models.CharField(max_length=100, unique=True, blank=True)
-    authorization_code = models.CharField(max_length=20, blank=True)
-    response_code = models.CharField(max_length=10, blank=True)
+    # Estados: pendiente, autorizado, rechazado, anulado
+    estado = models.CharField(max_length=20, default='pendiente')
+    
+    # Datos de respuesta de Transbank
+    authorization_code = models.CharField(max_length=6, blank=True, null=True)
+    response_code = models.CharField(max_length=2, blank=True, null=True)
     transaction_date = models.DateTimeField(null=True, blank=True)
-    accounting_date = models.CharField(max_length=10, blank=True)
-    payment_type_code = models.CharField(max_length=5, blank=True)
-    card_number = models.CharField(max_length=20, blank=True)  # Últimos 4 dígitos
-    monto = models.DecimalField(max_digits=10, decimal_places=2)
-    estado = models.CharField(max_length=15, choices=ESTADOS_PAGO, default='pendiente')
+    accounting_date = models.CharField(max_length=4, blank=True, null=True)
+    payment_type_code = models.CharField(max_length=2, blank=True, null=True)
+    card_number = models.CharField(max_length=4, blank=True, null=True)  # Solo últimos 4 dígitos
+    
+    # Metadatos
+    ip_cliente = models.GenericIPAddressField(default='127.0.0.1')  # ✅ AGREGAR DEFAULT
+    user_agent = models.TextField(default='Unknown')  # ✅ AGREGAR DEFAULT
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_procesamiento = models.DateTimeField(null=True, blank=True)
-    ip_cliente = models.GenericIPAddressField(null=True, blank=True)
-    user_agent = models.TextField(blank=True)
     
     class Meta:
-        verbose_name = "Pago Transbank"
-        verbose_name_plural = "Pagos Transbank"
+        db_table = 'catalogo_pagotransbank'
+        verbose_name = 'Pago Transbank'
+        verbose_name_plural = 'Pagos Transbank'
         ordering = ['-fecha_creacion']
     
     def __str__(self):
-        return f"Pago {self.buy_order} - {self.estado} - ${self.monto}"
+        return f"Pago {self.buy_order} - {self.estado}"
 

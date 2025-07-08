@@ -61,5 +61,11 @@ urlpatterns = [
     path('empleados/crear/', views.crear_empleado),
     path('empleados/exito/', views.empleado_exito, name="empleado_exito"),
 
+    # ==================== PEDIDOS ====================
+    path('confirmar-pedido/', views.confirmar_pedido, name='confirmar_pedido'),
+    path('detalle-pedido/<int:pedido_id>/', views.detalle_pedido, name='detalle_pedido'),
+    path('mis-pedidos/', views.mis_pedidos, name='mis_pedidos'),
+    path('confirmacion/<str:numero_pedido>/', views.confirmacion_pedido, name='confirmacion_pedido'),
+
     
 ]

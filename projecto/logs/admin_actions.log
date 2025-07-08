@@ -19,3 +19,16 @@ INFO 2025-07-07 17:58:15,751 admin_actions Admin admin123 accedió a vista: crear
 INFO 2025-07-07 17:59:28,208 admin_actions Admin admin123 accedió a vista: crear_producto
 INFO 2025-07-07 17:59:28,209 admin_actions Admin admin123 intenta crear producto
 ERROR 2025-07-07 17:59:28,448 admin_actions Admin admin123 - Error al crear producto en API: MART41
+INFO 2025-07-07 23:09:56,486 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-07 23:12:41,472 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-07 23:12:42,554 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-07 23:13:29,423 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-07 23:13:41,469 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-07 23:14:10,606 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-07 23:14:48,245 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-07 23:14:48,245 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-07 23:14:48,364 admin_actions Admin admin123 - Error al crear producto en API: MART41
+INFO 2025-07-07 23:22:45,274 admin_actions Admin admin123 accedió a vista: admin_inventario
+INFO 2025-07-07 23:22:47,508 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-07 23:22:56,398 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-07 23:23:09,884 admin_actions Admin admin123 accedió a vista: editar_producto
