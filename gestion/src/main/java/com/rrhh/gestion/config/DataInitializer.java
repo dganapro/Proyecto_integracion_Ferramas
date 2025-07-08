@@ -21,41 +21,51 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Crear usuario administrador por defecto si no existe
-        if (!usuarioRepository.existsByNombreUsuario("admin")) {
-            Usuario admin = new Usuario();
-            admin.setNombreUsuario("admin");
-            admin.setNombre("Administrador");
-            admin.setApellido("Sistema");
-            admin.setEmail("admin@sistema.com");
-            admin.setPassword(passwordEncoder.encode("admin123"));
-            admin.setRol(Rol.ADMINISTRADOR);
-            admin.setActivo(true);
-            admin.setFechaCreacion(LocalDateTime.now());
-            
-            usuarioRepository.save(admin);
-            System.out.println("✅ Usuario administrador creado: admin / admin123");
-        }
+        try {
+            // Crear usuario administrador por defecto si no existe
+            if (!usuarioRepository.existsByNombreUsuario("admin")) {
+                Usuario admin = new Usuario();
+                admin.setNombreUsuario("admin");
+                admin.setNombre("Administrador");
+                admin.setApellido("Sistema");
+                admin.setEmail("admin@ferreteria.com");
+                admin.setPassword(passwordEncoder.encode("admin123"));
+                admin.setRol(Rol.ADMINISTRADOR);
+                admin.setActivo(true);
+                admin.setFechaCreacion(LocalDateTime.now());
+                
+                usuarioRepository.save(admin);
+                System.out.println("✅ Usuario administrador creado: admin / admin123");
+            } else {
+                System.out.println("ℹ️ Usuario administrador ya existe");
+            }
 
-        // Crear usuario regular por defecto si no existe
-        if (!usuarioRepository.existsByNombreUsuario("usuario")) {
-            Usuario usuario = new Usuario();
-            usuario.setNombreUsuario("usuario");
-            usuario.setNombre("Usuario");
-            usuario.setApellido("Demo");
-            usuario.setEmail("usuario@demo.com");
-            usuario.setPassword(passwordEncoder.encode("usuario123"));
-            usuario.setRol(Rol.USUARIO);
-            usuario.setActivo(true);
-            usuario.setFechaCreacion(LocalDateTime.now());
-            
-            usuarioRepository.save(usuario);
-            System.out.println("✅ Usuario regular creado: usuario / usuario123");
-        }
+            // Crear usuario regular por defecto si no existe
+            if (!usuarioRepository.existsByNombreUsuario("usuario")) {
+                Usuario usuario = new Usuario();
+                usuario.setNombreUsuario("usuario");
+                usuario.setNombre("Usuario");
+                usuario.setApellido("Demo");
+                usuario.setEmail("usuario@ferreteria.com");
+                usuario.setPassword(passwordEncoder.encode("usuario123"));
+                usuario.setRol(Rol.USUARIO);
+                usuario.setActivo(true);
+                usuario.setFechaCreacion(LocalDateTime.now());
+                
+                usuarioRepository.save(usuario);
+                System.out.println("✅ Usuario regular creado: usuario / usuario123");
+            } else {
+                System.out.println("ℹ️ Usuario regular ya existe");
+            }
 
-        System.out.println("🚀 Sistema de usuarios inicializado correctamente");
-        System.out.println("📋 Usuarios disponibles:");
-        System.out.println("   👤 Admin: admin / admin123");
-        System.out.println("   👤 Usuario: usuario / usuario123");
+            System.out.println("🚀 Sistema de usuarios inicializado correctamente");
+            System.out.println("📋 Usuarios disponibles:");
+            System.out.println("   👤 Admin: admin / admin123");
+            System.out.println("   👤 Usuario: usuario / usuario123");
+            
+        } catch (Exception e) {
+            System.err.println("❌ Error al inicializar usuarios: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

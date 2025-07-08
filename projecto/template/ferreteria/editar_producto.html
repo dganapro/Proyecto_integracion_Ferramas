@@ -42,15 +42,9 @@
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="categoria" class="form-label">Categoría *</label>
-                                    <select class="form-select" name="categoria" id="categoria" required>
-                                        <option value="">Seleccionar categoría</option>
-                                        {% for categoria in categorias %}
-                                            <option value="{{ categoria }}" {% if categoria == producto.categoria %}selected{% endif %}>
-                                                {{ categoria }}
-                                            </option>
-                                        {% endfor %}
-                                    </select>
+                                    <label for="categoria" class="form-label">Categoría</label>
+                                    <input type="text" class="form-control" name="categoria" id="categoria" 
+                                           value="{{ producto.categoria|default:'' }}">
                                 </div>
                                 
                                 <div class="mb-3">
@@ -101,12 +95,12 @@
                                     <div class="col-6">
                                         <label for="stock_actual" class="form-label">Stock Actual *</label>
                                         <input type="number" class="form-control" name="stock_actual" id="stock_actual" 
-                                               min="0" required value="{{ producto.stock_actual }}">
+                                               min="0" required value="{{ producto.stockActual|default:0 }}">
                                     </div>
                                     <div class="col-6">
                                         <label for="stock_minimo" class="form-label">Stock Mínimo</label>
                                         <input type="number" class="form-control" name="stock_minimo" 
-                                               id="stock_minimo" min="0" value="{{ producto.stock_minimo|default:5 }}">
+                                               id="stock_minimo" min="0" value="{{ producto.stockMinimo|default:5 }}">
                                     </div>
                                 </div>
                             </div>
@@ -117,53 +111,29 @@
                         <!-- Precios -->
                         <div class="row">
                             <div class="col-md-6">
-                                <h5 class="mb-3">Precios</h5>
-                                
-                                <div class="mb-3">
-                                    <label for="precio_venta" class="form-label">Precio de Venta *</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" name="precio_venta" id="precio_venta"
-                                               min="1" step="0.01" required value="{{ producto.precio_venta }}">
-                                    </div>
-                                </div>
+                                <h5 class="mb-3">Información de Precios</h5>
                                 
                                 <div class="mb-3">
                                     <label for="precio_compra" class="form-label">Precio de Compra</label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" name="precio_compra"
-                                               id="precio_compra" min="0" step="0.01" 
-                                               value="{{ producto.precio_compra|default:'' }}">
+                                        <input type="number" class="form-control" name="precio_compra" 
+                                               id="precio_compra" step="0.01" min="0" 
+                                               value="{{ producto.precioCompra|default:'' }}">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="precio_venta" class="form-label">Precio de Venta *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" name="precio_venta" 
+                                               id="precio_venta" step="0.01" min="0.01" required
+                                               value="{{ producto.precioVenta|default:0 }}">
                                     </div>
                                     <div id="margen-info" class="form-text"></div>
                                 </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <h5 class="mb-3">Configuración</h5>
                                 
-                                <div class="mb-3">
-                                    <label for="estado" class="form-label">Estado</label>
-                                    <select class="form-select" name="estado" id="estado">
-                                        <option value="activo" {% if producto.estado == 'activo' %}selected{% endif %}>Activo</option>
-                                        <option value="inactivo" {% if producto.estado == 'inactivo' %}selected{% endif %}>Inactivo</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="unidad_medida" class="form-label">Unidad de Medida</label>
-                                    <select class="form-select" name="unidad_medida" id="unidad_medida">
-                                        <option value="unidad" {% if producto.unidad_medida == 'unidad' %}selected{% endif %}>Unidad</option>
-                                        <option value="metro" {% if producto.unidad_medida == 'metro' %}selected{% endif %}>Metro</option>
-                                        <option value="kilogramo" {% if producto.unidad_medida == 'kilogramo' %}selected{% endif %}>Kilogramo</option>
-                                        <option value="litro" {% if producto.unidad_medida == 'litro' %}selected{% endif %}>Litro</option>
-                                        <option value="caja" {% if producto.unidad_medida == 'caja' %}selected{% endif %}>Caja</option>
-                                        <option value="paquete" {% if producto.unidad_medida == 'paquete' %}selected{% endif %}>Paquete</option>
-                                    </select>
-                                </div>
-
-                                <!-- Historial de Precios -->
                                 {% if historial_precios %}
                                 <div class="mb-3">
                                     <h6>Historial de Precios</h6>
@@ -181,6 +151,29 @@
                                 </div>
                                 {% endif %}
                             </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Configuración</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <select class="form-select" name="estado" id="estado">
+                                        <option value="ACTIVO" {% if producto.estado == 'ACTIVO' %}selected{% endif %}>Activo</option>
+                                        <option value="INACTIVO" {% if producto.estado == 'INACTIVO' %}selected{% endif %}>Inactivo</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="unidad_medida" class="form-label">Unidad de Medida</label>
+                                    <select class="form-select" name="unidad_medida" id="unidad_medida">
+                                        <option value="UNIDAD" {% if producto.unidadMedida == 'UNIDAD' %}selected{% endif %}>Unidad</option>
+                                        <option value="METRO" {% if producto.unidadMedida == 'METRO' %}selected{% endif %}>Metro</option>
+                                        <option value="KILOGRAMO" {% if producto.unidadMedida == 'KILOGRAMO' %}selected{% endif %}>Kilogramo</option>
+                                        <option value="LITRO" {% if producto.unidadMedida == 'LITRO' %}selected{% endif %}>Litro</option>
+                                        <option value="CAJA" {% if producto.unidadMedida == 'CAJA' %}selected{% endif %}>Caja</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         
                         <hr class="my-4">
@@ -191,7 +184,7 @@
                             <textarea class="form-control" name="descripcion" id="descripcion" 
                                       rows="3">{{ producto.descripcion|default:'' }}</textarea>
                         </div>
-
+                        
                         <!-- Razón del cambio de precio -->
                         <div class="mb-3">
                             <label for="razon_cambio_precio" class="form-label">Razón del Cambio de Precio (opcional)</label>
@@ -208,7 +201,7 @@
                                 <i class="fas fa-save me-2"></i>Actualizar Producto
                             </button>
                             <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-primary">
-                                <i class="fas fa-list me-2"></i>Ver Catálogo
+                                <i class="fas fa-th-large me-2"></i>Ver Catálogo
                             </a>
                         </div>
                     </form>
@@ -217,7 +210,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
 // Vista previa de imagen
 function previewImage(event) {
@@ -251,8 +246,16 @@ function calcularMargen() {
     }
 }
 
-document.getElementById('precio_compra').addEventListener('input', calcularMargen);
-document.getElementById('precio_venta').addEventListener('input', calcularMargen);
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    const precioCompra = document.getElementById('precio_compra');
+    const precioVenta = document.getElementById('precio_venta');
+    
+    if (precioCompra) precioCompra.addEventListener('input', calcularMargen);
+    if (precioVenta) precioVenta.addEventListener('input', calcularMargen);
+    
+    calcularMargen(); // Calcular al cargar
+});
 
 // Validación del formulario
 document.getElementById('producto-form').addEventListener('submit', function(e) {
@@ -269,226 +272,6 @@ document.getElementById('producto-form').addEventListener('submit', function(e) 
     // Mostrar loading
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Actualizando...';
     submitBtn.disabled = true;
-});
-
-// Calcular margen al cargar la página
-document.addEventListener('DOMContentLoaded', calcularMargen);
-</script>
-{% endblock %}
-                                                        <td>${{ historial.precio_anterior|floatformat:0 }}</td>
-                                                        <td>${{ historial.precio_nuevo|floatformat:0 }}</td>
-                                                        <td>
-                                                            <span class="badge {% if historial.diferencia_precio > 0 %}bg-success{% elif historial.diferencia_precio < 0 %}bg-danger{% else %}bg-secondary{% endif %}">
-                                                                {% if historial.diferencia_precio > 0 %}+{% endif %}{{ historial.porcentaje_cambio|floatformat:1 }}%
-                                                            </span>
-                                                        </td>
-                                                        <td>{{ historial.usuario_modificacion.get_full_name|default:historial.usuario_modificacion.username }}</td>
-                                                        <td>{{ historial.razon_cambio|default:"Sin especificar"|truncatewords:5 }}</td>
-                                                    </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-                        
-                        <!-- Razón del cambio de precio -->
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="razon_cambio_precio" class="form-label">Razón del cambio de precio (opcional)</label>
-                                    <textarea class="form-control" name="razon_cambio_precio" id="razon_cambio_precio" 
-                                              rows="2" placeholder="Ej: Actualización por inflación, Promoción especial, etc."></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Botones de Acción -->
-                        <div class="d-flex gap-3 mt-4">
-                            <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-outline-secondary">
-                                <i class="fas fa-eye me-2"></i>Ver Producto
-                            </a>
-                            <a href="{% url 'catalogo_productos' %}" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left me-2"></i>Volver al Catálogo
-                            </a>
-                            <button type="submit" class="btn btn-warning">
-                                <i class="fas fa-save me-2"></i>Actualizar Producto
-                            </button>
-                            <button type="button" class="btn btn-danger" onclick="confirmarDeshabilitacion()">
-                                <i class="fas fa-ban me-2"></i>Deshabilitar
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal de Confirmación para Eliminar -->
-<div class="modal fade" id="eliminarModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirmar Eliminación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <p>¿Está seguro que desea eliminar el producto <strong>"{{ producto.nombre }}"</strong>?</p>
-                <div class="alert alert-warning">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    Esta acción no se puede deshacer. Se eliminarán todos los datos del producto.
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <form method="post" action="{% url 'eliminar_producto' producto.id %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Eliminar Definitivamente</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal de Confirmación para Deshabilitar -->
-<div class="modal fade" id="deshabilitarModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirmar Deshabilitación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <p>¿Está seguro que desea deshabilitar el producto <strong>"{{ producto.nombre }}"</strong>?</p>
-                <div class="alert alert-warning">
-                    <i class="fas fa-info-circle me-2"></i>
-                    El producto se ocultará del catálogo pero mantendrá toda su información. Podrá habilitarlo nuevamente desde el panel de administración.
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <form method="post" action="{% url 'deshabilitar_producto' producto.id %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-warning">Deshabilitar Producto</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-// Vista previa de imagen
-function previewImage(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById('image-preview');
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.innerHTML = `<img src="${e.target.result}" class="img-fluid rounded" style="max-height: 200px;">`;
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-// Función para confirmar eliminación
-function confirmarEliminacion() {
-    const modal = new bootstrap.Modal(document.getElementById('eliminarModal'));
-    modal.show();
-}
-
-// Función para confirmar deshabilitación
-function confirmarDeshabilitacion() {
-    const modal = new bootstrap.Modal(document.getElementById('deshabilitarModal'));
-    modal.show();
-}
-
-// Calcular margen de ganancia
-document.getElementById('precio_costo').addEventListener('input', calcularMargen);
-document.getElementById('precio').addEventListener('input', calcularMargen);
-
-function calcularMargen() {
-    const precioCosto = parseFloat(document.getElementById('precio_costo').value) || 0;
-    const precioVenta = parseFloat(document.getElementById('precio').value) || 0;
-    
-    if (precioCosto > 0 && precioVenta > 0) {
-        const margen = ((precioVenta - precioCosto) / precioCosto * 100).toFixed(1);
-        
-        // Buscar o crear elemento de margen
-        let margenDisplay = document.querySelector('.margen-display');
-        if (!margenDisplay) {
-            margenDisplay = document.createElement('div');
-            margenDisplay.className = 'alert alert-info margen-display mt-2';
-            document.getElementById('precio_oferta').parentNode.parentNode.appendChild(margenDisplay);
-        }
-        
-        margenDisplay.innerHTML = `<small><strong>Margen de ganancia:</strong> ${margen}%</small>`;
-    }
-}
-
-// Habilitar/deshabilitar precio de oferta
-document.getElementById('en_oferta').addEventListener('change', function() {
-    const precioOferta = document.getElementById('precio_oferta');
-    if (this.checked) {
-        precioOferta.required = true;
-        if (!precioOferta.value) {
-            precioOferta.focus();
-        }
-    } else {
-        precioOferta.required = false;
-    }
-});
-
-// Validación del formulario
-document.getElementById('producto-form').addEventListener('submit', function(e) {
-    const enOferta = document.getElementById('en_oferta').checked;
-    const precioOferta = parseFloat(document.getElementById('precio_oferta').value) || 0;
-    const precio = parseFloat(document.getElementById('precio').value) || 0;
-    
-    if (enOferta && (precioOferta <= 0 || precioOferta >= precio)) {
-        e.preventDefault();
-        alert('El precio de oferta debe ser mayor a 0 y menor al precio regular.');
-        return false;
-    }
-    
-    // Mostrar indicador de carga
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Actualizando...';
-    submitBtn.disabled = true;
-});
-
-// Contador de caracteres para descripción corta
-document.getElementById('descripcion_corta').addEventListener('input', function() {
-    const maxLength = 200;
-    const currentLength = this.value.length;
-    const remaining = maxLength - currentLength;
-    
-    // Buscar o crear contador
-    let counter = this.parentNode.querySelector('.char-counter');
-    if (!counter) {
-        counter = document.createElement('div');
-        counter.className = 'char-counter form-text text-end';
-        this.parentNode.appendChild(counter);
-    }
-    
-    counter.textContent = `${currentLength}/${maxLength} caracteres`;
-    counter.style.color = remaining < 20 ? '#dc3545' : '#6c757d';
-});
-
-// Calcular margen inicial si hay datos
-document.addEventListener('DOMContentLoaded', function() {
-    calcularMargen();
-    
-    // Actualizar contador de caracteres
-    const descripcionCorta = document.getElementById('descripcion_corta');
-    if (descripcionCorta.value) {
-        descripcionCorta.dispatchEvent(new Event('input'));
-    }
 });
 </script>
 {% endblock %}

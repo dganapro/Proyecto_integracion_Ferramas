@@ -48,4 +48,12 @@ public class WebController {
     public String usuarioDashboard() {
         return "usuario-dashboard";
     }
+    
+    /**
+     * Manejo de errores
+     */
+    @GetMapping("/error")
+    public String error() {
+        return "error";
+    }
 }

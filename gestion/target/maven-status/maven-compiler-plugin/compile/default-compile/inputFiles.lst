@@ -26,6 +26,7 @@ C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\ma
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\dto\UsuarioResponseDTO.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Asignacion.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Carrito.java
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Categoria.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Cliente.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Comuna.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\DetalleVenta.java
@@ -36,6 +37,7 @@ C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\ma
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\MetodoPago.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\MovimientoInventario.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Producto.java
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Proveedor.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Rol.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Sede.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\entity\Tarea.java
@@ -44,6 +46,7 @@ C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\ma
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\GestionApplication.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\AsignacionRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\CarritoRepository.java
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\CategoriaRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\ClienteRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\ComunaRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\DetalleVentaRepository.java
@@ -54,6 +57,7 @@ C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\ma
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\MetodoPagoRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\MovimientoInventarioRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\ProductoRepository.java
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\ProveedorRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\SedeRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\TareaRepository.java
 C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\gestion\src\main\java\com\rrhh\gestion\repository\UsuarioRepository.java

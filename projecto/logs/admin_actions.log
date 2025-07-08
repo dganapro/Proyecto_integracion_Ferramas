@@ -32,3 +32,66 @@ INFO 2025-07-07 23:22:45,274 admin_actions Admin admin123 accedió a vista: admin
 INFO 2025-07-07 23:22:47,508 admin_actions Admin admin123 accedió a vista: admin_productos
 INFO 2025-07-07 23:22:56,398 admin_actions Admin admin123 accedió a vista: admin_productos
 INFO 2025-07-07 23:23:09,884 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 00:41:31,530 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 00:41:36,597 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 00:44:43,105 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 00:45:18,195 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 00:45:18,195 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-08 00:45:18,315 admin_actions Admin admin123 - Error al crear producto en API: MARTIL32
+INFO 2025-07-08 00:52:02,262 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 00:54:42,943 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 00:54:54,100 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 00:55:19,605 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 00:55:32,682 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 00:55:32,682 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-08 00:55:32,947 admin_actions Admin admin123 - Error al crear producto en API: MARTIL32
+INFO 2025-07-08 01:03:06,570 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:03:23,104 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:03:23,104 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-08 01:03:25,143 admin_actions Admin admin123 - Error al crear producto en API: MARTIL32
+INFO 2025-07-08 01:07:34,522 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:07:39,577 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 01:07:42,687 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:07:48,484 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:07:51,003 admin_actions Admin admin123 accedió a vista: admin_inventario
+INFO 2025-07-08 01:07:53,193 admin_actions Admin admin123 accedió a vista: admin_reportes
+INFO 2025-07-08 01:08:48,263 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:09:00,186 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:09:00,187 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-08 01:09:00,341 admin_actions Admin admin123 - Error al crear producto en API: MARTIL32
+INFO 2025-07-08 01:09:27,184 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:09:27,185 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-08 01:09:27,206 admin_actions Admin admin123 - Error al crear producto en API: MARTIL32
+INFO 2025-07-08 01:09:36,792 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:09:36,792 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-08 01:09:36,810 admin_actions Admin admin123 - Error al crear producto en API: MARTIL32
+INFO 2025-07-08 01:21:56,403 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 01:21:57,795 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 01:24:04,142 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 01:24:07,206 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:24:17,979 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:24:17,979 admin_actions Admin admin123 intenta crear producto
+ERROR 2025-07-08 01:24:18,159 admin_actions Admin admin123 - Error al crear producto en API: MARTIL32
+INFO 2025-07-08 01:31:13,537 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 01:31:13,538 admin_actions Admin admin123 intenta crear producto
+INFO 2025-07-08 01:31:13,705 admin_actions Admin admin123 creó producto exitosamente: MARTIL32 - martillo
+INFO 2025-07-08 01:31:20,789 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:32:56,109 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:32:57,339 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:32:58,065 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:32:58,796 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:33:02,130 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:33:02,985 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:33:03,697 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:33:16,555 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:33:31,748 admin_actions Admin admin123 accedió a vista: admin_inventario
+INFO 2025-07-08 01:33:34,728 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 01:34:23,772 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:34:35,777 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:34:45,200 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:35:12,133 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:35:12,148 admin_actions Admin admin123 editando producto: 1 - martillo
+ERROR 2025-07-08 01:35:12,179 admin_actions Admin admin123 - Error al actualizar producto: 1
+INFO 2025-07-08 01:42:21,246 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 01:42:21,271 admin_actions Admin admin123 editando producto: 1 - martillo
+ERROR 2025-07-08 01:42:21,294 admin_actions Admin admin123 - Error al actualizar producto: 1

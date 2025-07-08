@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required, user_passes_test  # ← ESTA LÍNEA DEBE ESTAR
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.utils.decorators import method_decorator
@@ -11,12 +11,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
 from decimal import Decimal
-import requests
+import requests  # ← AGREGAR ESTA LÍNEA
 import json
 import uuid
+import logging
 from datetime import datetime, timedelta
 from .models import CarritoCompras, CarritoItem, Pedido, DetallePedido, HistorialPrecio, Local, PagoTransbank
-import logging
 
 # También agregar la importación de Transbank si la usas
 try:
@@ -178,12 +178,34 @@ def obtener_producto_por_id(producto_id):
 def crear_producto_api(producto_data):
     """Crea un producto en la API externa"""
     url = "http://127.0.0.1:8089/api/productos"
+    
+    # Mapear campos de Django a Spring Boot
+    spring_data = {
+        "codigo": producto_data.get('codigo'),
+        "nombre": producto_data.get('nombre'),
+        "descripcion": producto_data.get('descripcion', ''),
+        "precioVenta": float(producto_data.get('precio_venta', 0)),
+        "precioCompra": float(producto_data.get('precio_compra', 0)) if producto_data.get('precio_compra') else None,
+        "stockActual": int(producto_data.get('stock_actual', 0)),
+        "stockMinimo": int(producto_data.get('stock_minimo', 5)),
+        "marca": producto_data.get('marca', ''),
+        "estado": "ACTIVO",
+        "unidadMedida": producto_data.get('unidad_medida', 'UNIDAD').upper()
+    }
+    
     try:
-        response = requests.post(url, json=producto_data)
+        print(f"Enviando datos a Spring Boot: {spring_data}")
+        response = requests.post(url, json=spring_data, timeout=30)
+        print(f"Respuesta de Spring Boot: {response.status_code} - {response.text}")
+        
         if response.status_code in [200, 201]:
             return response.json()
         else:
+            print(f"Error en Spring Boot: {response.status_code} - {response.text}")
             return None
+    except requests.exceptions.ConnectionError:
+        print("Error: No se puede conectar con Spring Boot en el puerto 8089")
+        return None
     except Exception as e:
         print(f"Error al crear producto: {e}")
         return None
@@ -306,7 +328,7 @@ def detalle_producto(request, producto_id):
     
     return render(request, 'ferreteria/detalle_producto.html', contexto)
 
-# Agregar decorador y verificación de permisos a todas las funciones de gestión de productos
+# Agregar decorador y verificación de permisos a todas as funções de gestão de produtos
 
 @login_required
 @user_passes_test(lambda u: u.is_staff, login_url='/')
@@ -373,44 +395,31 @@ def editar_producto(request, producto_id):
         admin_logger.warning(f"Admin {request.user.username} intentó editar producto inexistente: {producto_id}")
         messages.error(request, 'Producto no encontrado')
         return redirect('catalogo_productos')
-    
-    # Calcular margen si hay precios - CON VALIDACIÓN
-    precio_venta = producto.get('precio_venta', 0)
-    precio_compra = producto.get('precio_compra', 0)
-    
-    if precio_venta and precio_compra and precio_compra > 0:
-        try:
-            precio_venta = float(precio_venta)
-            precio_compra = float(precio_compra)
-            producto['margen_porcentaje'] = round(((precio_venta - precio_compra) / precio_compra) * 100, 2)
-        except (ValueError, TypeError):
-            producto['margen_porcentaje'] = 0
-    else:
-        producto['margen_porcentaje'] = 0
-    
+
     if request.method == 'POST':
         admin_logger.info(f"Admin {request.user.username} editando producto: {producto_id} - {producto.get('nombre', 'N/A')}")
         
         # Capturar precios anteriores antes de actualizar
-        precio_venta_anterior = Decimal(str(producto.get('precio_venta', 0)))
-        precio_compra_anterior = Decimal(str(producto.get('precio_compra', 0)))
+        precio_venta_anterior = Decimal(str(producto.get('precioVenta', 0)))
+        precio_compra_anterior = Decimal(str(producto.get('precioCompra', 0)))
         precio_venta_nuevo = Decimal(str(request.POST.get('precio_venta', 0)))
         precio_compra_nuevo = Decimal(str(request.POST.get('precio_compra', 0)))
         
-        # Obtener datos del formulario
+        # Obtener datos del formulario - CORREGIR LOS NOMBRES DE CAMPOS
         producto_actualizado = {
             'codigo': request.POST.get('codigo'),
             'nombre': request.POST.get('nombre'),
             'descripcion': request.POST.get('descripcion'),
             'categoria': request.POST.get('categoria'),
-            'precio_compra': float(precio_compra_nuevo),
-            'precio_venta': float(precio_venta_nuevo),
-            'stock_actual': int(request.POST.get('stock_actual', 0)),
-            'stock_minimo': int(request.POST.get('stock_minimo', 0)),
-            'unidad_medida': request.POST.get('unidad_medida'),
+            'precioCompra': float(precio_compra_nuevo),  # ← Cambiar a precioCompra
+            'precioVenta': float(precio_venta_nuevo),    # ← Cambiar a precioVenta
+            'stockActual': int(request.POST.get('stock_actual', 0)),     # ← Cambiar a stockActual
+            'stockMinimo': int(request.POST.get('stock_minimo', 0)),     # ← Cambiar a stockMinimo
+            'unidadMedida': request.POST.get('unidad_medida'),  # ← Cambiar a unidadMedida
             'marca': request.POST.get('marca'),
+            'modelo': request.POST.get('modelo'),
             'proveedor': request.POST.get('proveedor'),
-            'estado': request.POST.get('estado', 'activo')
+            'estado': request.POST.get('estado', 'ACTIVO')
         }
         
         # Intentar actualizar en la API
@@ -433,7 +442,7 @@ def editar_producto(request, producto_id):
                     admin_logger.info(f"Historial de precio guardado: {producto['nombre']} - Venta: ${precio_venta_anterior} -> ${precio_venta_nuevo}")
                 except Exception as e:
                     admin_logger.error(f"Error al guardar historial de precio: {str(e)}")
-            
+
             admin_logger.info(f"Admin {request.user.username} actualizó producto exitosamente: {producto_id} - {producto_actualizado['nombre']}")
             messages.success(request, f'Producto {producto_actualizado["nombre"]} actualizado exitosamente')
             return redirect('detalle_producto', producto_id=producto_id)
@@ -1833,6 +1842,12 @@ def admin_reportes(request):
                 'valor_inventario': 0, 
                 'valor_venta': 0,
                 'activos': 0
+
+
+
+           
+
+
             }
         
         categorias_stats[categoria]['cantidad'] += 1
@@ -2125,21 +2140,6 @@ def api_cancelar_pedido(request, numero_pedido):
     
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-def ajax_validar_codigo(request):
-    """AJAX para validar código de producto único"""
-    codigo = request.GET.get('codigo', '').strip()
-    if not codigo:
-        return JsonResponse({'valido': True, 'mensaje': ''})
-    
-    # Verificar en la API externa
-    productos = obtener_todos_productos()
-    existe = any(p.get('codigo', '').lower() == codigo.lower() for p in productos)
-    
-    return JsonResponse({
-        'valido': not existe, 
-        'mensaje': 'Código ya existe' if existe else 'Código disponible'
-    })
-
 @login_required
 @user_passes_test(lambda u: u.is_staff, login_url='/')
 def generar_pdf_pedido(request, numero_pedido):
@@ -2414,7 +2414,5 @@ def backup_historial_precios():
         
     except Exception as e:
         general_logger.error(f"Error en backup de historial: {str(e)}")
-
-# ==================== FINAL DEL ARCHIVO ====================
 
 

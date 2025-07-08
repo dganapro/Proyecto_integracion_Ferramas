@@ -145,7 +145,14 @@
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
 // Validación en tiempo real del código
 document.getElementById('codigo').addEventListener('blur', function() {
@@ -271,75 +278,5 @@ function validarFormulario() {
 
 // Validar al cargar la página
 document.addEventListener('DOMContentLoaded', validarFormulario);
-</script>
-{% endblock %}
-    }
-});
-
-// Calcular margen de ganancia
-function calcularMargen() {
-    const precioCosto = parseFloat(document.getElementById('precio_costo').value) || 0;
-    const precioVenta = parseFloat(document.getElementById('precio').value) || 0;
-    const margenDiv = document.getElementById('margen-ganancia');
-    if (precioCosto > 0 && precioVenta > 0) {
-        const margen = ((precioVenta - precioCosto) / precioCosto * 100).toFixed(1);
-        margenDiv.textContent = `Margen de ganancia: ${margen}%`;
-        margenDiv.classList.remove('d-none');
-    } else {
-        margenDiv.classList.add('d-none');
-    }
-}
-document.getElementById('precio_costo').addEventListener('input', calcularMargen);
-document.getElementById('precio').addEventListener('input', calcularMargen);
-
-// Habilitar/deshabilitar precio de oferta
-document.getElementById('en_oferta').addEventListener('change', function() {
-    const precioOferta = document.getElementById('precio_oferta');
-    if (this.checked) {
-        precioOferta.required = true;
-        precioOferta.focus();
-    } else {
-        precioOferta.required = false;
-        precioOferta.value = '';
-    }
-});
-
-// Validación del formulario
-document.getElementById('producto-form').addEventListener('submit', function(e) {
-    const enOferta = document.getElementById('en_oferta').checked;
-    const precioOferta = parseFloat(document.getElementById('precio_oferta').value) || 0;
-    const precio = parseFloat(document.getElementById('precio').value) || 0;
-
-    if (enOferta && (precioOferta <= 0 || precioOferta >= precio)) {
-        e.preventDefault();
-        alert('El precio de oferta debe ser mayor a 0 y menor al precio regular.');
-        return false;
-    }
-
-    // Mostrar spinner solo en el botón presionado
-    const activeElement = document.activeElement;
-    if (activeElement && activeElement.tagName === 'BUTTON') {
-        activeElement.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Guardando...';
-        activeElement.disabled = true;
-    }
-});
-
-// Contador de caracteres para descripción corta
-const descripcionCorta = document.getElementById('descripcion_corta');
-function actualizarContadorDescripcion() {
-    const maxLength = 200;
-    const currentLength = descripcionCorta.value.length;
-    const remaining = maxLength - currentLength;
-    let counter = descripcionCorta.parentNode.querySelector('.char-counter');
-    if (!counter) {
-        counter = document.createElement('div');
-        counter.className = 'char-counter form-text text-end';
-        descripcionCorta.parentNode.appendChild(counter);
-    }
-    counter.textContent = `${currentLength}/${maxLength} caracteres`;
-    counter.style.color = remaining < 20 ? '#dc3545' : '#6c757d';
-}
-descripcionCorta.addEventListener('input', actualizarContadorDescripcion);
-document.addEventListener('DOMContentLoaded', actualizarContadorDescripcion);
 </script>
 {% endblock %}
