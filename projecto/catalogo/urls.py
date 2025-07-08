@@ -69,3 +69,8 @@ urlpatterns = [
 
     
 ]
+
+# URLs para manejo de errores (se configuran en settings.py)
+handler404 = 'catalogo.views.error_404_view'
+handler500 = 'catalogo.views.error_500_view'
+handler403 = 'catalogo.views.error_403_view'

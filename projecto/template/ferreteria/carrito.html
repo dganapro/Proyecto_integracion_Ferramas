@@ -201,51 +201,23 @@
 
 {% block extra_js %}
 <script>
-    // Actualizar contador del carrito
-    document.addEventListener('DOMContentLoaded', function() {
-        // Escapar la variable para evitar inyección de código
-        const cantidadItems = parseInt('{{ cantidad_items|default:0|escapejs }}');
-        localStorage.setItem('cart_count', cantidadItems);
-        
-        // Verificar si updateCartCount existe antes de llamarla
-        if (typeof updateCartCount === 'function') {
-            updateCartCount();
-        } else {
-            // Implementar función básica para actualizar el contador
-            updateCartCountLocal();
-        }
-        
-        // Validación de cantidad en inputs
-        initializeQuantityValidation();
-        
-        // Mejorar UX en formularios
-        initializeFormEnhancements();
-    });
-    
-    // Función local para actualizar contador del carrito
-    function updateCartCountLocal() {
-        const cartCount = localStorage.getItem('cart_count') || 0;
-        const cartBadges = document.querySelectorAll('.cart-count, .badge, [data-cart-count]');
-        
-        cartBadges.forEach(badge => {
-            badge.textContent = cartCount;
-            badge.style.display = cartCount > 0 ? 'inline' : 'none';
-        });
-    }
-    
     // Validación de cantidades
     function initializeQuantityValidation() {
         const quantityInputs = document.querySelectorAll('input[name="cantidad"]');
         
         quantityInputs.forEach(input => {
+            // Obtener el máximo stock desde el atributo data o desde el valor actual
+            const maxStock = parseInt(input.getAttribute('max')) || 99;
+            const itemId = input.closest('form').action.split('/').slice(-2, -1)[0];
+            
             input.addEventListener('change', function() {
-                const max = parseInt(this.getAttribute('max'));
                 const min = parseInt(this.getAttribute('min')) || 1;
                 let value = parseInt(this.value);
                 
-                if (value > max) {
-                    alert(`Stock disponible: ${max} unidades`);
-                    this.value = max;
+                // Validar rango
+                if (value > maxStock) {
+                    alert(`Stock disponible: ${maxStock} unidades`);
+                    this.value = maxStock;
                     return;
                 }
                 
@@ -254,32 +226,70 @@
                     return;
                 }
                 
+                // Auto-submit del formulario con loading
                 showLoadingOnInput(this);
+                this.closest('form').submit();
+            });
+            
+            // Validación en tiempo real mientras escribe
+            input.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                const min = parseInt(this.getAttribute('min')) || 1;
+                
+                if (value < min || value > maxStock) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                }
             });
         });
     }
     
     // Mejoras de UX en formularios
     function initializeFormEnhancements() {
-        const deleteButtons = document.querySelectorAll('a[href*="eliminar_del_carrito"]');
+        // Botones de eliminar item
+        const deleteButtons = document.querySelectorAll('button[type="submit"]');
         deleteButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                if (confirm('¿Eliminar este producto del carrito?')) {
+            if (button.closest('form').action.includes('eliminar_del_carrito')) {
+                button.addEventListener('click', function(e) {
+                    const productName = this.closest('.border-bottom').querySelector('h6 a').textContent.trim();
+                    if (confirm(`¿Eliminar "${productName}" del carrito?`)) {
+                        showLoadingOnButton(this);
+                    } else {
+                        e.preventDefault();
+                    }
+                });
+            }
+        });
+        
+        // Botón vaciar carrito
+        const emptyCartButton = document.querySelector('form[action*="vaciar_carrito"] button');
+        if (emptyCartButton) {
+            emptyCartButton.addEventListener('click', function(e) {
+                const itemCount = document.querySelectorAll('.border-bottom').length;
+                if (confirm(`¿Vaciar completamente el carrito? (${itemCount} productos serán eliminados)`)) {
                     showLoadingOnButton(this);
                 } else {
                     e.preventDefault();
                 }
             });
-        });
+        }
         
-        const emptyCartButton = document.querySelector('a[href*="vaciar_carrito"]');
-        if (emptyCartButton) {
-            emptyCartButton.addEventListener('click', function(e) {
-                if (confirm('¿Vaciar completamente el carrito?')) {
-                    showLoadingOnButton(this);
-                } else {
+        // Botón continuar al pago
+        const checkoutButton = document.querySelector('a[href*="checkout"]');
+        if (checkoutButton) {
+            checkoutButton.addEventListener('click', function(e) {
+                // Verificar que hay items en el carrito
+                const itemCount = document.querySelectorAll('.border-bottom').length;
+                if (itemCount === 0) {
                     e.preventDefault();
+                    alert('Tu carrito está vacío. Agrega productos antes de continuar.');
+                    return false;
                 }
+                
+                // Mostrar loading
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando pago...';
             });
         }
     }
@@ -289,21 +299,93 @@
         input.style.backgroundColor = '#f8f9fa';
         input.disabled = true;
         
+        // Mostrar spinner en el formulario
+        const form = input.closest('form');
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner-border spinner-border-sm text-primary';
+        spinner.setAttribute('role', 'status');
+        form.appendChild(spinner);
+        
         setTimeout(() => {
             input.style.backgroundColor = originalBg;
             input.disabled = false;
+            if (spinner.parentNode) {
+                spinner.remove();
+            }
         }, 1000);
     }
     
     function showLoadingOnButton(button) {
         const originalText = button.innerHTML;
         button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
-        button.style.pointerEvents = 'none';
+        button.disabled = true;
         
         setTimeout(() => {
             button.innerHTML = originalText;
-            button.style.pointerEvents = 'auto';
+            button.disabled = false;
         }, 3000);
     }
+    
+    // Actualizar totales en tiempo real
+    function updateTotals() {
+        let subtotal = 0;
+        const items = document.querySelectorAll('.border-bottom');
+        
+        items.forEach(item => {
+            const cantidad = parseInt(item.querySelector('input[name="cantidad"]').value) || 0;
+            const precioUnitario = parseFloat(item.querySelector('.text-center strong').textContent.replace('$', '').replace('.', '')) || 0;
+            const subtotalItem = cantidad * precioUnitario;
+            
+            // Actualizar subtotal del item
+            const subtotalElement = item.querySelector('.price');
+            if (subtotalElement) {
+                subtotalElement.textContent = '$' + new Intl.NumberFormat('es-CL').format(subtotalItem);
+            }
+            
+            subtotal += subtotalItem;
+        });
+        
+        // Actualizar totales generales
+        const iva = subtotal * 0.19;
+        const total = subtotal + iva;
+        
+        const subtotalElement = document.querySelector('.d-flex.justify-content-between:nth-child(1) span:last-child');
+        const ivaElement = document.querySelector('.d-flex.justify-content-between:nth-child(2) span:last-child');
+        const totalElement = document.querySelector('.d-flex.justify-content-between strong:last-child');
+        
+        if (subtotalElement) subtotalElement.textContent = '$' + new Intl.NumberFormat('es-CL').format(subtotal);
+        if (ivaElement) ivaElement.textContent = '$' + new Intl.NumberFormat('es-CL').format(iva);
+        if (totalElement) totalElement.textContent = '$' + new Intl.NumberFormat('es-CL').format(total);
+    }
+    
+    // Inicializar tooltips para información adicional
+    function initializeTooltips() {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }
+    
+    // Inicializar todo al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        // Escapar la variable para evitar inyección de código
+        const cantidadItems = parseInt('{{ cantidad_items|default:0|escapejs }}');
+        localStorage.setItem('cart_count', cantidadItems);
+        
+        // Verificar si updateCartCount existe antes de llamarla
+        if (typeof updateCartCount === 'function') {
+            updateCartCount();
+        } else {
+            updateCartCountLocal();
+        }
+        
+        // Inicializar funcionalidades
+        initializeQuantityValidation();
+        initializeFormEnhancements();
+        initializeTooltips();
+        
+        // Actualizar totales cada 2 segundos (en caso de cambios)
+        setInterval(updateTotals, 2000);
+    });
 </script>
 {% endblock %}
