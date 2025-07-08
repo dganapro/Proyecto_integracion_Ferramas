@@ -160,3 +160,61 @@ INFO 2025-07-08 03:46:15,739 admin_actions Admin admin123 accedió a vista: admin
 INFO 2025-07-08 03:46:16,169 admin_actions Admin admin123 accedió a vista: admin_dashboard
 INFO 2025-07-08 03:46:16,690 admin_actions Admin admin123 accedió a vista: admin_dashboard
 INFO 2025-07-08 03:48:26,925 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:11:23,577 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:11:28,740 admin_actions Admin admin123 accedió a vista: admin_inventario
+INFO 2025-07-08 04:11:32,892 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 04:11:35,376 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 04:12:16,552 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 04:12:16,554 admin_actions Admin admin123 intenta crear producto
+INFO 2025-07-08 04:12:16,555 admin_actions Imagen subida para producto: C80
+INFO 2025-07-08 04:12:16,571 admin_actions Admin admin123 creó producto exitosamente: C80 - cuerda
+INFO 2025-07-08 04:12:23,097 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:27:23,708 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:27:26,991 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 04:31:17,169 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:31:19,207 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 04:31:24,021 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 04:31:27,471 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:32:18,792 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:32:18,802 admin_actions Admin admin123 editando producto: 1 - martillo
+ERROR 2025-07-08 04:32:18,813 admin_actions Admin admin123 - Error al actualizar producto: 1
+INFO 2025-07-08 04:34:32,546 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:34:32,557 admin_actions Admin admin123 editando producto: 1 - martillo
+ERROR 2025-07-08 04:34:32,565 admin_actions Admin admin123 - Error al actualizar producto: 1
+INFO 2025-07-08 04:34:54,598 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:34:58,450 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:35:15,375 admin_actions Admin admin123 accedió a vista: admin_productos
+INFO 2025-07-08 04:35:22,764 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:35:44,533 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:38:08,486 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:38:15,944 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:38:30,970 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:38:30,981 admin_actions Admin admin123 editando producto: 11 - martillo
+ERROR 2025-07-08 04:38:30,987 admin_actions Admin admin123 - Error al actualizar producto: 11
+INFO 2025-07-08 04:39:52,127 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:39:52,143 admin_actions Admin admin123 editando producto: 11 - martillo
+ERROR 2025-07-08 04:39:52,153 admin_actions Admin admin123 - Error al actualizar producto: 11
+INFO 2025-07-08 04:46:04,592 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:46:10,751 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:46:21,853 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:46:21,862 admin_actions Admin admin123 editando producto: 11 - martillo
+ERROR 2025-07-08 04:46:21,868 admin_actions Admin admin123 - Error al actualizar producto: 11
+INFO 2025-07-08 04:46:58,370 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:47:02,198 admin_actions Admin admin123 accedió a vista: crear_producto
+INFO 2025-07-08 04:47:03,977 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:47:13,332 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:47:28,323 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:47:28,336 admin_actions Admin admin123 editando producto: 1 - martillo
+ERROR 2025-07-08 04:47:28,348 admin_actions Admin admin123 - Error al actualizar producto: 1
+INFO 2025-07-08 04:51:08,515 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:51:08,525 admin_actions Admin admin123 editando producto: 1 - martillo
+ERROR 2025-07-08 04:51:08,533 admin_actions Admin admin123 - Error al actualizar producto: 1
+INFO 2025-07-08 04:51:24,224 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:51:24,233 admin_actions Admin admin123 editando producto: 1 - martillo
+ERROR 2025-07-08 04:51:24,240 admin_actions Admin admin123 - Error al actualizar producto: 1
+INFO 2025-07-08 04:52:21,399 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:52:24,992 admin_actions Admin admin123 accedió a vista: admin_dashboard
+INFO 2025-07-08 04:52:29,509 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:52:36,209 admin_actions Admin admin123 accedió a vista: editar_producto
+INFO 2025-07-08 04:52:36,217 admin_actions Admin admin123 editando producto: 11 - martillo
+ERROR 2025-07-08 04:52:36,223 admin_actions Admin admin123 - Error al actualizar producto: 11

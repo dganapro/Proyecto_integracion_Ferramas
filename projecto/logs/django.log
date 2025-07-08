@@ -5094,3 +5094,2193 @@ Watching for file changes with StatReloader
 "GET /api/carrito/resumen/ HTTP/1.1" 200 57
 "GET / HTTP/1.1" 200 24737
 "GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 16129
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 31596
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/1/ HTTP/1.1" 200 15748
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /admin-ferreteria/inventario/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 1893, in admin_inventario
+    return render(request, 'ferreteria/admin/reportes.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: ferreteria/admin/reportes.html
+"GET /admin-ferreteria/inventario/ HTTP/1.1" 500 118423
+"GET /admin-ferreteria/productos/ HTTP/1.1" 200 1722
+"GET /productos/crear/ HTTP/1.1" 200 22911
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/crear/ HTTP/1.1" 302 0
+"GET /productos/ HTTP/1.1" 200 45526
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/editar/12/ HTTP/1.1" 200 22159
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 45133
+"POST /accounts/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 16129
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 35831
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/12/ HTTP/1.1" 200 15732
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 16129
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 35831
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/11/ HTTP/1.1" 200 15748
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/11/ HTTP/1.1" 200 15748
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/11/ HTTP/1.1" 200 15748
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/11/ HTTP/1.1" 200 15748
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 351685
+"GET /productos HTTP/1.1" 301 0
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 351685
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 16129
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 351844
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 351836
+"GET /carrito/ HTTP/1.1" 200 16129
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /registro/ HTTP/1.1" 200 11289
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/crear/ HTTP/1.1" 200 22911
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /api/validar-codigo/
+"GET /api/validar-codigo/?codigo=MARTIL04 HTTP/1.1" 404 16734
+"GET /carrito/ HTTP/1.1" 200 17872
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 17872
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 352043
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 352043
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 352180
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 352180
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['nombre']' from 'producto.nombre|default:producto['nombre']'
+"GET /productos/ HTTP/1.1" 500 352043
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 548, in render
+    values = {key: val.resolve(context) for key, val in self.extra_context.items()}
+                   ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [stock] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 218541
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 548, in render
+    values = {key: val.resolve(context) for key, val in self.extra_context.items()}
+                   ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [stock] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 218541
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 548, in render
+    values = {key: val.resolve(context) for key, val in self.extra_context.items()}
+                   ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [stock] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 218541
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 548, in render
+    values = {key: val.resolve(context) for key, val in self.extra_context.items()}
+                   ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [stock] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 218541
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 548, in render
+    values = {key: val.resolve(context) for key, val in self.extra_context.items()}
+                   ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [stock] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 218541
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'stock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 548, in render
+    values = {key: val.resolve(context) for key, val in self.extra_context.items()}
+                   ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [stock] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 218541
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1075, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [precio] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 222507
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1075, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [precio] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 222507
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1075, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [precio] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 222507
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 891, in _resolve_lookup
+    current = current[bit]
+              ~~~~~~~^^^^^
+KeyError: 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 901, in _resolve_lookup
+    current = getattr(current, bit)
+AttributeError: 'dict' object has no attribute 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    current = current[int(bit)]
+                      ~~~^^^^^
+ValueError: invalid literal for int() with base 10: 'precio'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 307, in catalogo_productos
+    return render(request, 'ferreteria/catalogo_productos.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1075, in render
+    output = self.filter_expression.resolve(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 743, in resolve
+    arg_vals.append(arg.resolve(context))
+                    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 854, in resolve
+    value = self._resolve_lookup(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 914, in _resolve_lookup
+    raise VariableDoesNotExist(
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+    )  # missing attribute
+    ^
+django.template.base.VariableDoesNotExist: Failed lookup for key [precio] in {'id': 1, 'codigo': 'MARTIL32', 'nombre': 'martillo', 'descripcion': 'asd', 'precioVenta': 10000.0, 'precioCompra': 5000.0, 'stockActual': 5, 'stockMinimo': 5, 'categoria': None, 'marca': 'asd', 'modelo': None, 'proveedor': None, 'estado': 'ACTIVO', 'unidadMedida': 'UNIDAD', 'imagen': None, 'peso': None, 'fechaCreacion': '2025-07-08T01:31:13', 'fechaActualizacion': '2025-07-08T01:31:13', 'usuarioCreacion': None, 'usuarioActualizacion': None, 'detallesVenta': [], 'itemsCarrito': [], 'historialPrecios': [], 'movimientosInventario': [], 'margen_porcentaje': 0, 'valor_inventario': 0}
+"GET /productos/ HTTP/1.1" 500 222379
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/crear/ HTTP/1.1" 200 22911
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /admin-ferreteria/productos/ HTTP/1.1" 200 2187
+"GET /productos/editar/1/ HTTP/1.1" 200 22165
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/editar/1/ HTTP/1.1" 200 22931
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/editar/1/ HTTP/1.1" 200 22931
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 46069
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/editar/12/ HTTP/1.1" 200 22159
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/editar/11/ HTTP/1.1" 200 22166
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/?buscar=&categoria=&stock=&precio=&orden=nombre HTTP/1.1" 200 46077
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /productos/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 271, in catalogo_productos
+    productos = buscar_productos(query)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 254, in buscar_productos
+    query in producto['categoria'].lower() or
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'lower'
+"GET /productos/?buscar=cuerda&categoria=&stock=&precio=&orden=nombre HTTP/1.1" 500 86972
+"GET /admin-ferreteria/productos/ HTTP/1.1" 200 2187
+"GET /carrito/ HTTP/1.1" 200 17872
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 46069
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/editar/11/ HTTP/1.1" 200 22166
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/12/ HTTP/1.1" 200 20316
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 37762
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /registro/ HTTP/1.1" 200 11289
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 25976
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /carrito/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 896, in ver_carrito
+    return render(request, 'ferreteria/carrito.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'vaciar_carrito' not found. 'vaciar_carrito' is not a valid view function or pattern name.
+"GET /carrito/ HTTP/1.1" 500 191496
+Internal Server Error: /carrito/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 896, in ver_carrito
+    return render(request, 'ferreteria/carrito.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'vaciar_carrito' not found. 'vaciar_carrito' is not a valid view function or pattern name.
+"GET /carrito/ HTTP/1.1" 500 191496
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /carrito/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 921, in ver_carrito
+    return render(request, 'ferreteria/carrito.html', contexto)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'vaciar_carrito' not found. 'vaciar_carrito' is not a valid view function or pattern name.
+"GET /carrito/ HTTP/1.1" 500 191496
+"POST /accounts/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /registro/ HTTP/1.1" 200 11289
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 17872
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 46069
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/editar/11/ HTTP/1.1" 200 22166
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/editar/11/ HTTP/1.1" 200 22932
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\urls.py changed, reloading.
+Watching for file changes with StatReloader
+"POST /productos/editar/11/ HTTP/1.1" 200 22932
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 25976
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Not Found: /api/carrito/agregar/
+"POST /api/carrito/agregar/ HTTP/1.1" 404 53
+Not Found: /api/carrito/agregar/
+"POST /api/carrito/agregar/ HTTP/1.1" 404 53
+Bad Request: /api/carrito/agregar/
+"POST /api/carrito/agregar/ HTTP/1.1" 400 64
+"GET /carrito/ HTTP/1.1" 200 25345
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /checkout/ HTTP/1.1" 200 27216
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Internal Server Error: /checkout/
+Traceback (most recent call last):
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py", line 1031, in checkout
+    return redirect('procesar_pago')
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'procesar_pago' not found. 'procesar_pago' is not a valid view function or pattern name.
+"POST /checkout/ HTTP/1.1" 500 102688
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+"POST /checkout/ HTTP/1.1" 302 0
+"GET /checkout/procesar-pago/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25738
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /checkout/ HTTP/1.1" 200 27216
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /checkout/ HTTP/1.1" 302 0
+"GET /checkout/procesar-pago/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25738
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /checkout/ HTTP/1.1" 200 27216
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /checkout/ HTTP/1.1" 302 0
+"GET /checkout/procesar-pago/ HTTP/1.1" 302 0
+"GET /checkout/ HTTP/1.1" 200 27617
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /checkout/ HTTP/1.1" 302 0
+"GET /checkout/procesar-pago/ HTTP/1.1" 302 0
+"GET /checkout/ HTTP/1.1" 200 27617
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET / HTTP/1.1" 200 25976
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /carrito/ HTTP/1.1" 200 25345
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /carrito/vaciar/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25733
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /carrito/actualizar/1/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25735
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /carrito/actualizar/1/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25735
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /carrito/actualizar/1/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25735
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /carrito/actualizar/1/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25735
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /carrito/actualizar/1/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25735
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /carrito/actualizar/1/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25735
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /carrito/actualizar/1/ HTTP/1.1" 302 0
+"GET /carrito/ HTTP/1.1" 200 25735
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/logout/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 24737
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /registro/ HTTP/1.1" 200 11289
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /accounts/login/ HTTP/1.1" 200 9830
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /accounts/login/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 46069
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/editar/11/ HTTP/1.1" 200 22166
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/editar/11/ HTTP/1.1" 200 22932
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /productos/crear/ HTTP/1.1" 200 22911
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /productos/ HTTP/1.1" 200 46069
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /productos/editar/1/ HTTP/1.1" 200 22165
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/editar/1/ HTTP/1.1" 200 22931
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/editar/1/ HTTP/1.1" 200 22931
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/editar/1/ HTTP/1.1" 200 22931
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET / HTTP/1.1" 302 0
+"GET /admin-ferreteria/ HTTP/1.1" 200 28094
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/ HTTP/1.1" 200 46069
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"GET /productos/editar/11/ HTTP/1.1" 200 22166
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+"POST /productos/editar/11/ HTTP/1.1" 200 22932
+"GET /api/carrito/resumen/ HTTP/1.1" 200 57
+C:\Users\dgana\OneDrive\Desktop\ing\Proyecto_integracion_Ferramas\projecto\catalogo\views.py changed, reloading.
+Watching for file changes with StatReloader

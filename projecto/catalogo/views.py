@@ -29,27 +29,13 @@ except ImportError:
 # Configurar loggers
 admin_logger = logging.getLogger('admin_actions')
 general_logger = logging.getLogger('catalogo')
-# Agregar tarjetaclase PagoTarjeta:
-class PagoTarjeta:
-    """Modelo temporal para pagos con tarjeta"""
-    def __init__(self, **kwargs):
-        for key, value in kwargs.items():
-            setattr(self, key, value)
-    
-    @classmethod
-    def objects(cls):
-        return cls
-    
-    @classmethod
-    def create(cls, **kwargs):
-        return cls(**kwargs)
 
 # ==================== VISTAS ORIGINALES ====================
 def home(request):
     return render(request, "ferreteria/dashboard.html")
 
 def despedirse(request):
-    return HttpResponse("<h1> Hasta la vista....baby </h1>")
+    return HttpResponse("<h1> Hasta la vista....baby </h1>", content_type="text/html")
 
 def ver_inicial(request):
     return render(request,"inicial.html")
@@ -420,6 +406,31 @@ def editar_producto(request, producto_id):
     if request.method == 'POST':
         admin_logger.info(f"Admin {request.user.username} editando producto: {producto_id} - {producto.get('nombre', 'N/A')}")
         
+        # Validaciones de campos obligatorios
+        nombre = request.POST.get('nombre', '').strip()
+        codigo = request.POST.get('codigo', '').strip()
+        precio_venta = request.POST.get('precio_venta', '').strip()
+        stock_actual = request.POST.get('stock_actual', '').strip()
+        errores = []
+        if not nombre:
+            errores.append('El nombre del producto es obligatorio.')
+        if not codigo:
+            errores.append('El código del producto es obligatorio.')
+        if not precio_venta or float(precio_venta) <= 0:
+            errores.append('El precio de venta debe ser mayor a 0.')
+        if not stock_actual or int(stock_actual) < 0:
+            errores.append('El stock actual no puede ser negativo.')
+        if errores:
+            for err in errores:
+                messages.error(request, err)
+            return render(request, 'ferreteria/editar_producto.html', {
+                'producto': producto,
+                'historial_precios': HistorialPrecio.objects.filter(producto_id=producto_id).order_by('-fecha_modificacion')[:10],  # type: ignore
+                'categorias': sorted([c for c in set(p.get('categoria', '') for p in obtener_todos_productos() if p.get('categoria')) if c]),
+                'proveedores': sorted([p for p in set(p.get('proveedor', '') for p in obtener_todos_productos() if p.get('proveedor')) if p]),
+                'marcas': sorted([m for m in set(p.get('marca', '') for p in obtener_todos_productos() if p.get('marca')) if m])
+            })
+        
         # Capturar precios anteriores antes de actualizar
         precio_venta_anterior = Decimal(str(producto.get('precioVenta', 0)))
         precio_compra_anterior = Decimal(str(producto.get('precioCompra', 0)))
@@ -459,7 +470,7 @@ def editar_producto(request, producto_id):
                         precio_compra_nuevo=precio_compra_nuevo,
                         usuario_modificacion=request.user,
                         razon_cambio=request.POST.get('razon_cambio_precio', 'Actualización de precio')
-                    )
+                    )  # type: ignore
                     admin_logger.info(f"Historial de precio guardado: {producto['nombre']} - Venta: ${precio_venta_anterior} -> ${precio_venta_nuevo}")
                 except Exception as e:
                     admin_logger.error(f"Error al guardar historial de precio: {str(e)}")
@@ -473,7 +484,7 @@ def editar_producto(request, producto_id):
     
     # Obtener historial de precios del producto - CON MANEJO DE ERRORES
     try:
-        historial_precios = HistorialPrecio.objects.filter(producto_id=producto_id).order_by('-fecha_modificacion')[:10]
+        historial_precios = HistorialPrecio.objects.filter(producto_id=producto_id).order_by('-fecha_modificacion')[:10]  # type: ignore
     except Exception as e:
         historial_precios = []
         admin_logger.warning(f"No se pudo obtener historial de precios: {str(e)}")
@@ -631,7 +642,7 @@ def api_producto_detail(request, producto_id):
     else:
         return JsonResponse({'error': 'Producto no encontrado'}, status=404)
 
-def api_crear_producto(request):
+def api_crear_producto_externo(request):
     """API endpoint para crear producto - POST /api/productos"""
     if request.method == 'POST':
         try:
@@ -2466,5 +2477,12 @@ def admin_reportes(request):
         'total_categorias': len(categorias_stats)
     }
     return render(request, 'ferreteria/admin/reportes.html', contexto)
+
+def vaciar_carrito(request):
+    from django.contrib import messages
+    if request.method == 'POST':
+        request.session['carrito'] = {}
+        messages.success(request, "Carrito vaciado correctamente.")
+    return redirect('ver_carrito')
 
 
