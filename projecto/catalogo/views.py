@@ -1853,9 +1853,6 @@ def admin_inventario(request):
                 'valor_inventario': 0, 
                 'valor_venta': 0,
                 'activos': 0
-
-
-
             }
         
         categorias_stats[categoria]['cantidad'] += 1
@@ -2422,5 +2419,49 @@ def backup_historial_precios():
         
     except Exception as e:
         general_logger.error(f"Error en backup de historial: {str(e)}")
+
+# Decoradores agregados para asegurar permisos y correcta importación
+@login_required
+@user_passes_test(lambda u: u.is_staff, login_url='/')
+def admin_reportes(request):
+    productos = obtener_todos_productos()
+    # Reporte por categorías
+    categorias_stats = {}
+    for producto in productos:
+        categoria = producto.get('categoria', 'Sin Categoría')
+        if categoria not in categorias_stats:
+            categorias_stats[categoria] = {
+                'cantidad': 0, 
+                'valor_inventario': 0, 
+                'valor_venta': 0,
+                'activos': 0
+            }
+        categorias_stats[categoria]['cantidad'] += 1
+        categorias_stats[categoria]['valor_inventario'] += producto.get('precio_compra', 0) * producto.get('stock_actual', 0)
+        categorias_stats[categoria]['valor_venta'] += producto.get('precio_venta', 0) * producto.get('stock_actual', 0)
+        if producto.get('estado') == 'activo':
+            categorias_stats[categoria]['activos'] += 1
+    # Productos más valiosos
+    productos_ordenados = sorted(productos, key=lambda x: x.get('precio_venta', 0) * x.get('stock_actual', 0), reverse=True)
+    productos_mas_valiosos = productos_ordenados[:10]
+    # Productos con mayor margen
+    productos_con_margen = []
+    for producto in productos:
+        precio_compra = producto.get('precio_compra', 0)
+        precio_venta = producto.get('precio_venta', 0)
+        if precio_compra > 0:
+            margen = ((precio_venta - precio_compra) / precio_compra) * 100
+            producto_copia = producto.copy()
+            producto_copia['margen'] = margen
+            productos_con_margen.append(producto_copia)
+    productos_mayor_margen = sorted(productos_con_margen, key=lambda x: x['margen'], reverse=True)[:10]
+    contexto = {
+        'categorias_stats': categorias_stats,
+        'productos_mas_valiosos': productos_mas_valiosos,
+        'productos_mayor_margen': productos_mayor_margen,
+        'total_productos': len(productos),
+        'total_categorias': len(categorias_stats)
+    }
+    return render(request, 'ferreteria/admin/reportes.html', contexto)
 
 
