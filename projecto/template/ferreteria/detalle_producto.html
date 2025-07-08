@@ -78,8 +78,7 @@
 
             <!-- Agregar al Carrito -->
             {% if producto.stock_actual > 0 %}
-                <form method="POST" action="{% url 'agregar_al_carrito' producto.id %}" class="mb-4">
-                    {% csrf_token %}
+                <div class="mb-4">
                     <div class="row align-items-end">
                         <div class="col-4">
                             <label for="cantidad" class="form-label">Cantidad:</label>
@@ -92,12 +91,20 @@
                                    max="{{ producto.stock_actual }}">
                         </div>
                         <div class="col-8">
-                            <button type="submit" class="btn btn-primary btn-lg w-100">
-                                <i class="fas fa-cart-plus"></i> Agregar al Carrito
-                            </button>
+                            {% if user.is_authenticated %}
+                                <button type="button" 
+                                        class="btn btn-primary btn-lg w-100" 
+                                        onclick="agregarAlCarrito({{ producto.id }})">
+                                    <i class="fas fa-cart-plus"></i> Agregar al Carrito
+                                </button>
+                            {% else %}
+                                <a href="{% url 'login' %}" class="btn btn-primary btn-lg w-100">
+                                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión para Comprar
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
-                </form>
+                </div>
             {% else %}
                 <div class="alert alert-warning">
                     <i class="fas fa-exclamation-triangle"></i>
@@ -239,6 +246,57 @@
 
 {% block extra_js %}
 <script>
+// Función para agregar al carrito
+function agregarAlCarrito(productoId) {
+    const cantidad = document.getElementById('cantidad').value;
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    
+    // Estado de carga
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Agregando...';
+    btn.disabled = true;
+    
+    fetch(`/agregar-al-carrito/${productoId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: `cantidad=${cantidad}`
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Error en la respuesta');
+    })
+    .then(data => {
+        // Mostrar mensaje de éxito
+        showNotification('¡Producto agregado al carrito!', 'success');
+        
+        // Actualizar contador del carrito
+        updateCartCount();
+        
+        // Cambiar botón temporalmente
+        btn.innerHTML = '<i class="fas fa-check"></i> ¡Agregado!';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-success');
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-primary');
+            btn.disabled = false;
+        }, 2000);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Error al agregar producto', 'error');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    });
+}
+
 // Validar cantidad máxima
 document.getElementById('cantidad').addEventListener('input', function() {
     const maxStock = {{ producto.stock_actual }};
@@ -249,12 +307,54 @@ document.getElementById('cantidad').addEventListener('input', function() {
         this.value = 1;
     }
 });
+
+// Funciones auxiliares
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function showNotification(message, type) {
+    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+    const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert ${alertClass} alert-dismissible fade show position-fixed`;
+    alertDiv.style.cssText = 'top: 90px; right: 20px; z-index: 1050; min-width: 300px;';
+    alertDiv.innerHTML = `
+        <i class="fas ${iconClass} me-2"></i>${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+
+    document.body.appendChild(alertDiv);
+    setTimeout(() => {
+        if (alertDiv.parentNode) {
+            alertDiv.remove();
+        }
+    }, 4000);
+}
+
+function updateCartCount() {
+    fetch('/api/carrito/resumen/')
+        .then(response => response.json())
+        .then(data => {
+            const cartBadge = document.querySelector('.cart-count');
+            if (cartBadge) {
+                cartBadge.textContent = data.total_items;
+                cartBadge.style.display = data.total_items > 0 ? 'flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
 </script>
-{% endblock %}
-    }
-    if (parseInt(this.value) < 1) {
-        this.value = 1;
-    }
-});
-</script> -->
 {% endblock %}

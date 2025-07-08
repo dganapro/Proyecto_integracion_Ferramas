@@ -238,33 +238,132 @@
 <script>
     // Actualizar costo de envío según el tipo seleccionado
     document.addEventListener('DOMContentLoaded', function() {
-        const radioButtons = document.querySelectorAll('input[name="tipo_entrega"]');
+        const radioButtons = document.querySelectorAll('input[name="metodo_entrega"]');
         const costoEnvio = document.getElementById('costo-envio');
         const totalFinal = document.getElementById('total-final');
+        const direccionSection = document.getElementById('direccion-section');
+        const ubicacionSection = document.getElementById('ubicacion-section');
         const subtotalBase = {{ total|floatformat:0 }};
         
-        radioButtons.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (this.value === 'retiro') {
+        // Función para actualizar costo de envío
+        function actualizarCostoEnvio() {
+            const metodoSeleccionado = document.querySelector('input[name="metodo_entrega"]:checked');
+            if (metodoSeleccionado) {
+                if (metodoSeleccionado.value === 'retiro') {
                     costoEnvio.textContent = 'Gratis';
                     totalFinal.textContent = '$' + new Intl.NumberFormat('es-CL').format(subtotalBase);
+                    // Ocultar campos de dirección
+                    direccionSection.style.display = 'none';
+                    ubicacionSection.style.display = 'none';
+                    document.getElementById('direccion_entrega').required = false;
+                    document.getElementById('ciudad').required = false;
+                    document.getElementById('region').required = false;
                 } else {
                     costoEnvio.textContent = '$3.000';
                     totalFinal.textContent = '$' + new Intl.NumberFormat('es-CL').format(subtotalBase + 3000);
+                    // Mostrar campos de dirección
+                    direccionSection.style.display = 'block';
+                    ubicacionSection.style.display = 'block';
+                    document.getElementById('direccion_entrega').required = true;
+                    document.getElementById('ciudad').required = true;
+                    document.getElementById('region').required = true;
                 }
-            });
+            }
+        }
+        
+        // Agregar listeners a los radio buttons
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', actualizarCostoEnvio);
         });
+        
+        // Ejecutar al cargar la página
+        actualizarCostoEnvio();
     });
     
-    // Validación del teléfono
-    document.getElementById('telefono_contacto').addEventListener('input', function() {
+    // Validación del teléfono con formato chileno
+    document.getElementById('telefono_cliente').addEventListener('input', function() {
         let value = this.value.replace(/\D/g, ''); // Solo números
+        
+        // Limitar a 8 dígitos (sin código de país)
         if (value.length > 8) {
             value = value.slice(0, 8);
         }
+        
+        // Formatear si hay al menos 1 dígito
         if (value.length > 0) {
-            this.value = '+56 9 ' + value.substring(0, 4) + ' ' + value.substring(4);
+            // Formato: +56 9 XXXX XXXX
+            if (value.length <= 4) {
+                this.value = '+56 9 ' + value;
+            } else {
+                this.value = '+56 9 ' + value.substring(0, 4) + ' ' + value.substring(4);
+            }
         }
     });
+    
+    // Validación del formulario antes de enviar
+    const checkoutForm = document.querySelector('form');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(e) {
+            const metodoEntrega = document.querySelector('input[name="metodo_entrega"]:checked');
+            const nombreCompleto = document.getElementById('nombre_completo').value.trim();
+            const emailCliente = document.getElementById('email_cliente').value.trim();
+            const metodoPago = document.querySelector('input[name="metodo_pago"]:checked');
+            
+            // Validaciones básicas
+            if (!nombreCompleto) {
+                e.preventDefault();
+                alert('Por favor ingresa tu nombre completo');
+                return false;
+            }
+            
+            if (!emailCliente) {
+                e.preventDefault();
+                alert('Por favor ingresa tu email');
+                return false;
+            }
+            
+            if (!metodoEntrega) {
+                e.preventDefault();
+                alert('Por favor selecciona un método de entrega');
+                return false;
+            }
+            
+            if (!metodoPago) {
+                e.preventDefault();
+                alert('Por favor selecciona un método de pago');
+                return false;
+            }
+            
+            // Validar dirección si es envío a domicilio
+            if (metodoEntrega.value === 'domicilio') {
+                const direccion = document.getElementById('direccion_entrega').value.trim();
+                const ciudad = document.getElementById('ciudad').value.trim();
+                const region = document.getElementById('region').value;
+                
+                if (!direccion || !ciudad || !region) {
+                    e.preventDefault();
+                    alert('Por favor completa todos los datos de dirección para el envío a domicilio');
+                    return false;
+                }
+            }
+            
+            // Mostrar loading en el botón
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+            submitBtn.disabled = true;
+        });
+    }
+    
+    // Auto-completar ciudad y región según código postal
+    const codigoPostalField = document.getElementById('codigo_postal');
+    if (codigoPostalField) {
+        codigoPostalField.addEventListener('blur', function() {
+            const codigoPostal = this.value.trim();
+            if (codigoPostal && codigoPostal.length >= 5) {
+                // Aquí podrías agregar lógica para auto-completar ciudad/región
+                // basado en el código postal usando una API externa
+            }
+        });
+    }
 </script>
 {% endblock %}
